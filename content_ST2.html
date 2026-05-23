@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="E-Waste and Responsible Tech - why electronic waste is a growing crisis and how students can act.">
+    <meta name="author" content="Student 2">
+    <title>E-Waste &amp; Responsible Tech | EcoLoop</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 1. Side nav for internal navigation */
+        .content-layout { display: grid; grid-template-columns: 220px 1fr; gap: 2.5rem; align-items: start; }
+        .side-nav { position: sticky; top: calc(var(--header-h) + 1rem); background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); padding: 1.25rem; }
+        .side-nav h4 { font-family: var(--font-heading); color: var(--color-primary-dark); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+        .side-nav ul { list-style: none; }
+        .side-nav ul li { margin-bottom: 0.5rem; }
+        .side-nav ul li a { font-family: var(--font-heading); font-size: 0.88rem; color: var(--color-muted); text-decoration: none; padding: 0.25rem 0.5rem; border-left: 3px solid transparent; display: block; transition: all 0.2s; }
+        .side-nav ul li a:hover { color: var(--color-primary); border-left-color: var(--color-primary); background: var(--color-primary-pale); border-radius: 0 4px 4px 0; }
+        /* 2. Content section spacing */
+        .content-section { margin-bottom: 3rem; padding-top: 1rem; }
+        .content-section > h2 { scroll-margin-top: calc(var(--header-h) + 1rem); }
+        .highlight-box li { list-style: decimal; padding-left: 0.5rem; }
+        /* 3. Content images grid */
+        .img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        .content-img {
+            width: 100%; aspect-ratio: 4/3; border-radius: var(--radius-md); display: block;
+            object-fit: cover; box-shadow: var(--shadow-sm);
+        }
+        /* 4. Action checklist */
+        .checklist { list-style: none; margin: 1rem 0; }
+        .checklist li { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem; padding: 0.75rem; background: var(--color-primary-pale); border-radius: var(--radius-md); font-size: 0.92rem; }
+        .checklist li::before { content: '\2713'; background: var(--color-primary); color: white; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+        /* 5. Highlight box */
+        .highlight-box { background-color: var(--color-primary); color: white; border-radius: var(--radius-lg); padding: 1.5rem 2rem; margin: 1.5rem 0; }
+        .highlight-box h3, .highlight-box p { color: white; }
+        /* Go to top button */
+        .go-top { position: fixed; bottom: 2rem; right: 2rem; background: var(--color-primary); color: white; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.2rem; box-shadow: var(--shadow-md); transition: background 0.2s, transform 0.2s; z-index: 200; }
+        .go-top:hover { background: var(--color-primary-dark); transform: translateY(-3px); color: white; }
+        @media(max-width:700px){ .content-layout{grid-template-columns:1fr;} .side-nav{position:static;} .img-row{grid-template-columns:1fr;} }
+    </style>
+</head>
+<body id="top">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div id="site-header"></div>
+
+    <main id="main-content">
+        <section class="page-heading" style="--page-heading-image: url('assets/img/Header.jpg');">
+            <div class="container">
+                <h1>E-Waste &amp; Responsible Consumption</h1>
+                <p>Understanding why discarded devices matter and how students can reduce electronic waste starting today.</p>
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="home.html">Home</a><span aria-hidden="true">&rsaquo;</span>
+                    <span aria-current="page">E-Waste</span>
+                </nav>
+            </div>
+        </section>
+
+        <div class="section">
+            <div class="container">
+                <div class="content-layout">
+
+                    <!-- Internal navigation menu -->
+                    <aside class="side-nav" aria-label="Page sections">
+                        <h2>Content</h2>
+                        <ul>
+                            <li><a href="#intro">Introduction</a></li>
+                            <li><a href="#problem">Understanding the Problem</a></li>
+                            <li><a href="#student-actions">What Students Can Do</a></li>
+                            <li><a href="#P2P">CircuitCycle</a></li>
+                            <li><a href="#checklist">Action Checklist</a></li>
+                        </ul>
+                    </aside>
+
+                    <!-- Main content -->
+                    <article>
+
+                        <div class="content-section">
+                            <h2 id="intro">Introduction</h2>
+                            <p>Electronic waste, or e-waste, in general, can be defined as waste consisting of discarded electrical or electronic equipment such as smartphones, laptops, chargers, headphones, home electronic equipment, and so on. As technology is developing and changing rapidly, electronic items are being discarded and replaced with new items, even though they have not been used completely. The amount of e-waste is increasing significantly around the world.</p>
+                            <p>For students, who typically own multiple devices and frequently upgrade their smartphones, e-waste is a relevant concern. This page explores why the problem is so serious, what makes discarded electronics dangerous, and what students can do to extend the life of their devices and dispose them properly.</p>
+                            <div class="img-row">
+                                <img class="content-img" src="assets/img/e-waste1.jpeg" alt="image of a waste camp with volunteers">
+                                <img class="content-img" src="assets/img/e-waste2.jpeg" alt="image of a box of ewaste">
+                            </div>
+                        </div>
+
+                        <div class="content-section">
+                            <h2 id="problem">Understanding the Problem</h2>
+                            <p>E-waste is one of the rapidly increasing types of waste, and this problem is on the rise globally. In 2019, the amount of electronic waste generated around the world was 53.6 million metric tons, and this amount of e-waste is expected to increase significantly by 2030 if the current rate of e-waste generation continues. More importantly, only a small percentage of this e-waste is being recycled, and the majority of it is being dumped or burned, or sent to countries without proper recycling facilities.</p>
+                            <p>The problem of e-waste is evident in developed countries. For instance, the United Kingdom is one of the countries with the highest per capita e-waste in Europe. However, a large amount of this e-waste still ends up in West Africa and Asia. In these countries, informal recycling is common, and children and workers are exposed to hazardous materials during the dismantling of electronic devices without proper safety gear.</p>
+                            <div class="highlight-box">
+                                <h3>The Stats</h3>
+                                <ol>
+                                    <li>In 2019, the world generated 53.6 million metric tonnes of e-waste.</li>
+                                    <li>Only about 17.4 per cent of global e-waste was formally collected and recycled.</li>
+                                    <li>The raw materials contained in annual global e-waste are estimated to be worth around US$57 billion.</li>
+                                </ol>
+                            </div>
+
+                        </div>
+
+                        <div class="content-section">
+                            <h2 id="student-actions">What Students Can Do</h2>
+                            <p>Students do not need specialist equipment or a large budget to reduce e-waste. Small decisions made consistently can make a clear difference.</p>
+
+                            <h3>Keep devices longer</h3>
+                            <p>Use phones, laptops, and accessories for as long as they still meet your real needs rather than replacing them for minor upgrades.</p>
+
+                            <h3>Repair before replacing</h3>
+                            <p>Battery swaps, charger replacements, storage clean-ups, and basic repairs can often solve the problem without buying a new device.</p>
+
+                            <h3>Buy only when necessary</h3>
+                            <p>Before purchasing new tech, check whether the current device can still perform the tasks you actually need for study and daily life.</p>
+
+                            <h3>Protect battery health</h3>
+                            <p>Using the correct charger, avoiding overheating, and not letting batteries degrade unnecessarily can extend the useful life of a device.</p>
+
+                            <h3>Recycle responsibly</h3>
+                            <p>When a device truly reaches the end of its life, take it to a certified e-waste collection point instead of putting it into general waste.</p>
+
+                            <h3>Build awareness</h3>
+                            <p>Students can influence others by normalising repair, sharing information about proper disposal, and joining SDG 12 efforts like <strong>CircuitCycle</strong>.</p>
+
+                            <div class="img-row">
+                                <img class="content-img" src="assets/img/e-waste3.png"  alt="graph depicting the difference between ewaste generated and recycled" style="object-fit: cover;">
+                                <img class="content-img" src="assets/img/e-waste4.jpeg"  alt="image of an ewaste pile contaning wires, circuits etc.">
+                            </div>
+                        </div>
+
+                        <div class="content-section">
+                            <h2 id="P2P">CircuitCycle</h2>
+                            <p>
+                                CircuitCycle is a student-led EcoLoop initiative designed to reduce e-waste on campus at IIT. The aim of the campaign is to help students keep devices in use for longer, collect unwanted electronics safely, and increase awareness of responsible tech habits. A campus collection point would allow students to hand in broken cables, chargers, headphones, batteries, old phones, and small accessories that should not be thrown into general waste.
+                            </p>
+
+                            <p>
+                                The campaign would also include simple repair-first guidance, battery care tips, data-wiping reminders, and a donation route for working devices that could still be reused. Students could pledge to upgrade less often, join an e-waste sorting drive, or volunteer during collection days. CircuitCycle helps students understand that responsible consumption is not only about buying less, but also about using technology longer and disposing of it properly when its life is truly over.
+                            </p>
+                        </div>
+
+                        <div class="content-section">
+                            <h2 id="checklist">Action Checklist</h2>
+                            <p>Start with one or two of these actions this week. Each one is realistic, low-cost, and makes a measurable difference over time.</p>
+                            <ul class="checklist" aria-label="E-waste action checklist" >
+                                <li>Keep your current phone for an extra year before upgrading.</li>
+                                <li>Replace a faulty charger or battery before replacing the whole device.</li>
+                                <li>Back up your files and clean storage before assuming a device is unusable.</li>
+                                <li>Do not put cables, chargers, or electronics into general waste bins.</li>
+                                <li>Use a certified e-waste drop-off point or retailer take-back scheme.</li>
+                                <li>Donate working old devices to a charity, school, or community project.</li>
+                                <li>Sell or pass on devices you no longer use instead of leaving them in storage.</li>
+                                <li>Support repair-friendly brands when you eventually need to buy new tech.</li>
+                            </ul>
+                            <div style="margin-top:2rem;">
+                                <a href="ais.html" class="btn btn-primary">Try the Impact Simulator</a>
+                                <a href="content_ST3.html" class="btn btn-outline" style="margin-left:1rem;">Read: Fast Fashion</a>
+                            </div>
+                        </div>
+
+                    </article>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Go to Top button - HTML and CSS only per spec -->
+    <a href="#top" class="go-top" aria-label="Go to top of page" title="Back to top">&#8593;</a>
+    <div id="site-footer"></div>
+    <script src="components.js"></script>
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const siteNav = document.querySelector('.site-nav');
+        if (navToggle && siteNav) { navToggle.addEventListener('click', function () { const o=siteNav.classList.toggle('open'); navToggle.setAttribute('aria-expanded',String(o)); }); }
+    </script>
+</body>
+</html>

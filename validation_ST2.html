@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validator Page Student - provide your student name</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/pageEditor_validator.css"> <!-- External CSS link -->
+
+</head>
+<body id="top">
+    
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div id="site-header"></div>
+
+    <section class="stud">
+        <h2>Rajindu Amithirigala, EcoLoop (G8), Student 2</h2>
+    </section>
+
+    <div class="editor-layout">
+        <!-- Main content area -->
+        <main id="main-content">
+
+            <!-- Update the content of the following sections with the information that corresponds to the pages you implemented  -->
+
+            <section>
+                <h2 id="splashVal">Splash screen validation report</h2>
+                    <p>The Splash Screen passed validation with no errors or warnings. This was a promising sign, considering that this page does not use the shared site template at all and relies completely on embedded CSS and JavaScript code. Passing validation also ensured that the meta refresh tag, the use of inline styles, keyframe animations, and ARIA attributes are all correctly and properly written. It also reinforced the idea that a complex layout can be achieved without compromising a clean structure by making sure the HTML code is minimal and purposeful.</p> 
+                    <img src="validationSnapshots/validation_splash.png">
+                                    
+                <h3>Back to Page Editor page</h3>
+                    <p><a href="pageEditor_ST2.html#splash">Page Editor - Splash Screen</a></p>
+                <!-- Update the path to link the Page Editor with the validation page and make it jump to the marker that contains a snapshot for the splash page -->
+            </section>
+
+            <section>
+                <h2 id="aisVal">AIS validation report</h2>
+                    <p>The AIS page successfully passed validation, exhibiting no errors. This outcome was particularly encouraging, considering the page's incorporation of various interactive components, including action cards featuring custom ARIA roles, a dynamically updating results panel, JavaScript-driven background class switching, and embedded CSS with multiple keyframe animations. The attainment of a clean validation result served to confirm that all of these features were constructed upon a structurally sound HTML framework, and that the utilization of `role="checkbox"` and `aria-checked` attributes on non-native elements did not present any conflicts with the validator. Furthermore, it validated that the embedded CSS was appropriately scoped within the &lt;style&gt; block, without introducing any parsing complications.</p>
+                    <img src="validationSnapshots/validation_ais.png">
+                                    
+                <h3>Back to Page Editor page</h3>
+                    <p><a href="pageEditor_ST2.html#AIS">Page Editor - AIS</a></p>
+                <!-- Update the path to link the Page Editor with the validation page and make it jump to the marker that contains a snapshot for the splash page -->
+            </section></a></p>
+
+            <section>
+                <h2 id="contentVal">Content Page validation report</h2>
+                    <p>Without any warnings or errors, the Content Page was successful in validation. The amount of content included on this page such as pages of content, anchor links, side navigation, images, a highlight box with an ordered list, and a personalized checklist were useful in verifying that all elements of the page had been properly nested and organized. This was also useful in verifying that there had been no conflicts with the global stylesheet.</p>
+                    <img src="validationSnapshots/content_ST2_validation.png">
+                                    
+                <h3>Back to Page Editor page</h3>
+                    <p><a href="pageEditor_ST2.html#content">Page Editor - Content</a></p>
+                <!-- Update the path to link the Page Editor with the validation page and make it jump to the marker that contains a snapshot for the splash page -->
+            </section></a></p>
+
+
+            <p class="top"><a href="#top">Go top</a></p>
+        </main>
+
+        <!-- Sidebar area -->
+        <aside>
+            <h3>Core pages developed:</h3>
+
+            <ul class="top-level-ul">
+                <li>Chanitha (Student 1)</li>
+                <ul>
+                    <li>Shared Template &amp; Navigation</li>
+                    <li><a href="home.html">Home Page</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="content_ST1.html">Content</a></li>
+                </ul>
+                <li>Rajindu (Student 2)</li>
+                <ul>
+                    <li><a href="splash.html">Splash Screen</a></li>
+                    <li><a href="ais.html">Action Impact Simulator (AIS)</a></li>
+                    <li><a href="content_ST2.html">Content</a></li>
+                </ul>
+                <li>Rithika (Student 3)</li>
+                <ul>
+                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="content_ST3.html">Content</a></li>
+                </ul>
+                <li>Student 4</li>
+                <ul>
+                    <li><a href="profile.html">User Profile</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                    <li><a href="content_ST4.html">Content</a></li>
+                </ul>
+            </ul>
+        </aside>
+    </div>
+
+    <div id="site-footer"></div>
+    <script src="components.js"></script>
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const siteNav = document.querySelector('.site-nav');
+        if (navToggle && siteNav) {
+            navToggle.addEventListener('click', function () {
+                const isOpen = siteNav.classList.toggle('open');
+                navToggle.setAttribute('aria-expanded', String(isOpen));
+            });
+        }
+    </script>
+</body>
+</html>

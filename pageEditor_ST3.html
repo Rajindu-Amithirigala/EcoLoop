@@ -1,0 +1,413 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Editor | Rithika Wickramasinghe</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/pageEditor_validator.css"> <!-- External CSS link -->
+
+</head>
+<body id="top">
+    
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div id="site-header"></div>
+
+    <section class="stud">
+        <h2>Rithika Wickramasinghe, EcoLoop (G8)</h2>
+        <h2>User experience and feedback system developer</h2>
+    </section>
+
+    <div class="editor-layout">
+        <!-- Main content area -->
+        <main id="main-content">
+
+            <section>
+                <h2 id="student-info">Student Information</h2>
+                <table>
+                    <tr>
+                        <th>Field</th>
+                        <th>Detail</th>
+                    </tr>
+                    <tr>
+                        <td>Student Name</td>
+                        <td>Rithika Mandiv Wickramasinghe</td>
+                    </tr>
+                    <tr>
+                        <td>Student ID</td>
+                        <td>w2181561</td>
+                    </tr>
+                    <tr>
+                        <td>Role</td>
+                        <td>Student 3 - User experience and feedback system developer</td>
+                    </tr>
+                    <tr>
+                        <td>Module</td>
+                        <td>4COSC011W Web Design &amp; Development</td>
+                    </tr>
+                    <tr>
+                        <td>Team Name</td>
+                        <td>EcoLoop</td>
+                    </tr>
+                    <tr>
+                        <td>Academic Year</td>
+                        <td>2025/26</td>
+                    </tr>
+                </table>
+            </section>
+
+            <br>
+
+            <section>
+                <h2 id="feedback">Feedback Page</h2>
+                    <h3>Technical Description</h3>
+                        <p>The feedback page combines a scrollable programme directory, community ratings, and a structured
+                    feedback form. It acts as both a showcase of EcoLoop activity and a place where users can respond to
+                    the project.</p>
+                        <p>A two-column CSS Grid separates the programme directory from the form on larger screens. The form
+                    uses <code>&lt;fieldset&gt;</code> and <code>&lt;legend&gt;</code> to group personal and feedback
+                    details semantically. A <code>&lt;datalist&gt;</code> supplies suggestions, while the programme
+                    directory uses a scrollable container with <code>max-height</code> and
+                    <code>overflow-y: auto</code>.
+                </p>
+                        <p>JavaScript provides a live character counter that updates on every input event. Form submission is
+                    intercepted, required fields are validated, the email field is checked with a regex pattern, and
+                    error styles are applied where needed. On success, the form is hidden and a confirmation message is
+                    shown.</p>
+                    <h3>Accessibility</h3>
+                        <ul>
+                    <li>Every form input has an associated <code>&lt;label&gt;</code> element for screen-reader
+                        compatibility.</li>
+                    <li>Related controls are grouped using <code>&lt;fieldset&gt;</code> and <code>&lt;legend&gt;</code>
+                        for semantic clarity.</li>
+                    <li>Validation error messages are displayed visually and exposed to assistive technologies.</li>
+                    <li>Required fields are marked both visually (asterisk) and in markup (<code>required</code>
+                        attribute).</li>
+                    <li>Colour contrast meets WCAG 2.1 AA standards across all form elements.</li>
+                    <br>
+                </ul>
+                    <h3>Design and Implementation Rationale</h3>
+                        <p>The two-column layout was chosen to allow users to browse programmes while simultaneously completing
+                    the feedback form. The scrollable directory panel prevents the page from becoming excessively long.
+                    Star ratings use Unicode characters and accent colours for a visually engaging yet lightweight
+                    display. Client-side validation provides immediate feedback without requiring a server round-trip,
+                    keeping the experience fast and self-contained.</p>
+
+                    <h3>Link to the validation page</h3>
+                        <p><a href="validation_ST3.html#feedbackVal" target="_blank" rel="noopener noreferrer">Validation Page - Feedback</a></p>
+
+                    <h3>Link to the page</h3>
+                        <p><a href="feedback.html" target="_blank" rel="noopener noreferrer">Feedback Page</a></p>
+            </section>
+
+            <br>
+
+            <section>
+                <h2 id="team">Team Page</h2>
+                    <h3>Technical Description</h3>
+                        <p>The team page introduces the four contributors using interactive profile cards. Each card reveals
+                    contribution details and biography text on hover or keyboard focus.</p>
+                        <p>Cards are arranged in a four-column CSS Grid. Each card is keyboard-focusable via
+                    <code>tabindex="0"</code> and contains an initially collapsed detail area that expands using
+                    <code>max-height</code> and <code>opacity</code> transitions. Unique avatar gradients distinguish
+                    each member visually. Hover states apply a vertical lift with <code>transform</code> and an enhanced
+                    <code>box-shadow</code>.
+                </p>
+                    <h3>Accessibility</h3>
+                        <ul>
+                    <li>Team cards are keyboard-focusable and respond to <code>:focus-within</code> states identically
+                        to hover.</li>
+                    <li>Avatar images include descriptive <code>alt</code> text for screen readers.</li>
+                    <li>The card list uses ARIA <code>role="list"</code> and <code>role="listitem"</code> for semantic
+                        structure.</li>
+                    <li>Each card has an <code>aria-label</code> summarising the student's name and role.</li>
+                    <li>Colour contrast between text and card backgrounds meets WCAG 2.1 AA requirements.</li>
+                    <br>
+                </ul>
+                    <h3>Design and Implementation Rationale</h3>
+                        <p>Interactive cards were chosen over a static table to make the team section more engaging. The
+                    expand-on-hover pattern keeps the page compact while allowing detailed information to be accessed on
+                    demand. The <code>:focus-within</code> CSS pseudo-class ensures keyboard users receive the same
+                    interactive experience as mouse users, meeting both accessibility and usability goals.</p>
+
+                    <h3>Link to the validation page</h3>
+                        <p><a href="validation_ST3.html#teamVal" target="_blank" rel="noopener noreferrer">Validation Page - Team</a></p>
+
+                    <h3>Link to the page</h3>
+                        <p><a href="team.html" target="_blank" rel="noopener noreferrer">Team Page</a></p>
+            </section>
+
+            <br>
+
+            <section>
+                <h2 id="content">Fast Fashion Content (GoThrift 26')</h2>
+                    <h3>Technical Description</h3>
+                        <p>The <strong>content_ST3.html</strong> page is titled <em>GoThrift 26'</em>
+                             and focuses on <strong>fast fashion</strong> — how cheap, trend-driven clothing affects the environment 
+                             and how students can reduce clothing waste and shop more responsibly. 
+                             It introduces the topic, explains the true cost (carbon, water, microplastics from synthetics), 
+                             discusses student fashion habits including a “cost per wear” mindset, 
+                             and outlines sustainable alternatives such as second-hand shopping, swaps, and capsule wardrobes.</p>
+                        <p>The layout uses the shared sticky <strong>side navigation</strong> and <strong>article</strong> pattern.
+                             Content is structured into sections (Introduction, The True Cost, Student Fashion Habits, Sustainable Alternatives, Action Checklist, and the GoThrift 26' event).
+                              Imagery includes paired photos in a two-column <code>img-row</code> (for example <code>fast_fashion.webp</code> and <code>clothing_pile.webp</code>, 
+                              plus impacts such as <code>clothes_burn.jpg</code> and <code>water_pollution.jpg</code>). A gradient <strong>stat-callout</strong> highlights key statistics; 
+                              the <strong>action checklist</strong> uses a custom list with circular checkmark bullets via <code>::before</code>; the closing <strong>event-section</strong> promotes the EcoLoop thrift-shop initiative.</p>
+            
+                    <h3>Accessibility</h3>
+                        <ul>
+                    <li>All images include descriptive <code>alt</code> attributes for screen-reader users.</li>
+                    <li>Semantic heading hierarchy (<code>h1</code> through <code>h3</code>) provides clear document
+                        structure.</li>
+                    <li>The stat callout presents full text for statistics, not colour alone; the checklist has an <code>aria-label</code> describing its purpose.</li>
+                    <li>Internal links to related site pages (for example the Impact Simulator and food-waste content) use clear button labels.</li>
+                    <li>Text contrast ratios meet WCAG 2.1 AA guidelines throughout the page.</li>
+                </ul>
+                <br>
+                    <h3>Design and Implementation Rationale</h3>
+                        <p>The page is written for a UK student audience: local examples (charity shops, campus swaps, Vinted/Depop) keep the topic actionable. 
+                            The stat callout separates headline figures from body copy; the checklist turns advice into concrete steps; the GoThrift event block gives a clear call toward community participation and aligns with the page title and breadcrumb (<em>Fast Fashion</em>). 
+                            Together, these choices balance credibility, readability, and encouragement to change shopping habits without relying on a single warning style — the emphasis is on fashion waste, microplastics, and responsible consumption rather than electronic waste.</p>
+
+                    <h3>Link to the validation page</h3>
+                        <p><a href="validation_ST3.html#contentVal" target="_blank" rel="noopener noreferrer">Validation Page - Content</a></p>
+
+                    <h3>Link to the page</h3>
+                        <p><a href="content_ST3.html" target="_blank" rel="noopener noreferrer">Fast Fashion — GoThrift 26'</a></p>
+            </section>
+
+            <br>
+
+            <section>
+                <h2 id="accessibility">Accessibility Considerations</h2>
+                <ul>
+                    <li><strong>Form labels:</strong> Every form input has an associated label.</li>
+                    <li><strong>Fieldset grouping:</strong> Related controls are grouped semantically for screen
+                        readers.</li>
+                    <li><strong>Error messages:</strong> Validation feedback is exposed clearly and visually.</li>
+                    <li><strong>Team cards keyboard support:</strong> Cards are keyboard-focusable and respond to
+                        keyboard input.</li>
+                    <li><strong>Colour contrast:</strong> Important information is not communicated by colour alone.
+                    </li>
+                    <li><strong>Required fields:</strong> Required inputs are clearly marked both visually and in
+                        markup.</li>
+                </ul>
+            </section>
+
+            <br>
+
+            <section>
+                <h2 id="compliance">JANET Compliance</h2>
+                <ul>
+                    <li>All pages are educational and appropriate for an academic university module.</li>
+                    <li>The feedback form uses client-side behaviour only and does not transmit or store submitted data.
+                    </li>
+                    <li>No commercial content or advertising appears on these pages.</li>
+                    <li>External facts are referenced in the references section.</li>
+                    <li>The implementation and reflective writing are original work.</li>
+                </ul>
+            </section>
+
+            <br>
+
+            <section>
+                <h2 id="group"> Group Meetings and Individual Contribution Log</h2>
+
+                        <table>
+
+                            <thead>
+                                <tr>
+                                    <th colspan="6">Group Meetings and Contribution Log</th>
+                                </tr>
+                                <tr>
+                                    <th>Meeting</th>
+                                    <th>Date &amp; Time</th>
+                                    <th>Format</th>
+                                    <th>Objective</th>
+                                    <th>Attended</th>
+                                    <th>Your Individual Contribution</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>14 Feb 2026</td>
+                                    <td>Online</td>
+                                    <td>Agree on SDG and split the work amongst the three original members</td>
+                                    <td>Yes</td>
+                                    <td>I agreed to take responsibility for <strong>feedback.html</strong> (programme directory, ratings, and form UX), <strong>content_ST3.html</strong> (fast fashion / GoThrift 26' article)</td>
+                                </tr>
+
+                                <tr>
+                                    <td>2</td>
+                                    <td>21 Feb 2026</td>
+                                    <td>Online</td>
+                                    <td>Mock of website design template and final decisions</td>
+                                    <td>Yes</td>
+                                    <td>I applied the earthy colour palette and shared template to <strong>feedback.html</strong> and <strong>content_ST3.html</strong> (layouts, cards, side navigation)</td>
+                                </tr>
+
+                                <tr>
+                                    <td>3</td>
+                                    <td>28 Feb 2026</td>
+                                    <td>Online</td>
+                                    <td>All Content Finalisation</td>
+                                    <td>Yes</td>
+                                    <td>I evaluated and finalised my <strong>feedback.html</strong> copy, validation, and programme list, completed the main sections and imagery on <strong>content_ST3.html</strong>.</td>
+                                </tr>
+
+                                <tr>
+                                    <td>4</td>
+                                    <td>07 Mar 2026</td>
+                                    <td>Online</td>
+                                    <td>Follow-up on Progress</td>
+                                    <td>Yes</td>
+                                    <td>I reported on client-side validation and the character counter on <strong>feedback.html</strong>, progress on the fast-fashion sections of <strong>content_ST3.html</strong>.</td>
+                                </tr>
+
+                                <tr>
+                                    <td>5</td>
+                                    <td>12 March 2026</td>
+                                    <td>Online</td>
+                                    <td>Finalization of Website</td>
+                                    <td>Yes</td>
+                                    <td>I evaluated the team’s progress and confirmed my <strong>feedback.html</strong> and <strong>content_ST3.html</strong> routes worked in the full site build.</td>
+                                </tr>
+
+                                <tr>
+                                    <td>6</td>
+                                    <td>23 March 2026</td>
+                                    <td>Online</td>
+                                    <td>Addition of 4th Member</td>
+                                    <td>Yes</td>
+                                    <td>I checked cross-links from <strong>feedback.html</strong> and <strong>content_ST3.html</strong> so users could reach the profile and related pages without broken paths.</td>
+                                </tr>
+
+                                <tr>
+                                    <td>7</td>
+                                    <td>29 March 2026</td>
+                                    <td>Online</td>
+                                    <td>Completion of Coursework</td>
+                                    <td>Yes</td>
+                                    <td>I hosted the final check-in on my ST3 pages: ensured <strong>feedback.html</strong> and <strong>content_ST3.html</strong> were validated and submission-ready.</td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+            </section>
+
+            <br>
+
+            <section>
+                <h2 id="challenge">Challenges &amp; Lessons</h2>
+                <h3>Challenge 1: Form Validation Without Libraries</h3>
+                <p>Building validation from scratch required combining clear visual error states with accessible DOM
+                    feedback. The final solution used class changes for borders and helper elements for messages so
+                    users could understand problems quickly.</p>
+                <h3>Challenge 2: Smooth Team Card Expansion</h3>
+                <p>Animating height transitions required a practical fixed <code>max-height</code> rather than
+                    <code>auto</code>. Testing different values was necessary to find a balance that avoided clipping
+                    content while still feeling responsive.
+                </p>
+                <h3>Lessons Learned</h3>
+                <ul>
+                    <li>Forms need testing with both keyboard and assistive-technology thinking, not just visually.</li>
+                    <li><code>max-height</code> transitions are a practical CSS solution for expandable panels.</li>
+                    <li>Breaking large forms into semantic groups makes both the code and UX more manageable.</li>
+                </ul>
+            </section>
+
+            <br>
+
+            <section>
+                <h2 id="ref">References</h2>
+                <ul class="ref">
+                    <li>Ellen MacArthur Foundation (2017) <em>A new textiles economy: Redesigning fashion's future</em>.
+                        <a href="https://www.ellenmacarthurfoundation.org/a-new-textiles-economy" target="_blank" rel="noopener noreferrer">https://www.ellenmacarthurfoundation.org/a-new-textiles-economy</a> (statistics in the content page stat callout are attributed to this source).</li>
+                    <li>W3C. (2018). <em>Web Content Accessibility Guidelines (WCAG) 2.1</em>.
+                        <a href="https://www.w3.org/TR/WCAG21/" target="_blank" rel="noopener noreferrer">https://www.w3.org/TR/WCAG21/</a></li>
+                    <li id="ref-w3-css">W3Schools (2019) <em>CSS Tutorial.</em> [online] W3Schools.com. Available at:
+                        <a href="https://www.w3schools.com/css/" target="_blank" rel="noopener noreferrer">https://www.w3schools.com/css/</a> (Last accessed: 26 Mar 2026).</li>
+                    <li id="ref-w3-js">W3Schools (2019) <em>JavaScript Tutorial.</em> [online] W3Schools.com. Available at:
+                        <a href="https://www.w3schools.com/js/" target="_blank" rel="noopener noreferrer">https://www.w3schools.com/js/</a> (Last accessed: 26 Mar 2026).</li>
+                    <li>MDN Web Docs. (2024). <em>Client-side form validation</em>. Mozilla.
+                        <a href="https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation" target="_blank" rel="noopener noreferrer">https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation</a></li>
+                    <li>JANET. (2023). <em>Acceptable use policy</em>. Jisc.
+                        <a href="https://www.jisc.ac.uk/janet-acceptable-use-policy" target="_blank" rel="noopener noreferrer">https://www.jisc.ac.uk/janet-acceptable-use-policy</a></li>
+                    <li>Charity Retail Association (2024) <em>Charity shops and reuse in the UK</em>.
+                        <a href="https://www.charityretail.org.uk/" target="_blank" rel="noopener noreferrer">https://www.charityretail.org.uk/</a></li>
+                    <li>Fashion Revolution (2024) <em>Fashion Revolution — transparency and sustainability in fashion</em>.
+                        <a href="https://www.fashionrevolution.org/" target="_blank" rel="noopener noreferrer">https://www.fashionrevolution.org/</a></li>
+                </ul>
+            </section>
+
+            <br>
+
+            <section id="validation-links">
+                <h2>Validation Links</h2>
+                    <h3>Link to the validation page</h3>
+                        <p><a href="validation_ST3.html" target="_blank" rel="noopener noreferrer">Validation Page - ST3</a></p>
+            </section>
+
+            <p class="top"><a href="#top">Go top</a></p>
+        </main>
+
+        <!-- Sidebar area -->
+        <aside>
+            <h3>Core pages developed:</h3>
+
+            <ul class="top-level-ul">
+                <li>Chanitha Abeygunawardena</li>
+                <ul>
+                    <li><a href="home.html">Home Page</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="content_ST1.html">Content</a></li>
+                </ul>
+                <li>Rajindu Amithirigala</li>
+                <ul>
+                    <li><a href="splash.html">Splash Screen</a></li>
+                    <li><a href="ais.html">Action Impact Simulator (AIS)</a></li>
+                    <li><a href="content_ST2.html">Content</a></li>
+                </ul>
+                <li>Rithika Wickramasinghe</li>
+                <ul>
+                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="content_ST3.html">Content</a></li>
+                </ul>
+                <li>Sahan Polwatte</li>
+                <ul>
+                    <li><a href="profile.html">User Profile</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                    <li><a href="content_ST4.html">Content</a></li>
+                </ul>
+                <br>
+                <li><a href="#student-info">Student Information</a></li>
+                <li><a href="#accessibility">Accessibility Considerations</a></li>
+                <li><a href="#challenge">Challenges &amp; Lessons</a></li>
+                <li><a href="#compliance">JANET Compliance</a></li>
+                <li><a href="#group">Group Meetings</a></li>
+                <li><a href="#ref">References</a></li>
+                <li><a href="#validation-links">Validation Links</a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <div id="site-footer"></div>
+    <script src="components.js"></script>
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const siteNav = document.querySelector('.site-nav');
+        if (navToggle && siteNav) {
+            navToggle.addEventListener('click', function () {
+                const isOpen = siteNav.classList.toggle('open');
+                navToggle.setAttribute('aria-expanded', String(isOpen));
+            });
+        }
+    </script>
+</body>
+</html>

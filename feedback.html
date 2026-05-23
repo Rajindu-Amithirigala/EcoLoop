@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Feedback and Programme Directory - explore SDG 12 opportunities and submit your feedback.">
+    <meta name="author" content="Student 3">
+    <title>Feedback &amp; Directory | EcoLoop</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Limits the programme list height so users can browse several cards without pushing the reviews and form far below the fold. */
+        .programme-scroll {
+            max-height: 520px;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+            margin-bottom: 2rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--color-primary) var(--color-border);
+        }
+
+        .programme-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .programme-scroll::-webkit-scrollbar-thumb {
+            background: var(--color-primary);
+            border-radius: 9999px;
+        }
+
+        /* Keeps each programme card compact and scan-friendly by pairing a fixed thumbnail with the shared button-driven card layout. */
+        .prog-card {
+            display: flex;
+            gap: 1rem;
+            background: #feecdd;
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--color-primary-dark);
+        }
+
+        .prog-thumb {
+            width: 92px;
+            height: 92px;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+            flex-shrink: 0;
+            display: block;
+        }
+
+        .prog-body {
+            flex: 1;
+        }
+
+        .prog-body h2,
+        .prog-body h3 {
+            font-size: 1rem;
+            color: var(--color-primary-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .prog-body p {
+            font-size: 0.88rem;
+            color: var(--color-muted);
+            margin-bottom: 0.75rem;
+            line-height: 1.5;
+        }
+
+        .btn-sm {
+            padding: 0.4rem 1rem;
+            font-size: 0.83rem;
+        }
+
+        .btn-upcoming {
+            background: #2f2f2f;
+            border-color: #2f2f2f;
+            color: #fff;
+            cursor: not-allowed;
+            text-decoration: none;
+        }
+
+        .btn-upcoming:hover,
+        .btn-upcoming:focus-visible {
+            background: #444;
+            border-color: #444;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+            text-decoration: none;
+        }
+
+        /* Separates the ratings summary from the directory cards so the left column still reads as two distinct subsections. */
+        .stack-section {
+            margin-top: 2.5rem;
+        }
+
+        .rating-overall {
+            text-align: center;
+            padding: 2rem;
+            background: var(--color-primary-pale);
+            border-radius: var(--radius-lg);
+            margin-bottom: 1.5rem;
+        }
+
+        .rating-score {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            line-height: 1;
+        }
+
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .review-card {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .review-card h3 {
+            font-size: 0.95rem;
+            color: var(--color-primary-dark);
+            margin-bottom: 0.35rem;
+        }
+
+        .review-card p {
+            font-size: 0.82rem;
+            color: var(--color-muted);
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .review-meta {
+            font-size: 0.78rem;
+            color: var(--color-muted);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .review-stars {
+            color: #E9C46A;
+            font-size: 0.9rem;
+        }
+
+        .content-panel {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: 0px 0px 5px var(--color-primary);
+        }
+
+        /* Frames the feedback form as its own panel so it remains visually balanced against the denser programme and review content. */
+        .form-section {
+            background: transparent;
+            border-radius: 0;
+            padding: 0;
+            box-shadow: none;
+        }
+
+        .char-counter {
+            font-size: 0.8rem;
+            color: var(--color-muted);
+            text-align: right;
+            margin-top: 0.25rem;
+        }
+
+        .form-success {
+            display: none;
+            background: var(--color-primary-pale);
+            border: 2px solid var(--color-primary);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            color: var(--color-success);
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* Keeps the mock sorting control aligned with the directory heading content without introducing a separate toolbar row. */
+        .sort-row {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .sort-row select {
+            padding: 0.4rem 0.75rem;
+            border-radius: var(--radius-md);
+            border: none;
+            box-shadow: none;
+            font-size: 0.9rem;
+            background: white;
+            cursor: pointer;
+        }
+
+        .sort-row select:focus-visible {
+            outline: 2px solid var(--color-primary-dark);
+            outline-offset: 2px;
+            box-shadow: 0 0 0 4px rgba(45, 106, 79, 0.16);
+        }
+
+        /* Uses a two-column page split so browsing programmes and submitting feedback can happen side by side on larger screens. */
+        .page-sections {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+
+        @media(max-width:800px) {
+            .page-sections {
+                grid-template-columns: 1fr;
+            }
+
+            .prog-card {
+                flex-direction: column;
+            }
+
+            .prog-thumb {
+                width: 100%;
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div id="site-header"></div>
+
+    <main id="main-content">
+        <section class="page-heading" style="--page-heading-image: url('assets/img/Header.jpg');">
+            <div class="container">
+                <h1>Feedback &amp; Programme Directory</h1>
+                <p>Explore fun opportunities and share your feedback with us.</p>
+                <nav class="breadcrumb" aria-label="Breadcrumb"><a href="home.html">Home</a><span
+                        aria-hidden="true">></span><span aria-current="page">Feedback</span></nav>
+            </div>
+        </section>
+
+        <section class="section" aria-label="Programme directory and feedback">
+            <div class="container">
+                <div class="page-sections">
+                    <div>
+                        <section aria-labelledby="directory-heading" class="content-panel">
+                            <h2 id="directory-heading">Programme Directory</h2>
+                            <p>Scroll through SDG 12-related volunteering opportunities, campaigns and student actions.
+                            </p>
+                            <div class="sort-row">
+                                <label for="sort-select" style="font-weight:600;font-size:0.9rem;">Sort by:</label>
+                                <select id="sort-select" aria-label="Sort programmes">
+                                    <option>Most Popular</option>
+                                    <option>Nearest</option>
+                                    <option>Student-friendly</option>
+                                    <option>Recently Added</option>
+                                </select>
+                            </div>
+                            <div class="programme-scroll" role="region" aria-label="Programme listings">
+                                <article class="prog-card">
+                                    <img class="prog-thumb" src="assets/img/plate2purpose.png"
+                                        alt="Food waste icon, showing a hand throwing away food scraps into a bin">
+                                    <div class="prog-body">
+                                        <h3>Plate2Purpose</h3>
+                                        <p>Plate2Purpose is a student-based campus event with the aim of reducing food
+                                            waste through efficient sharing, consumption, and planning.</p>
+                                        <a href="content_ST1.html" class="btn btn-primary btn-sm">Learn More</a>
+                                    </div>
+                                </article>
+                                <article class="prog-card">
+                                    <img class="prog-thumb" src="assets/img/circuitcycle.png"
+                                        alt="E-waste icon, showing broken electronic devices next to a bin and trashbag">
+                                    <div class="prog-body">
+                                        <h3>CircuitCycle</h3>
+                                        <p>CircuitCycle is a campaign with the aim of reducing e-waste through the use
+                                            and disposal of e-devices, as well as the responsible use of technology
+                                            among IIT students.</p>
+                                        <a href="content_ST2.html" class="btn btn-primary btn-sm">Learn More</a>
+                                    </div>
+                                </article>
+                                <article class="prog-card">
+                                    <img class="prog-thumb" src="assets/img/GoThrift.png"
+                                        alt="Fast Fashion Icon, showing a t-shirt with a recycling symbol">
+                                    <div class="prog-body">
+                                        <h3>GoThrift 26'</h3>
+                                        <p>GoThrift 26' is a community-led thrifting event conducted on campus with the
+                                            aim of reducing textile waste through the provision of affordable fashion to
+                                            the community.</p>
+                                        <a href="content_ST3.html" class="btn btn-primary btn-sm">Learn More</a>
+                                    </div>
+                                </article>
+                                <article class="prog-card">
+                                    <img class="prog-thumb" src="assets/img/SecondLife.png"
+                                        alt="Recycling Icon, showing the standard recycling symbol with three arrows chasing each other in a triangle">
+                                    <div class="prog-body">
+                                        <h2 id="P2P">ShoreSafe</h2>
+                                        <p>ShoreSafe is a student-led EcoLoop initiative focused on reducing plastic
+                                            pollution through direct local action. .</p>
+                                        <a href="content_ST4.html" class="btn btn-primary btn-sm">Learn More</a>
+                                    </div>
+                                </article>
+                                <article class="prog-card">
+                                    <img class="prog-thumb" src="assets/img/LastBite.png"
+                                        alt="Eating Icon, showing a person eating a dish with a bite taken out of it">
+                                    <div class="prog-body">
+                                        <h3>LastBite 2026</h3>
+                                        <p>A fun competition, where students take part in a hot dog eating contest while
+                                            raising awareness about food waste. All profits and food donations go to
+                                            charity.</p>
+                                        <button type="button" class="btn btn-upcoming btn-sm"
+                                            aria-disabled="true">Coming Soon</button>
+                                    </div>
+                                </article>
+                            </div>
+                        </section>
+
+                        <section class="stack-section content-panel" aria-labelledby="ratings-heading">
+                            <h2 id="ratings-heading">Community Ratings</h2>
+                            <div class="rating-overall" role="region" aria-label="Overall community rating">
+                                <div class="rating-score">9.3<span
+                                        style="font-size:1.5rem;font-weight:400;color:var(--color-muted);">/10</span>
+                                </div>
+                                <div style="font-weight:700;color:var(--color-primary);margin:0.25rem 0;">Excellent
+                                </div>
+                                <div style="font-size:0.85rem;color:var(--color-muted);">Based on 142 student reviews
+                                </div>
+                            </div>
+                            <div class="review-grid">
+                                <article class="review-card">
+                                    <span class="review-stars" role="img" aria-label="5 out of 5 stars">
+                                        &#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                                    <h3>Truly Eye-opening!</h3>
+                                    <p>EcoLoop taught me skills I use every week. The techniques I use not only save the
+                                        enviroment but saves cash too...</p>
+                                    <p><a href="#">See more</a></p>
+                                    <div class="review-meta"><span>Venal A.</span><span>Feb 2025</span></div>
+                                </article>
+
+                                <article class="review-card">
+                                    <span class="review-stars" role="img" aria-label="5 out of 5 stars">
+                                        &#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                                    <h3>Genuinely impactful</h3>
+                                    <p>Being a part of the OC in both Plate2Purpose and CircuitCycle showed me how much
+                                        waste is generated on campus...</p>
+                                    <p><a href="#">See more</a></p>
+                                    <div class="review-meta"><span>Sujanne N.</span><span>Jan 2025</span></div>
+                                </article>
+
+                                <article class="review-card">
+                                    <span class="review-stars" role="img" aria-label="4 out of 5 stars">
+                                        &#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                                    <h3>Great community feel</h3>
+                                    <p>GoThrift 26' was so fun and insightful. I refreshed my wardrobe for free and made
+                                        a lot of like-minded friends...</p>
+                                    <p><a href="#">See more</a></p>
+                                    <div class="review-meta"><span>Malina V.</span><span>Jan 2025</span></div>
+                                </article>
+                            </div>
+                        </section>
+                    </div>
+
+                    <section aria-labelledby="feedback-heading" class="content-panel">
+                        <h2 id="feedback-heading">Share Your Feedback</h2>
+                        <div class="form-section">
+                            <div class="form-success" id="form-success" role="status" aria-live="polite">
+                                Thank you for your feedback. We really appreciate it.
+                            </div>
+                            <form id="feedback-form" novalidate>
+                                <fieldset>
+                                    <legend>Personal Details</legend>
+                                    <div class="form-group">
+                                        <label for="fname">Full Name <span aria-hidden="true">*</span></label>
+                                        <input type="text" id="fname" name="fname" placeholder="Your Name" required
+                                            aria-describedby="fname-error">
+                                        <span class="field-error" id="fname-error" aria-live="polite"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="femail">Email Address <span aria-hidden="true">*</span></label>
+                                        <input type="email" id="femail" name="femail" placeholder="you@gmail.com"
+                                            required aria-describedby="femail-error">
+                                        <span class="field-error" id="femail-error" aria-live="polite"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ftel">Telephone Number</label>
+                                        <input type="tel" id="ftel" name="ftel" placeholder="+94 12 345 6789">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="faddress">Address</label>
+                                        <textarea id="faddress" name="faddress" rows="2"
+                                            placeholder="Street, City, Postcode"></textarea>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <legend>Feedback Details</legend>
+                                    <div class="form-group">
+                                        <label for="fprog">Programme Attended</label>
+                                        <select id="fprog" name="fprog">
+                                            <option value="">Select a programme</option>
+                                            <option>Plate2Purpose</option>
+                                            <option>CircuitCycle</option>
+                                            <option>GoThrift 26'</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fdate">Date of Programme</label>
+                                        <input type="date" id="fdate" name="fdate">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fdatetime">Book a Meeting</label>
+                                        <input type="datetime-local" id="fdatetime" name="fdatetime">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fmsg">Your Feedback <span aria-hidden="true">*</span></label>
+                                        <textarea id="fmsg" name="fmsg" rows="5" maxlength="500"
+                                            placeholder="Tell us about your experience..." required
+                                            aria-describedby="fmsg-help fmsg-error"></textarea>
+                                        <div class="char-counter" id="fmsg-help"><span id="char-remaining">500</span>
+                                            characters remaining</div>
+                                        <span class="field-error" id="fmsg-error" aria-live="polite"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fsuggest">Suggestions (type to search)</label>
+                                        <input type="text" id="fsuggest" name="fsuggest" list="suggestions-list"
+                                            placeholder="e.g. more events, online sessions...">
+                                        <datalist id="suggestions-list">
+                                            <option value="More frequent events"></option>
+                                            <option value="Online / hybrid sessions"></option>
+                                            <option value="Partner with more local businesses"></option>
+                                            <option value="Extend programme to other campuses"></option>
+                                            <option value="Add a beginner-friendly track"></option>
+                                        </datalist>
+                                    </div>
+                                </fieldset>
+                                <button type="submit" class="btn btn-primary" style="width:100%;">Submit
+                                    Feedback</button>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div id="site-footer"></div>
+    <script src="components.js"></script>
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const siteNav = document.querySelector('.site-nav');
+        if (navToggle && siteNav) { navToggle.addEventListener('click', function () { const o = siteNav.classList.toggle('open'); navToggle.setAttribute('aria-expanded', String(o)); }); }
+
+        // Keeps the textarea requirement visible by updating the remaining character count as the user types.
+        const msgField = document.getElementById('fmsg');
+        const charRemaining = document.getElementById('char-remaining');
+        msgField.addEventListener('input', function () {
+            const remaining = 500 - msgField.value.length;
+            charRemaining.textContent = remaining;
+            charRemaining.style.color = remaining < 50 ? '#DC2626' : '';
+        });
+
+        // Intercepts submission so required fields can show inline JavaScript validation feedback before the form is accepted.
+        document.getElementById('feedback-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            let valid = true;
+
+            // Reuses the same blank-field check for each required control so errors stay consistent across the form.
+            function showError(fieldId, errorId, msg) {
+                const field = document.getElementById(fieldId);
+                const err = document.getElementById(errorId);
+                if (!field.value.trim()) {
+                    err.textContent = msg;
+                    field.classList.add('error');
+                    field.setAttribute('aria-invalid', 'true');
+                    valid = false;
+                } else {
+                    err.textContent = '';
+                    field.classList.remove('error');
+                    field.setAttribute('aria-invalid', 'false');
+                }
+            }
+
+            showError('fname', 'fname-error', 'Please enter your full name.');
+
+            // Uses a lightweight pattern test so the email field gets a clear inline message instead of relying on browser defaults alone.
+            const emailField = document.getElementById('femail');
+            const emailErr = document.getElementById('femail-error');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailField.value.trim() || !emailRegex.test(emailField.value)) {
+                emailErr.textContent = 'Please enter a valid email address.';
+                emailField.classList.add('error');
+                emailField.setAttribute('aria-invalid', 'true');
+                valid = false;
+            } else {
+                emailErr.textContent = '';
+                emailField.classList.remove('error');
+                emailField.setAttribute('aria-invalid', 'false');
+            }
+
+            showError('fmsg', 'fmsg-error', 'Please write your feedback before submitting.');
+
+            // Switches from the form to a confirmation state once every required field passes validation.
+            if (valid) {
+                document.getElementById('feedback-form').style.display = 'none';
+                document.getElementById('form-success').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,300 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Editor Student - provide your student name</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/pageEditor_validator.css"> <!-- External CSS link -->
+
+</head>
+<body id="top">
+    
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div id="site-header"></div>
+
+    <section class="stud">
+        <h2>Rajindu Amithirigala, EcoLoop (G8), Student 2</h2>
+    </section>
+
+    <div class="editor-layout">
+        <!-- Main content area -->
+        <main id="main-content">
+
+            <!-- Update those first three sections for the pages you were responsible to implement -->
+
+            <section>
+                <h2 id="splash">Splash Screen</h2>
+                    <h3>Technical Description</h3>
+                        <p>The Splash Screen, though built without the shared site template as the specs allowed, was crafted to align with the website's established visual identity. 
+                           This meant adhering to the agreed-upon color palette, typography, and overall layout. A full-screen background image, fixed behind all other elements, was achieved with position: fixed and inset: 0. 
+                           To enhance text readability against the image, an ::after <a href="#ref-pseudo">(W3Schools, n.d.)</a> pseudo-element overlay was implemented. A subtle pan animation, courtesy of @keyframes <a href="#ref-keyframes">(W3Schools, n.d.)</a> bgShift, was then applied. 
+                           This animation shifts the background position over an 8-second interval, resulting in a soft movement effect. The background itself is intentionally sized at 105% by 105% to avoid any unsightly white edges that might appear at the animation's extremes.</pr>
+
+                        <p>The page features an automatic redirect, courtesy of a meta http-equiv="refresh" tag, set to trigger after four seconds, as outlined in the lecture notes. A CSS-only spinning loader <a href="#ref-loader">(W3Schools, n.d.)</a> was crafted, employing border-radius: 50% and animated, asymmetric border colors via @keyframes spin to create a fluid ring rotation. 
+                           A progress bar was also included, animated with @keyframes shrink, which steadily decreased the fill width from 100% to 0% over a precise four-second interval, visually mirroring the countdown. The countdown number itself is refreshed every second, thanks to setInterval <a href="#ref-setinterval">(W3Schools, n.d.)</a> in JavaScript. 
+                           This same script also enables the skip function, utilizing clearInterval to halt both the timer and the meta redirect when the user interacts with the page.
+                        </p>
+                    <h3>Accessibility</h3>
+                        <p>The background decorative layer is using aria-hidden="true" so that it is completely skipped by screen readers. 
+                            The content wrapper is using role="main" so that the main content region is indicated. In the loader, the role="status" and aria-label are being used so that the screen readers can announce it correctly. 
+                            In the paragraph of the countdown, aria-live="polite" is being used so that the changing number is announced to the screen reader users without interfering with the rest of the content. 
+                            In the team members section, aria-label is being used on the container. The clamp() <a href="#ref-clamp">(W3Schools, n.d.)</a> function has been used for the title and tagline font sizes so that the text can scale properly across different screen sizes without becoming unreadable on small screens.</p>
+                    <h3>Design and Implementation Rationale</h3>
+                        <p>The decision to use a full-screen background image with a dark overlay rather than a plain color background was made in order to provide a powerful visual first impression in accordance with the environmental theme of the site. 
+                            The level of overlay opacity has been kept low enough so that the image is still visible while the white text above it remains readable. The spinning loader and shrinking progress bar were selected in order to provide the user with a clear indication that something is happening while they are waiting for the 4-second duration. 
+                            This has the added benefit of reducing the chances of the user closing the page before the redirect can fire. The "skip" button has been added in order to honor the autonomy of the user and has been implemented using JavaScript in order to cancel the countdown interval. 
+                            Pill-shaped tags have been used for the team member names in order to maintain a compact appearance while maintaining consistency with the other badge and button styles that are utilized throughout the rest of the site.</p>
+                    
+                    <h3>Link to the validation page</h3> <!-- Update the path to link the Page Editor with the splash page -->
+                        <p><a href="validation_ST2.html#splashVal" target="_blank" rel="noopener noreferrer">Validation Page - Splash Screen</a></p>
+                    <h3>Link to the page</h3>
+                        <p><a href="splash.html" target="_blank" rel="noopener noreferrer">Splash Screen</a></p>`
+            </section>
+
+            <section>
+                <h2 id="AIS">Action Impact Simulator</h2>
+                    <h3>Technical Description</h3>
+                        <p>The Action Impact Simulator was created by importing the shared HTML template, including the website header, main content section, and footer, all of which are handled by components.js. The page's grid is defined by applying the .ais-layout class, 
+                            which uses CSS Grid <a href="#ref-grid">(W3Schools, n.d.)</a> to divide the action cards and the impact results panel into two columns. This grid collapses to one column on screen sizes below 860px. The action cards, of which there are eight, are defined in HTML, each of which has a data 
+                            attribute for points that is used by JavaScript to calculate the total score.</p>
+                        <p>The card selection is controlled by JavaScript using a toggleCard() function that manipulates a class list and calls updateDisplay() to update the score. The level of impact is defined by a getLevel() function that has three defined 
+                            thresholds: Low (1-6), Medium (7-13), and High (14-22), all stored in a LEVELS object that also has a label and message along with a class. Background image changes are driven by JavaScript by adding one of three CSS classes 
+                            (ais-bg-low, ais-bg-medium, ais-bg-high) to the #bg-layer wrapper div, with the three background images defined in the embedded style block using background-attachment: fixed to create a parallax-style <a href="#ref-parallax">(W3Schools, n.d.)</a> effect. 
+                            A resetCards() function clears all selections and restores the default state. Keyboard support is implemented through an onkeydown <a href="#ref-onkeydown">(W3Schools, n.d.)</a> handler that activates card selection on Enter or Space.</p>
+                    <h3>Accessibility</h3>
+                        <p>The action card grid has role="group" and aria-label attributes to identify it as a group of controls. Each card has role="checkbox" and aria-checked attributes so that screen readers can correctly announce the state of the selected card. 
+                            Each card is keyboard accessible using tabindex="0" and responds to Enter and Space key <a href="#ref-onkeydown">(W3Schools, n.d.)</a> presses. The impact results panel has aria-live="polite" attributes so that screen readers can correctly announce changes to the score and feedback messages without interrupting screen reader users. 
+                            All thumbnail images have descriptive alt attributes. The skip link at the top of the page allows keyboard-only users to bypass the navigation links. The breadcrumb has aria-label and aria-current="page" attributes to correctly identify the user's location in the site.</p>
+                    <h3>Design and Implementation Rationale</h3>
+                        <p>The CSS Grid with auto-fill and minmax(260px, 1fr) <a href="#ref-minmax">(W3Schools, n.d.)</a> was used for the action card grid so that it would automatically adjust to different screen sizes without needing to specify all column counts. For the impact panel, "sticky" positioning was used so that users could always see their current score when viewing the cards without needing to go back to the top of the page. 
+                            For the background image system, JavaScript class switching was used instead of styles so that all of the visual styling is handled by CSS and all of the JavaScript logic is handled by JavaScript. backdrop-filter: blur <a href="#ref-backdrop">(W3Schools, n.d.)</a> was used on the card and panel backgrounds so that text remains readable when a background image is used.</p>
+                    
+                    <h3>Link to the validation page</h3> <!-- Update the path to link the Page Editor with the splash page -->
+                        <p><a href="validation_ST2.html#aisVal" target="_blank" rel="noopener noreferrer">Validation Page - Action Impact Simulator</a></p>
+                    <h3>Link to the page</h3>
+                        <p><a href="ais.html".html" target="_blank" rel="noopener noreferrer">Action Impact Simulator</a></p>
+            </section>
+
+            <section>
+                <h2 id="content">Content Page</h2>
+                    <h3>Technical Description</h3>
+                        <p>The shared HTML template and global CSS are used on the E-Waste content page, and an embedded style block defines page-specific styles. 
+                            A sticky side navigation panel and the main article content are separated by a two-column structure created by CSS Grid in the main layout. 
+                            In order to stay visible while scrolling without overlapping the fixed site header, the side navigation uses position: sticky <a href="#ref-sticky">(W3Schools, n.d.)</a> with a top value determined from the --header-h CSS variable <a href="#ref-variables">(W3Schools, n.d.)</a>. 
+                            For the same purpose, scroll-margin-top is applied to each section heading to make sure anchor links are positioned correctly beneath the header.</p>
+
+                        <p>The Introduction, Understanding the Problem, What Students Can Do, CircuitCycle, and Action Checklist are the five distinctly labeled sections that make up the page. 
+                            The side navigation uses anchor hrefs to link to each of these sections. A two-column CSS Grid with aspect-ratio: 4/3 and object-fit: cover is used to display images in pairs, ensuring that thumbnails are always the same size regardless of the dimensions of the original image. 
+                            The action checklist replaces the default list marker—which was eliminated by the global CSS reset—with a styled tick icon using a custom ::before pseudo-element <a href="#ref-pseudo">(W3Schools, n.d.)</a>. 
+                            To restore the numbering that the global reset eliminates, the statistics in the highlight box use a ol with list-style: decimal applied via embedded CSS. 
+                            Only HTML and CSS are used in the implementation of the go-to-top button <a href="#ref-scrolltop">(W3Schools, n.d.)</a>.The go-to-top button is implemented using only HTML and CSS with position: fixed, as required by the specification.</p>
+                    <h3>Accessibility</h3>
+                        <p>The page has a labelled aside navigation with aria-label="Page sections, a breadcrumb with aria-current="page", and a skip link. For screen reader users, the checklist has an aria-label that provides context as a named list. 
+                           Each of the four pictures has an alt text description that is pertinent to its content. Screen reader users can better comprehend the structure and navigate between sections thanks to the heading hierarchy, which follows a logical order from h1 down through h2 and h3 sub-sections. For clarity, 
+                           the go-to-top button has title and aria-label attributes. In order to keep the content readable on mobile devices, the layout uses a media query <a href="#ref-mediaqueries">(W3Schools, n.d.)</a> to collapse to a single column on small screens. The Global E-Waste Monitor provided the statistics used on the page <a href="#ref-unitar">UNITAR (2024)</a>.</p>
+                    <h3>Design and Implementation Rationale</h3>
+                        <p>The reason for choosing this two-column format with a sticky side navigation is that this page has a lot of long-form content, and without proper internal navigation, a user would be forced to scroll extensively to find a particular section of content.
+                           The combination of aspect ratio and object fit was used on images to prevent layout shifts when images of different dimensions are placed side by side in the same grid row. For the highlight box, I used the main brand color for the background to ensure that 
+                           the user would easily notice these important statistics, making it easier for them to find and recall this information within all that long-form content. For the tick styling in the checklist, I used pseudo-elements <a href="#ref-pseudo">(W3Schools, n.d.)</a> instead of images to ensure that it works in all browsers without having to add extra assets.</p>
+                    
+                    
+                    <h3>Link to the validation page</h3> <!-- Update the path to link the Page Editor with the splash page -->
+                        <p><a href="validation_ST2.html#contentVal" target="_blank" rel="noopener noreferrer">Validation Page - Content</a></p>
+                    <h3>Link to the page</h3>
+                        <p><a href="content_ST2.html".html" target="_blank" rel="noopener noreferrer">E-waste</a></p>
+            </section>
+
+            <section>
+                <h2 id="challenge"> Challenges and Lessons Learned</h2>
+                    <p>Finding a balance between the Splash Screen's visual design and the technical specifications was one of its biggest challenges. It took careful coordination to implement the automatic redirect using a &lt;meta http-equiv="refresh"&gt; tag while simultaneously keeping a JavaScript-driven countdown and skip button so that both systems coexisted peacefully. 
+                       While the meta refresh took care of the fallback redirect on its own, the skip button was required to cleanly terminate the JavaScript interval. In order to make sure that the text was readable over the background image on various screen sizes, I added a dark ::after overlay to the background layer and experimented with contrast at various opacity values. 
+                       From this I learned that layered positioning and pseudo-elements are a reliable way to add visual depth without affecting the readability of the content above.</p>
+                    <p>The JavaScript-driven background image system was one of the challenges that the Action Impact Simulator posed. It was necessary to carefully use background-attachment: fixed, semi-transparent card backgrounds and backdrop-filter: blur to make the background change dynamically based on score thresholds while maintaining consistently readable page content. 
+                       It took multiple iterations to get the card selection logic, score calculation, progress bar update, and background class switching to all respond correctly from a single updateDisplay() function. I discovered that it is much simpler to debug and expand JavaScript code when it is organized around a central update function rather than dispersed individual handlers.</p>        
+                    <p>The biggest challenge for the Content Page was organizing a lot of information so that it felt manageable rather than overwhelming. In order to account for the fixed site header, which was not immediately apparent, the sticky side navigation must be implemented with the proper anchor positioning using scroll-margin-top on each section heading.  
+                       Overall, working across these three pages deepened my understanding of how CSS, JavaScript and HTML work together as a system rather than independently, and reinforced the importance of planning the structure and interaction of a page before writing code.In order to restore numbering on the statistics ordered list, I also had to override the global CSS list reset. 
+                       This experience taught me how embedded CSS can be used to selectively restore default browser behavior and how global resets can have unexpected effects on page-specific content.</p>        
+                    </section>
+
+            <section>
+                <h2 id="compliance">Janet Compliance</h2>
+                    <p>The pages I implemented were created in accordance with responsible web publishing guidelines and Janet regulations <a href="#ref-janet">(Jisc, 2025)</a>. Every piece of content on the Splash Screen, Action Impact Simulator, and Content Page is unique, educational, and pertinent to the coursework's educational goal. There was no offensive, defamatory, or deceptive content, and none of the pages were used for profit. 
+                        In order to give the pages a clear, meaningful structure that is comprehensible to both browsers and assistive technologies, semantic HTML elements like &lt;main&gt;, &lt;section&gt;, &lt;article&gt;, &lt;aside&gt;, and &lt;nav&gt; were used throughout.</p>
+                    <p>All three pages took accessibility into account. To make the pages usable by a variety of users, skip links, descriptive alt text, ARIA roles and labels, keyboard navigation support, and visible focus states were added. Aria-live regions are used in the countdown and score feedback on the Splash Screen and AIS, respectively, to notify screen reader users of dynamic content 
+                        updates without requiring a page reload.</p>
+                    <p>Copyright and acknowledgment were also considered. All the external images used on any of the pages were obtained from royalty-free sites and are acknowledged in the references section of this Page Editor. Statistical information used on any of the pages of the Content Page has been obtained from various sources, including the Global E-Waste Monitor (UNITAR, 2024), and is acknowledged. 
+                       No content has been copied from the UN SDG website or any other site without proper acknowledgment. I understand that not only is technically correct code needed, but also ethical and honest content that is acknowledged, which I have tried to do on all the pages I have worked on.</p>
+            </section>
+
+            <section>
+                <h2 id="group"> Group Meetings and Individual Contribution Log</h2>
+
+                        <table >
+    
+                            <thead>
+                                <tr>
+                                    <th colspan="6">Group Meetings and Contribution Log</th>
+                                </tr>
+                                <tr>
+                                    <th>Meeting</th>
+                                    <th>Date &amp; Time</th>
+                                    <th>Format</th>
+                                    <th>Objective</th>
+                                    <th>Attended</th>
+                                    <th>Your Individual Contribution</th>
+                                </tr>
+                            </thead>
+                        
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>14 Feb 2026</td>
+                                    <td>Online</td>
+                                    <td>Agree on SDG and split the work amongst the three original members</td>
+                                    <td>Yes</td>
+                                    <td>I took responsibility for the splash screen and the AIS</td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>2</td>
+                                    <td>21 Feb 2026</td>
+                                    <td>Online</td>
+                                    <td>Mock-up of website design template and final decisions</td>
+                                    <td>Yes</td>
+                                    <td>Decided on the color palette</td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>3</td>
+                                    <td>28 Feb 2026</td>
+                                    <td>Online</td>
+                                    <td>All Content Finalisation</td>
+                                    <td>Yes</td>
+                                    <td>Suggesting on adding a redirect button to link all the content pages</td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>4</td>
+                                    <td>07 Mar 2026</td>
+                                    <td>Online</td>
+                                    <td>Follow-up on Progress</td>
+                                    <td>Yes</td>
+                                    <td>I presented my current work and the splash screen design</td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>5</td>
+                                    <td>12 March 2026</td>
+                                    <td>Online</td>
+                                    <td>Finalization of Website</td>
+                                    <td>Yes</td>
+                                    <td>Finalizing the splash and AIS designs</td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>6</td>
+                                    <td>23 March 2026</td>
+                                    <td>Online</td>
+                                    <td>Addition of 4th Member</td>
+                                    <td>Yes</td>
+                                    <td>Updating the splash to include the new member (was added by Ms. Janani on 22 March).</td>
+                                </tr>
+
+                                <tr>
+                                    <td>7</td>
+                                    <td>29 March 2026</td>
+                                    <td>Online</td>
+                                    <td>Completion of Coursework</td>
+                                    <td>Yes</td>
+                                    <td>Hosted the final meeting to ensure that the entire website and coursework has been properly completed.</td>
+                                </tr>
+                        
+                            </tbody>
+                        
+                        </table>
+                    
+            </section>
+
+            <section>
+                <h2 id="ref">References</h2>
+                    <ul class="ref">
+                        <li id="ref-pseudo">W3Schools (n.d.) <i>CSS ::after Selector.</i> Available at: <a href="https://www.w3schools.com/cssref/sel_after.php" target="_blank" rel="noopener noreferrer">https://www.w3schools.com/cssref/sel_after.php</a> (Accessed: 18 March 2026).</li>
+                        <li id="ref-keyframes">W3Schools (n.d.) <i>CSS @keyframes Rule.</i> Available at: <a href="https://www.w3schools.com/cssref/atrule_keyframes.php" target="_blank" rel="noopener noreferrer">https://www.w3schools.com/cssref/atrule_keyframes.php</a> (Accessed: 18 March 2026).</li>
+                        <li id="ref-loader">W3Schools (n.d.) <i>How TO - CSS Loader.</i> Available at: <a href="https://www.w3schools.com/howto/howto_css_loader.asp" target="_blank" rel="noopener noreferrer">https://www.w3schools.com/howto/howto_css_loader.asp</a> (Accessed: 18 March 2026).</li>
+                        <li id="ref-setinterval">W3Schools (n.d.) <i>Window setInterval() Method.</i> Available at: <a href="https://www.w3schools.com/jsref/met_win_setinterval.asp" target="_blank" rel="noopener noreferrer">https://www.w3schools.com/jsref/met_win_setinterval.asp</a> (Accessed: 20 March 2026).</li>
+                        <li id="ref-clamp">W3Schools (n.d.) <i>CSS clamp() Function.</i> Available at: <a href="https://www.w3schools.com/cssref/func_clamp.php" target="_blank" rel="noopener noreferrer">https://www.w3schools.com/cssref/func_clamp.php</a> (Accessed: 18 March 2026).</li>
+                        <li id="ref-grid">W3Schools (n.d.) <i>CSS Grid Layout.</i> Available at: <a href="https://www.w3schools.com/css/css_grid.asp" target="_blank" rel="noopener noreferrer">https://www.w3schools.com/css/css_grid.asp</a> (Accessed: 18 March 2026).</li>
+                        <li id="ref-parallax">W3Schools (n.d.) <i>How TO - Parallax Scrolling.</i> Available at: <a href="https://www.w3schools.com/howto/howto_css_parallax.asp" target="_blank" rel="noopener noreferrer">https://www.w3schools.com/howto/howto_css_parallax.asp</a> (Accessed: 19 March 2026).</li>
+                        <li id="ref-onkeydown">W3Schools (n.d.) <i>HTML onkeydown Event Attribute.</i> Available at: <a href="https://www.w3schools.com/jsref//event_onkeydown.asp" target="_blank" rel="noopener noreferrer">https://www.w3schools.com/jsref//event_onkeydown.asp</a> (Accessed: 18 March 2026).</li>
+                        <li id="ref-minmax">W3Schools (n.d.) <i>CSS minmax() Function.</i> Available at: <a href="https://www.w3schools.com/cssref/func_minmax.php" target="_blank" rel="noopener noreferrer">https://www.w3schools.com/cssref/func_minmax.php</a> (Accessed: 20 March 2026).</li>
+                        <li id="ref-backdrop">W3Schools (n.d.) <i>CSS backdrop-filter Property.</i> Available at: <a href="https://www.w3schools.com/cssref/css3_pr_backdrop-filter.php" target="_blank" rel="noopener noreferrer">https://www.w3schools.com/cssref/css3_pr_backdrop-filter.php</a> (Accessed: 19 March 2026).</li>
+                        <li id="ref-sticky">W3Schools (n.d.) <i>CSS position: sticky Property.</i> Available at: <a href="https://www.w3schools.com/css/css_positioning_sticky.asp" target="_blank" rel="noopener noreferrer">https://www.w3schools.com/css/css_positioning_sticky.asp</a> (Accessed: 20 March 2026).</li>
+                        <li id="ref-variables">W3Schools (n.d.) <i>CSS Variables.</i> Available at: <a href="https://www.w3schools.com/css/css3_variables.asp" target="_blank" rel="noopener noreferrer">https://www.w3schools.com/css/css3_variables.asp</a> (Accessed: 18 March 2026).</li>
+                        <li id="ref-scrolltop">W3Schools (n.d.) <i>How TO - Scroll Back To Top Button.</i> Available at: <a href="https://www.w3schools.com/howto/howto_js_scroll_to_top.asp" target="_blank" rel="noopener noreferrer">https://www.w3schools.com/howto/howto_js_scroll_to_top.asp</a> (Accessed: 20 March 2026).</li>
+                        <li id="ref-janet">Jisc (2025) <i>Janet Compliance.</i> [online] Available at: <a href="https://intranet.ecs.westminster.ac.uk/modules/4COSC011W/compliance.html" target="_blank" rel="noopener noreferrer">https://intranet.ecs.westminster.ac.uk/modules/4COSC011W/compliance.html</a> (Last accessed: 20 Mar 2026).</li>
+                        <li id="ref-mediaqueries">W3Schools (n.d.) <i>CSS Media Queries.</i> Available at: <a href="https://www.w3schools.com/css/css_rwd_mediaqueries.asp" target="_blank" rel="noopener noreferrer">https://www.w3schools.com/css/css_rwd_mediaqueries.asp</a> (Accessed: 20 March 2026).</li>
+                        <li id="ref-unitar">UNITAR (2024) <i>Global e-Waste Monitor 2024: Electronic Waste Rising Five Times Faster than Documented E-waste Recycling.</i> Available at: <a href="https://unitar.org/about/news-stories/press/global-e-waste-monitor-2024-electronic-waste-rising-five-times-faster-documented-e-waste-recycling" target="_blank" rel="noopener noreferrer">https://unitar.org/about/news-stories/press/global-e-waste-monitor-2024-electronic-waste-rising-five-times-faster-documented-e-waste-recycling</a> (Accessed: 16 March 2026).</li>
+                        <li id="ref-sdg12">United Nations (2025) <i>Goal 12: Ensure sustainable consumption and production patterns.</i> Available at: <a href="https://unstats.un.org/sdgs/report/2025/Goal-12/" target="_blank" rel="noopener noreferrer">https://unstats.un.org/sdgs/report/2025/Goal-12/</a> (Accessed: 16 March 2026).</li>
+                        <li id="ref-unsplash">Unsplash (n.d.) <i>Black and yellow electronic devices.</i> Available at: <a href="https://unsplash.com/photos/black-and-yellow-electronic-devices-A7NNW7pjHOk" target="_blank" rel="noopener noreferrer">https://unsplash.com/photos/black-and-yellow-electronic-devices-A7NNW7pjHOk</a> (Accessed: 16 March 2026).</li>
+                        <li id="ref-freepik">Freepik (n.d.) <i>Cybersecurity Images.</i> Available at: <a href="https://www.freepik.com/free-photos-vectors/cybersecurity#uuid=e21cf291-9fa1-4675-944e-d80a022c0c69" target="_blank" rel="noopener noreferrer">https://www.freepik.com/free-photos-vectors/cybersecurity</a> (Accessed: 16 March 2026).</li>
+                        <li id="ref-pinterest">Pinterest (n.d.) <i>Pinterest.</i> Available at: <a href="https://www.pinterest.com/" target="_blank" rel="noopener noreferrer">https://www.pinterest.com/</a> (Accessed: 18 March 2026).</li>      
+                    </ul>
+            </section>
+
+            <p class="top"><a href="#top">Go top</a></p>
+        </main>
+
+        <!-- Sidebar area -->
+        <aside>
+            <h3>Core pages developed:</h3>
+
+            <ul class="top-level-ul">
+                <li>Chanitha (Student 1)</li>
+                <ul>
+                    <li>Shared Template &amp; Navigation</li>
+                    <li><a href="home.html">Home Page</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="content_ST1.html">Content</a></li>
+                </ul>
+                <li>Rajindu (Student 2)</li>
+                <ul>
+                    <li><a href="splash.html">Splash Screen</a></li>
+                    <li><a href="ais.html">Action Impact Simulator (AIS)</a></li>
+                    <li><a href="content_ST2.html">Content</a></li>
+                </ul>
+                <li>Rithika (Student 3)</li>
+                <ul>
+                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="content_ST3.html">Content</a></li>
+                </ul>
+                <li>Student 4</li>
+                <ul>
+                    <li><a href="profile.html">User Profile</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                    <li><a href="content_ST4.html">Content</a></li>
+                </ul>
+                <li><a href="#challenge">Challenges and Lessons Learned</a></li>
+                <li><a href="#compliance">Compliance</a></li>
+                <li><a href="#group">Group Meetings and Individual Contribution Log</a></li>
+                <li><a href="#ref">References</a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <div id="site-footer"></div>
+    <script src="components.js"></script>
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const siteNav = document.querySelector('.site-nav');
+        if (navToggle && siteNav) {
+            navToggle.addEventListener('click', function () {
+                const isOpen = siteNav.classList.toggle('open');
+                navToggle.setAttribute('aria-expanded', String(isOpen));
+            });
+        }
+    </script>
+</body>
+</html>

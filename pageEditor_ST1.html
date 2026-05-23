@@ -1,0 +1,392 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Editor | Chanitha Abeygunawardena</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/pageEditor_validator.css"> <!-- External CSS link -->
+
+</head>
+<body id="top">
+    
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div id="site-header"></div>
+
+    <section class="stud">
+        <h2>Chanitha Abeygunawardena, EcoLoop (G8), Student 1</h2>
+    </section>
+
+    <div class="editor-layout">
+        <!-- Main content area -->
+        <main id="main-content">
+
+            <!-- Update those first three sections for the pages you were responsible to implement -->
+
+            <section>
+                <h2 id="home">Home page</h2>
+                    <h3>Technical Description</h3>
+                        <p>The home page was built using a semantic structure with &lt;main&gt; wrapping around multiple &lt;section&gt; elements, &lt;article&gt; cards, headings, paragraphs, lists, and links <a href="#ref-w3-html">(W3Schools, 2024)</a>.
+                        The hero area has a video background <a href="#ref-pennes">(Pennes, 2020)</a> with a light overlay to make text readable. This was done using position: relative, position: absolute, z-index and ::before.
+                        Layout classes like container, section, card-grid, card, btn and badge from style.css (template) were integrated to keep the page looking consistent and on theme with the rest of the website.
+                        For the statistics strip and content cards I used CSS Grid, box-shadow, border-radius, object-fit, clamp(), and spacing variables from :root to create a nice layout <a href="#ref-uw-images">(University of Westminster, 2026)</a>.</p>
+
+                        <p>The cards under "Explore Topics Through Action" were designed with an interactive gallery using article elements, a clickable image area with descriptive alt text, CSS transitions, transforms and opacity changes. 
+                            Additionally, JavaScript was used to add and remove a data-hovered attribute so that the hover effect is not purely CSS <a href="#ref-w3-js">(W3Schools, 2019)</a>. 
+                            This makes the page feel more interactive while following the specification guidelines.</p>
+                        
+                    
+                    <h3>Accessibility</h3>
+                        <p>I included two buttons in the hero section that link to the Impact Simulator and Food Waste page so that users can jump straight into the main content.
+                            The hero section also uses aria-labelledby, the background video includes &lt;track&gt; for validation requirements, and all images have descriptive &lt;alt&gt; text.
+                            The statistics strip is a labelled region and topic links use aria-label values to provide more context for screen reader users. All statistics included were drawn from <a href="#ref-unitar">UNITAR (2024)</a>, <a href="#ref-unep">UNEP (2025)</a>, and <a href="#ref-goodwin">Goodwin and Lipinski (2024)</a>.</p>
+                        </p>
+
+                        <p>
+                            I also made sure keyboard accessibility was considered. Focus styles are visible through :focus-visible. 
+                            The topic cards respond to keyboard focus as well as mouse hover. 
+                            The JavaScript also supports keyboard activation on the media links. 
+                            Headings are used in a logical order which helps screen reader users understand the structure of the Home Page  <a href="#ref-wang">(Wang, 2024)</a>.
+                        
+                        </p>
+
+                    <h3>Design and Implementation Rationale</h3>
+                        <p>I selected semantic tags such as &lt;main&gt;, &lt;section&gt; and &lt;article&gt; on the Home Page so the content is grouped in a meaningful way for assistive technologies and easier to maintain. 
+                            CSS Grid was used for the card areas because it gives a clean responsive structure without breaking reading order, while clamp() helps headings and spacing scale smoothly across different screen sizes. 
+                            The video overlay, strong contrast and visible focus states were chosen to keep the hero section visually engaging without reducing readability or keyboard usability <a href="#ref-gittings">(Gittings, 2017)</a>.</p>
+                    
+                    <h3>Link to the validation page</h3>
+                        <p><a href="validation_ST1.html#splashVal" target="_blank" rel="noopener noreferrer">Validation Page - Home</a></p>
+
+                    <h3>Link to the page</h3>
+                        <p><a href="home.html" target="_blank" rel="noopener noreferrer">Home Page</a></p>
+            </section>
+
+            <section>
+                <h2 id="gallery">Gallery Page</h2>
+                    <h3>Technical Description</h3>
+                        <p>I implemented the Gallery as a JavaScript-driven image grid so the thumbnail content can be generated from an array named galleryData instead of repeating HTML manually. 
+                            The page uses an unordered list as the gallery container and JavaScript creates each thumbnail as a &lt;button&gt; containing an &lt;img&gt; and a caption area  <a href="#ref-w3-js">(W3Schools, 2019)</a>. 
+                            This approach makes the gallery easier to manage and update. 
+                            The layout is controlled with CSS Grid through .thumb-grid and the thumbnail cards use aspect-ratio, object-fit, overflow, transform, and box-shadow to maintain a visual style <a href="#ref-uw-lists">(University of Westminster, 2026)</a> and <a href="#ref-w3-css">(W3Schools, 2019)</a>.</p> 
+
+                        <p>When a thumbnail is clicked, JavaScript opens a modal dialog that displays a larger image and description. 
+                            The modal is built with a full-screen overlay, a content box, a close button and text customisation controls to change the font and color of the extended view. 
+                            CSS uses position: fixed, inset, max-height, and responsive breakpoints to keep the modal responsive to different screen sizes. JavaScript controls the modal's opening, closing, focus handling, colour changes and font changes.</p>
+
+                    <h3>Accessibility</h3>
+                        <p>I used button elements for the thumbnails instead of plain div containers so they are naturally keyboard accessible. 
+                            Each thumbnail has attributes to describe its function. 
+                            The modal uses role="dialog" and other attributes so assistive technologies can understand it as a focused interactive window. 
+                            The close button also has an aria-label.</p>
+
+                        <p>Keyboard support was added for the modal by allowing the Escape key to close it and by trapping focus inside the dialog while it's open. 
+                            When the modal closes, focus returns to the thumbnail that opened it. 
+                            All gallery images use alt text and the customisation buttons use aria-pressed so their selected state is announced properly.
+                            All gallery images were sourced from the United Nations SDG: 12 photo library <a href="#ref-unphoto">(UN Photo, 2020)</a>. These images are directly related to Responsible Consumption and Production. <a href="#ref-un-goal12">(United Nations, 2025)</a>.</p>
+
+                    <h3>Design and Implementation Rationale</h3>
+                        <p>I chose button-based thumbnails instead of generic containers because the gallery is an interactive control and should be reachable and understandable through keyboard navigation by default <a href="#ref-geeks">(GeeksforGeeks, 2024)</a>. 
+                            CSS Grid and aspect-ratio were used to keep the thumbnails aligned and predictable, which improves scanning and reduces visual clutter. 
+                            The modal structure, overlay and focus handling were implemented to keep attention on the selected item, while aria labels and state indicators make the interaction clearer for screen reader users.</p>
+
+                    <h3>Link to the validation page</h3>
+                        <p><a href="validation_ST1.html#volunteerVal" target="_blank" rel="noopener noreferrer">Validation Page - Gallery</a></p>
+
+                        
+                    <h3>Link to the page</h3>
+                        <p><a href="gallery.html" target="_blank" rel="noopener noreferrer">Gallery</a></p>
+            </section>
+
+            <section>
+                <h2 id="content">Content Page</h2>
+                    <h3>Technical Description</h3>
+                        <p>I structured the ST1 content page using a shared page heading followed by a two-column content layout. 
+                            The layout combines an aside for navigation and an article for the main reading content. 
+                            I divided the page into thematic sections with unique IDs which make the content easier to scan and also support in-page navigation. 
+                            CSS Grid is used to separate the side navigation from the article and position: sticky keeps the side navigation visible while scrolling on screens.  <a href="#ref-uw-images">(University of Westminster, 2026)</a> and <a href="#ref-w3-css">(W3Schools, 2019)</a></p> 
+
+                        <p>The page styling focuses on readability and content hierarchy <a href="#ref-haim">(Haim, 2025)</a>. 
+                            I used styles to place related images side by side, highlight statistics, and create visual action points. 
+                            I also used scroll-margin-top on headings so anchor links do not get hidden behind the site header. 
+                            Shared styles help keep the page consistent with the rest of the website.</p>
+
+                    <h3>Accessibility</h3>
+                        <p>The page includes a skip link, a breadcrumb with aria-current="page" and a labelled side navigation with aria-label. 
+                            The internal section links make long content easier to navigate for both keyboard users and screen reader users. 
+                            Because each section has a heading and ID, users can move through the content in a meaningful order and jump directly to the part they need.
+                            Content page images were sourced from Freepik <a href="#ref-freepik-mother">(Freepik.com, 2026).</a>
+                            The statistics were sourced from the <a href="#ref-wfp">World Food Programme (2024)</a>, the <a href="#ref-fao">FAO Regional Office (2022)</a>, and <a href="#ref-undesa">UN DESA Voice (2023)</a>.</p>
+
+                        <p>All main images contain descriptive &lt;alt&gt; text and the checklist points are labelled to provide better context for assistive technologies. 
+                            The layout is responsive so it changes to a single-column structure on smaller screen sizes. 
+                            The back-to-top button has a simple up arrow icon and helps users navigate the lengthy page easily.</p>
+
+                    <h3>Design and Implementation Rationale</h3>
+                        <p>I used an aside for local navigation and an article for the main reading area so the long-form content has a clear structural separation between navigation and information. 
+                            CSS Grid was the best choice for the two-column layout because it keeps the side menu and article aligned while still allowing the design to collapse neatly on smaller screens. 
+                            Sticky positioning, section IDs and scroll-margin-top were chosen to support quick movement through the page and to ensure anchor navigation remains usable when a fixed or sticky header is present.</p>
+
+                    <h3>Link to the validation page</h3>
+                        <p><a href="validation_ST1.html#contentVal" target="_blank" rel="noopener noreferrer">Validation Page - Content</a></p>
+
+                        
+                    <h3>Link to the page</h3>
+                        <p><a href="content_ST1.html" target="_blank" rel="noopener noreferrer">Food Waste</a></p>
+            </section>
+
+
+            <section>
+                <h2 id="challenge"> Challenges and Lessons Learned</h2>
+                    <p>One of the main challenges I had on the Home Page was to come up with a visually strong hero section while keeping the text readable and the layout responsive. 
+                        The background video, the overlay and foreground information need to work with one another without diminishing the contrast or crowding the page. 
+                        I solved this problem with some use of layered positioning, a dark overlay, controlling content width and responsive font sizing. 
+                        The challenge of giving an interactive feel to the topic cards without losing keyboard accessibility was another issue. 
+                        I was able to solve this by using a combination of CSS hover, state changes using JavaScript and visible focus styling. 
+                        From this I learnt that good visual design must always have a balance of readability, structure and accessibility.</p> 
+
+                    <p>On the Gallery Page, the most difficult thing to do was to construct the modal interaction in a way that is both dynamic and usable. 
+                        I created the thumbnail grid with the help of JavaScript, opening the item the user clicked on in an extended modal view, updating the image and text content and also allowing the user to customise the text styling. 
+                        The modal state, close behaviour, keyboard navigation and focus return were the biggest challenges. 
+                        I was able to resolve this problem by using a structured array to store the gallery data and developing separate functions to open, close and reset the modal. 
+                        Working on this page taught me the importance of organising JavaScript in a clear way when a page has several features that are interactive, and showed me the need to think about what needs to be done to make the page accessible in addition to making it functional.</p>
+
+                    <p>For the Content Page, the major challenge was to convey a large amount of information in a manner that was still easy to read and navigate. 
+                        Long pages might easily become daunting if the design is dull or the navigation from one part to another is not easily facilitated for users. 
+                        I skirted this issue by implementing a side navigation menu using anchor links, clear section headings, supporting images and a highlighted statistics box and an action checklist to break up the content. 
+                        I added scroll-margin-top and a sticky side menu as well because the internal links will be functional with the fixed site header. 
+                        From this, I learned that content design was not just writing information, but also structuring information in a manner that the user is able to move through efficiently.</p>
+
+                    <p>Overall, these pages helped me in enhancing my knowledge about responsive design, reusable styling, and interactive JavaScript. 
+                        The main lesson I learned was that good web design is not only about looks. It is dependent on having clear structure, accessibility, maintainability and ensuring that each feature functions well for all types of different users and devices.</p>
+            </section>
+
+            <section>
+                <h2 id="compliance">Janet Compliance</h2>
+                    <p>The pages I created were designed to follow Janet regulations <a href="#ref-janet">(Jisc, 2025)</a> and general good practice for public web publication, keeping the content lawful, respectful, accurate and suitable for an educational website. 
+                        I did not include defamatory, offensive or misleading material and the purpose of the pages is informational rather than harmful or commercial. 
+                        I also made use of the semantic HTML elements such as headings, sections, navigation, forms and lists so that the structure of the pages was obvious and accessible. 
+                        Throughout my pages I included such things as skip links, descriptive alt text, labelled navigation and keyboard-friendly controls and visible focus states; features which help with accessible publication and responsible web design.
+                        I also took into consideration copyright and data protection. 
+                        Any third-party images, video or external material used on the pages were properly acknowledged in the references section and I have tried to use content in such a way that it is acceptable for the coursework rather than claiming the resources of an external source.</p> 
+
+                    <p>Overall, I believe that my pages are compliant as far as structure, accessibility and responsible publishing practice are concerned. 
+                        However, to be fully realistic, another important area to check is that all the external media, all borrowed factual descriptions are referenced clearly and consistently. Compliance is therefore not only about writing code that works, but also writing content in an ethical, legal and accessible manner.</p>
+
+                    
+            </section>
+
+            <section>
+                <h2 id="group"> Group Meetings and Individual Contribution Log</h2>
+
+                        <table >
+    
+                            <thead>
+                                <tr>
+                                    <th colspan="6">Group Meetings and Contribution Log</th>
+                                </tr>
+                                <tr>
+                                    <th>Meeting</th>
+                                    <th>Date &amp; Time</th>
+                                    <th>Format</th>
+                                    <th>Objective</th>
+                                    <th>Attended</th>
+                                    <th>Your Individual Contribution</th>
+                                </tr>
+                            </thead>
+                        
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>14 Feb 2026</td>
+                                    <td>Online</td>
+                                    <td>Agree on SDG and split the work amongst the three original members</td>
+                                    <td>Yes</td>
+                                    <td>I agreed to take responsibility for the Home Page, Gallery, and Template.</td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>2</td>
+                                    <td>21 Feb 2026</td>
+                                    <td>Online</td>
+                                    <td>Mock-up of website design template and final decisions</td>
+                                    <td>Yes</td>
+                                    <td>I suggested the earthy colour palette and implemented the template.</td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>3</td>
+                                    <td>28 Feb 2026</td>
+                                    <td>Online</td>
+                                    <td>All Content Finalisation</td>
+                                    <td>Yes</td>
+                                    <td>I evaluated and finalized everyone's content pages.</td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>4</td>
+                                    <td>07 Mar 2026</td>
+                                    <td>Online</td>
+                                    <td>Follow-up on Progress</td>
+                                    <td>Yes</td>
+                                    <td>I handled the meeting and talked about next steps regarding the remaining pages.</td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>5</td>
+                                    <td>12 March 2026</td>
+                                    <td>Online</td>
+                                    <td>Finalization of Website</td>
+                                    <td>Yes</td>
+                                    <td>I evaluated the team's progress and the initial 3-member team finalized most of the website.</td>
+                                </tr>
+                        
+                                <tr>
+                                    <td>6</td>
+                                    <td>23 March 2026</td>
+                                    <td>Online</td>
+                                    <td>Addition of 4th Member</td>
+                                    <td>Yes</td>
+                                    <td>I had to integrate the pages and elements of Student 4 into the website (was added by Ms. Janani on 22 March).</td>
+                                </tr>
+
+                                <tr>
+                                    <td>7</td>
+                                    <td>29 March 2026</td>
+                                    <td>Online</td>
+                                    <td>Completion of Coursework</td>
+                                    <td>Yes</td>
+                                    <td>Hosted the final meeting to ensure that the entire website and coursework has been properly completed.</td>
+                                </tr>
+                        
+                            </tbody>
+                        
+                        </table>
+                    
+            </section>
+
+            <section>
+                <h2 id="ref">References</h2>
+                <ul class="ref">
+                    <li id="ref-emmet">Emmet (2026) <i>Big pile of garbage.</i> [online] Vecteezy. Available at: <a href="https://www.vecteezy.com/photo/1914066-big-pile-of-garbage" target="_blank" rel="noopener noreferrer">https://www.vecteezy.com/photo/1914066-big-pile-of-garbage</a> (Last accessed: 14 Mar 2026).</li>
+
+                    <li id="ref-fao">FAO Regional Office for the Near East and North Africa (2022) <i>Towards a Regional Framework of Action for food loss and waste reduction in the Near East and North Africa region.</i> [online] Available at: <a href="https://www.fao.org/neareast/news/details/Towards-a-Regional-Framework-of-Action-for-food-loss-and-waste-reduction-in-the-Near-East-and-North-Africa-region/en" target="_blank" rel="noopener noreferrer">https://www.fao.org/neareast/news/details/</a> (Last accessed: 07 Mar 2026).</li>
+
+                    <li id="ref-freepik-assortment">Freepik.com (2026) <i>Assortment of dirty dumped objects.</i> [online] Available at: <a href="https://www.freepik.com/free-photo/assortment-dirty-dumped-objects_15175107.htm" target="_blank" rel="noopener noreferrer">https://www.freepik.com/free-photo/assortment-dirty-dumped-objects_15175107.htm</a> (Last accessed: 19 Mar 2026).</li>
+
+                    <li id="ref-freepik-medium">Freepik.com (2026) <i>Medium shot people working together.</i> [online] Available at: <a href="https://www.freepik.com/free-photo/medium-shot-people-working-together_19894415.htm" target="_blank" rel="noopener noreferrer">https://www.freepik.com/free-photo/medium-shot-people-working-together_19894415.htm</a> (Last accessed: 11 Mar 2026).</li>
+
+                    <li id="ref-freepik-mother">Freepik.com (2026) <i>Mother and daughter preparing to plant a tree.</i> [online] Available at: <a href="https://www.freepik.com/free-photo/mother-daughter-preparing-plant-tree-woods_237237151.htm" target="_blank" rel="noopener noreferrer">https://www.freepik.com/free-photo/mother-daughter-preparing-plant-tree-woods_237237151.htm</a> (Last accessed: 23 Mar 2026).</li>
+
+                    <li id="ref-freepik-women">Freepik.com (2026) <i>Women organising clothing in thrift store.</i> [online] Available at: <a href="https://www.freepik.com/free-photo/women-organising-clothing-thrift-store_80755786.htm" target="_blank" rel="noopener noreferrer">https://www.freepik.com/free-photo/women-organising-clothing-thrift-store_80755786.htm</a> (Last accessed: 05 Mar 2026).</li>
+
+                    <li id="ref-geeks">GeeksforGeeks (2024) <i>Importance of Galleries in Web Design.</i> [online] GeeksforGeeks. Available at: <a href="https://www.geeksforgeeks.org/websites-apps/importance-of-galleries-in-web-design/" target="_blank" rel="noopener noreferrer">https://www.geeksforgeeks.org/websites-apps/importance-of-galleries-in-web-design/</a> (Last accessed: 18 Mar 2026).</li>
+
+                    <li id="ref-goodwin">Goodwin, L. and Lipinski, B. (2024) <i>World Resources Institute.</i> Available at: <a href="https://www.wri.org/insights/how-much-food-does-the-world-waste" target="_blank" rel="noopener noreferrer">https://www.wri.org/insights/how-much-food-does-the-world-waste</a> (Last accessed: 09 Mar 2026).</li>
+
+                    <li id="ref-gittings">Gittings, R. (2017) <i>How to Structure a Successful Homepage.</i> [online] Medium. Available at: <a href="https://medium.com/@ryangittings/how-to-structure-a-successful-homepage-61af8bc5cfcf" target="_blank" rel="noopener noreferrer">https://medium.com/@ryangittings/how-to-structure-a-successful-homepage-61af8bc5cfcf</a> (Last accessed: 22 Mar 2026).</li>
+
+                    <li id="ref-ho">Ho, S. (2020) <i>Global Organic Food Market Now Worth Over US$100 Billion As Demand For Safe Food Skyrockets.</i> [online] Green Queen. Available at: <a href="https://www.greenqueen.com.hk/global-organic-food-market-surpass-us100-billion-demand-skyrockets/" target="_blank" rel="noopener noreferrer">https://www.greenqueen.com.hk/global-organic-food-market-surpass-us100-billion-demand-skyrockets/</a> (Last accessed: 13 Mar 2026).</li>
+
+                    <li id="ref-haim">Haim, I. (2025) <i>What is Website Content? A Comprehensive Guide for Creators.</i> [online] Blog. Available at: <a href="https://elementor.com/blog/what-is-website-content/" target="_blank" rel="noopener noreferrer">https://elementor.com/blog/what-is-website-content/</a> (Last accessed: 16 Mar 2026).</li>
+
+                    <li id="ref-janet">Jisc (2025) <i>Janet Compliance.</i> [online] Available at: <a href="https://intranet.ecs.westminster.ac.uk/modules/4COSC011W/compliance.html" target="_blank" rel="noopener noreferrer">https://intranet.ecs.westminster.ac.uk/modules/4COSC011W/compliance.html</a> (Last accessed: 20 Mar 2026).</li>
+
+                    <li id="ref-nutrition">The Nutrition Source (2017) <i>The Nutrition Source.</i> Available at: <a href="https://nutritionsource.hsph.harvard.edu/sustainability/food-waste/" target="_blank" rel="noopener noreferrer">https://nutritionsource.hsph.harvard.edu/sustainability/food-waste/</a> (Last accessed: 06 Mar 2026).</li>
+
+                    <li id="ref-pennes">Pennes, R. (2020) <i>One earth - environmental short film.</i> [online] YouTube. Available at: <a href="https://www.youtube.com/watch?v=QQYgCxu988s" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=QQYgCxu988s</a> (Last accessed: 24 Mar 2026).</li>
+
+                    <li id="ref-undesa">UN DESA Voice (2023) <i>SDGs in numbers.</i> [online] Available at: <a href="https://desapublications.un.org/un-desa-voice/sdgs-in-numbers/november-2024/sdgs-numbers" target="_blank" rel="noopener noreferrer">https://desapublications.un.org/un-desa-voice/sdgs-in-numbers/november-2024/sdgs-numbers</a> (Last accessed: 12 Mar 2026).</li>
+
+                    <li id="ref-unphoto">UN Photo (2020) <i>United Nations.</i> Available at: <a href="https://media.un.org/photo/en/collections/sustainable-development-goals/goal-12-responsible-consumption-and-production" target="_blank" rel="noopener noreferrer">https://media.un.org/photo/en/collections/sustainable-development-goals/goal-12-responsible-consumption-and-production</a> (Last accessed: 08 Mar 2026).</li>
+
+                    <li id="ref-unep">UNEP (2025) <i>UN Environment.</i> Available at: <a href="https://www.unep.org/news-and-stories/press-release/unsustainable-fashion-and-textiles-focus-international-day-zero" target="_blank" rel="noopener noreferrer">https://www.unep.org/news-and-stories/press-release/unsustainable-fashion-and-textiles-focus-international-day-zero</a> (Last accessed: 21 Mar 2026).</li>
+
+                    <li id="ref-unitar">UNITAR (2024) <i>E-Waste Monitor.</i> Available at: <a href="https://ewastemonitor.info/the-global-e-waste-monitor-2024/" target="_blank" rel="noopener noreferrer">https://ewastemonitor.info/the-global-e-waste-monitor-2024/</a> (Last accessed: 15 Mar 2026).</li>
+
+                    <li id="ref-un-goal12">United Nations (2025) <i>Goal 12: Ensure sustainable consumption and production patterns.</i> [online] Available at: <a href="https://sdgs.un.org/goals/goal12" target="_blank" rel="noopener noreferrer">https://sdgs.un.org/goals/goal12</a> (Last accessed: 03 Mar 2026).</li>
+
+                    <li id="ref-usepa">United States Environmental Protection Agency (2024) <i>US EPA.</i> Available at: <a href="https://www.epa.gov/recycle/preventing-wasted-food-home" target="_blank" rel="noopener noreferrer">https://www.epa.gov/recycle/preventing-wasted-food-home</a> (Last accessed: 17 Mar 2026).</li>
+
+                    <li id="ref-uw-images">University of Westminster (2026) <i>HTML Images, Links and Special Characters; CSS for Links, Images, CSS Positioning.</i> 4COSC011C.2 Web Design and Development. [PowerPoint slides]. Available at: Blackboard (Last accessed: 25 Mar 2026).</li>
+
+                    <li id="ref-uw-lists">University of Westminster (2026) <i>HTML Lists, CSS for Lists, HTML Tables, CSS for Tables, CSS Box Model.</i> 4COSC011C.2 Web Design and Development. [PowerPoint slides]. Available at: Blackboard (Last accessed: 10 Mar 2026).</li>
+
+                    <li id="ref-uw-intro">University of Westminster (2026) <i>Introduction to Web Technologies and HTML, CSS &amp; Colors.</i> 4COSC011C.2 Web Design and Development. [PowerPoint slides]. Available at: Blackboard (Last accessed: 26 Mar 2026).</li>
+
+                    <li id="ref-uw-js-intro">University of Westminster (2026) <i>Introduction to JavaScript.</i> 4COSC011C.2 Web Design and Development. [PowerPoint slides]. Available at: Blackboard (Last accessed: 04 Mar 2026).</li>
+
+                    <li id="ref-uw-js-dom">University of Westminster (2026) <i>JavaScript and DOM; JavaScript Event Listeners and Callbacks.</i> 4COSC011C.2 Web Design and Development. [PowerPoint slides]. Available at: Blackboard (Last accessed: 02 Mar 2026).</li>
+
+                    <li id="ref-uw-js-objects">University of Westminster (2026) <i>JavaScript Objects, Methods, Functions.</i> 4COSC011C.2 Web Design and Development. [PowerPoint slides]. Available at: Blackboard (Last accessed: 19 Mar 2026).</li>
+
+                    <li id="ref-vasilis">Vasilis Bouronikos (2023) <i>Embracing the Circular Economy: A Sustainable Future for the Agri-Food Sector.</i> [online] Institute of Entrepreneurship Development. Available at: <a href="https://ied.eu/blog/sustainability-blog/exploring-benefits-circular-economy-agri-food-sector/" target="_blank" rel="noopener noreferrer">https://ied.eu/blog/sustainability-blog/exploring-benefits-circular-economy-agri-food-sector/</a> (Last accessed: 11 Mar 2026).</li>
+
+                    <li id="ref-w3-css">W3Schools (2019) <i>CSS Tutorial.</i> [online] W3Schools.com. Available at: <a href="https://www.w3schools.com/css/" target="_blank" rel="noopener noreferrer">https://www.w3schools.com/css/</a> (Last accessed: 24 Mar 2026).</li>
+
+                    <li id="ref-w3-js">W3Schools (2019) <i>JavaScript Tutorial.</i> [online] W3Schools.com. Available at: <a href="https://www.w3schools.com/js/" target="_blank" rel="noopener noreferrer">https://www.w3schools.com/js/</a> (Last accessed: 08 Mar 2026).</li>
+
+                    <li id="ref-w3-html">W3Schools (2024) <i>HTML Tutorial.</i> [online] W3Schools.com. Available at: <a href="https://www.w3schools.com/html/" target="_blank" rel="noopener noreferrer">https://www.w3schools.com/html/</a> (Last accessed: 15 Mar 2026).</li>
+
+                    <li id="ref-wang">Wang, H.-H. (2024) <i>Homepage Design: 5 Fundamental Principles.</i> [online] Nielsen Norman Group. Available at: <a href="https://www.nngroup.com/articles/homepage-design-principles/" target="_blank" rel="noopener noreferrer">https://www.nngroup.com/articles/homepage-design-principles/</a> (Last accessed: 22 Mar 2026).</li>
+
+                    <li id="ref-wfp">World Food Programme (2024) <i>World Food Programme.</i> Available at: <a href="https://www.wfp.org/stories/5-facts-about-food-waste-and-hunger" target="_blank" rel="noopener noreferrer">https://www.wfp.org/stories/5-facts-about-food-waste-and-hunger</a> (Last accessed: 06 Mar 2026).</li>
+                </ul>
+            </section>
+
+            <p class="top"><a href="#top">Go to top</a></p>
+        </main>
+
+        <!-- Sidebar area -->
+        <aside>
+            <h3>Core pages developed:</h3>
+
+            <ul class="top-level-ul">
+                <li>Chanitha Abeygunawardena</li>
+                <ul>
+                    <li><a href="home.html">Home Page</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="content_ST1.html">Content</a></li>
+                </ul>
+                <li>Rajindu Amithirigala</li>
+                <ul>
+                    <li><a href="splash.html">Splash Screen</a></li>
+                    <li><a href="ais.html">Action Impact Simulator (AIS)</a></li>
+                    <li><a href="content_ST2.html">Content</a></li>
+                </ul>
+                <li>Rithika Wickramasinghe</li>
+                <ul>
+                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="content_ST3.html">Content</a></li>
+                </ul>
+                <li>Sahan Polwatte</li>
+                <ul>
+                    <li><a href="profile.html">User Profile</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                    <li><a href="content_ST4.html">Content</a></li>
+                </ul>
+                <br>
+                <li><a href="#challenge">Challenges and Lessons Learned</a></li>
+                <li><a href="#compliance">Compliance</a></li>
+                <li><a href="#group">Group Meetings and Individual Contribution Log</a></li>
+                <li><a href="#ref">References</a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <div id="site-footer"></div>
+    <script src="components.js"></script>
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const siteNav = document.querySelector('.site-nav');
+        if (navToggle && siteNav) {
+            navToggle.addEventListener('click', function () {
+                const isOpen = siteNav.classList.toggle('open');
+                navToggle.setAttribute('aria-expanded', String(isOpen));
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Eco Loop visual sitemap — SVG diagram showing all pages and their relationships.">
+    <meta name="author" content="Student 3">
+    <title>Sitemap | Eco Loop</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Page-specific SVG node styling */
+        .site-node {
+            stroke: none;
+            stroke-width: 0;
+            transition: fill 0.25s ease, stroke 0.25s ease, stroke-width 0.25s ease;
+            cursor: pointer;
+        }
+
+        .site-node:hover,
+        .site-node:focus {
+            stroke: #000;
+            stroke-width: 3;
+        }
+
+        .node-link:focus .site-node {
+            outline: none;
+        }
+
+        .node-link {
+            text-decoration: none;
+        }
+
+        .sitemap-wrapper {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            padding: 1.5rem;
+            overflow-x: auto;
+        }
+
+        .sitemap-legend {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+            font-size: 0.82rem;
+            color: var(--color-muted);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .legend-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div id="site-header"></div>
+
+    <main id="main-content">
+        <section class="page-heading" style="--page-heading-image: url('assets/img/Header.jpg');">
+            <div class="container">
+                <h1>Sitemap</h1>
+                <p>A visual overview of all Small Shift pages and how they connect — click any node to navigate.</p>
+                <nav class="breadcrumb" aria-label="Breadcrumb"><a href="home.html">Home</a><span
+                        aria-hidden="true">›</span><span aria-current="page">Sitemap</span></nav>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="sitemap-heading">
+            <div class="container">
+                <div class="sitemap-wrapper">
+                    <!-- SVG Sitemap — responsive, accessible, interactive nodes -->
+                    <svg viewBox="0 0 900 700" width="100%" xmlns="http://www.w3.org/2000/svg"
+                            style="min-width:600px; max-width:900px; display:block; margin:0 auto;">
+
+                            <!-- Lines -->
+                            <line x1="450" y1="65" x2="450" y2="115" stroke="#fc9b46" stroke-width="2" />
+
+                            <defs>
+                                <marker id="arrow-orange" viewBox="0 0 10 10" refX="10" refY="5"
+                                    markerWidth="6" markerHeight="6" orient="auto">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#ffa45e" />
+                                </marker>
+                            </defs>
+
+                            <!-- Home → children -->
+                            <line x1="450" y1="165" x2="120" y2="225" stroke="#ffa45e" stroke-width="1.5" marker-end="url(#arrow-orange)" />
+                            <line x1="450" y1="165" x2="230" y2="225" stroke="#ffa45e" stroke-width="1.5" marker-end="url(#arrow-orange)" />
+                            <line x1="450" y1="165" x2="340" y2="225" stroke="#ffa45e" stroke-width="1.5" marker-end="url(#arrow-orange)" />
+                            <line x1="450" y1="165" x2="450" y2="225" stroke="#ffa45e" stroke-width="1.5" marker-end="url(#arrow-orange)" />
+                            <line x1="450" y1="165" x2="560" y2="225" stroke="#ffa45e" stroke-width="1.5" marker-end="url(#arrow-orange)" />
+                            <line x1="450" y1="165" x2="670" y2="225" stroke="#ffa45e" stroke-width="1.5" marker-end="url(#arrow-orange)" />
+                            <line x1="450" y1="165" x2="780" y2="225" stroke="#ffa45e" stroke-width="1.5" marker-end="url(#arrow-orange)" />
+
+                            <!-- Vertical lines -->
+                            <line x1="340" y1="273" x2="340" y2="315" stroke="#ffa45e" stroke-width="2" />
+                            <polygon points="340,320 335,310 345,310" fill="#ffa45e" />
+
+                            <line x1="340" y1="365" x2="340" y2="405" stroke="#ffa45e" stroke-width="2" />
+                            <polygon points="340,410 335,400 345,400" fill="#ffa45e" />
+
+                            <line x1="340" y1="455" x2="340" y2="495" stroke="#ffa45e" stroke-width="2" />
+                            <polygon points="340,500 335,490 345,490" fill="#ffa45e" />
+
+                            <line x1="340" y1="545" x2="340" y2="585" stroke="#ffa45e" stroke-width="2" />
+                            <polygon points="340,590 335,580 345,580" fill="#ffa45e" />
+
+
+                            <!-- Splash -->
+                             <a xlink:href="splash.html">
+                            <rect class="site-node" x="360" y="15" width="180" height="50" rx="10"
+                                fill="#3f2a18" />
+                            <text x="450" y="44" text-anchor="middle" fill="white">Splash Screen</text>
+                            </a>
+
+                            <!-- Home -->
+                             <a xlink:href="home.html">
+                            <rect class="site-node" x="360" y="115" width="180" height="50" rx="10"
+                                fill="#79502c" />
+                            <text x="450" y="144" text-anchor="middle" fill="white">Home Page</text>
+                            </a>
+
+                            <!-- Level 3 -->
+                            <a xlink:href="ais.html">
+                            <rect class="site-node" x="67" y="225" width="106" height="48" rx="8"
+                                fill="#9f6b3e" />
+                            <text x="120" y="253" text-anchor="middle" fill="white">Impact Sim</text>
+                            </a>
+
+                            <a xlink:href="gallery.html">
+                            <rect class="site-node" x="177" y="225" width="106" height="48" rx="8"
+                                fill="#9f6b3e" />
+                            <text x="230" y="253" text-anchor="middle" fill="white">Gallery</text>
+                            </a>
+
+                            <a xlink:href="content_ST1.html">
+                            <rect class="site-node" x="287" y="225" width="106" height="48" rx="8"
+                                fill="#9f6b3e" />
+                            <text x="340" y="253" text-anchor="middle" fill="white">Content Pages</text>
+                             </a>
+
+                            <a xlink:href="profile.html">
+                            <rect class="site-node" x="397" y="225" width="106" height="48" rx="8"
+                                fill="#9f6b3e" />
+                            <text x="450" y="253" text-anchor="middle" fill="white">User Profile</text>
+                            </a>
+
+                            <a xlink:href="feedback.html">
+                            <rect class="site-node" x="507" y="225" width="106" height="48" rx="8"
+                                fill="#9f6b3e" />
+                            <text x="560" y="253" text-anchor="middle" fill="white">Feedback</text>
+                            </a>
+
+                        
+                            <a xlink:href="team.html">
+                            <rect class="site-node" x="617" y="225" width="106" height="48" rx="8"
+                                fill="#9f6b3e" />
+                            <text x="670" y="253" text-anchor="middle" fill="white">Team</text>
+                            </a>
+
+                            <a xlink:href="sitemap.html">
+                            <rect class="site-node" x="727" y="225" width="106" height="48" rx="8"
+                                fill="#9f6b3e" />
+                            <text x="780" y="253" text-anchor="middle" fill="white">Sitemap</text>
+                            </a>
+
+                            <!-- Sub pages -->
+                             <a xlink:href="content_ST1.html">
+                            <rect class="site-node" x="287" y="320" width="106" height="45" rx="6"
+                                fill="#fc9b46" />
+                            <text x="340" y="346" text-anchor="middle" fill="white">Food Waste</text>
+                            </a>
+
+                            <a xlink:href="content_ST3.html">
+                            <rect class="site-node" x="287" y="410" width="106" height="45" rx="6"
+                                fill="#fc9b46" />
+                            <text x="340" y="436" text-anchor="middle" fill="white">Fast Fashion</text>
+                            </a>
+                            <a xlink:href="content_ST2.html">
+                            <rect class="site-node" x="287" y="500" width="106" height="45" rx="6"
+                                fill="#fc9b46" />
+                            <text x="340" y="526" text-anchor="middle" fill="white">E-Waste</text>
+                            </a>
+
+                            <a xlink:href="content_ST4.html">
+                            <rect class="site-node" x="287" y="590" width="106" height="45" rx="6"
+                                fill="#fc9b46" />
+                            <text x="340" y="616" text-anchor="middle" fill="white">Plastic waste</text>
+                            </a>    
+
+                        </svg>
+                    <div class="sitemap-legend" role="list" aria-label="Sitemap colour legend">
+                        <div class="legend-item" role="listitem">
+                            <div class="legend-dot" style="background:#3f2a18;"></div><span>Entry point</span>
+                        </div>
+                        <div class="legend-item" role="listitem">
+                            <div class="legend-dot" style="background:#79502c;"></div><span>Main page</span>
+                        </div>
+                        <div class="legend-item" role="listitem">
+                            <div class="legend-dot" style="background:#9f6b3e;"></div><span>Navigation page</span>
+                        </div>
+                        <div class="legend-item" role="listitem">
+                            <div class="legend-dot" style="background:#fc9b46;"></div><span>Content hub</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div id="site-footer"></div>
+    <script src="components.js"></script>
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const siteNav = document.querySelector('.site-nav');
+        if (navToggle && siteNav) { navToggle.addEventListener('click', function () { const o = siteNav.classList.toggle('open'); navToggle.setAttribute('aria-expanded', String(o)); }); }
+    </script>
+</body>
+
+</html>

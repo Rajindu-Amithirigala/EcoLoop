@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Food Waste and Smarter Daily Choices - how students can reduce food waste and eat more sustainably.">
+    <meta name="author" content="Student 1">
+    <title>Food Waste &amp; Smarter Choices | EcoLoop</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 1. Side nav for internal navigation */
+        .content-layout { display: grid; grid-template-columns: 220px 1fr; gap: 2.5rem; align-items: start; }
+        .side-nav { position: sticky; top: calc(var(--header-h) + 1rem); background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); padding: 1.25rem; }
+        .side-nav h2 { font-family: var(--font-heading); color: var(--color-primary-dark); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+        .side-nav ul { list-style: none; }
+        .side-nav ul li { margin-bottom: 0.5rem; }
+        .side-nav ul li a { font-family: var(--font-heading); font-size: 0.88rem; color: var(--color-muted); text-decoration: none; padding: 0.25rem 0.5rem; border-left: 3px solid transparent; display: block; transition: all 0.2s; }
+        .side-nav ul li a:hover { color: var(--color-primary); border-left-color: var(--color-primary); background: var(--color-primary-pale); border-radius: 0 4px 4px 0; }
+        /* 2. Content section spacing */
+        .content-section { margin-bottom: 3rem; padding-top: 1rem; }
+        .content-section > h2 { scroll-margin-top: calc(var(--header-h) + 1rem); }
+        /* 3. Content images grid */
+        .img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        .content-img {
+            width: 100%; aspect-ratio: 4/3; border-radius: var(--radius-md); display: block;
+            object-fit: cover; box-shadow: var(--shadow-sm);
+        }
+        /* 4. Action checklist */
+        .checklist { list-style: none; margin: 1rem 0; }
+        .checklist li { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem; padding: 0.75rem; background: var(--color-primary-pale); border-radius: var(--radius-md); font-size: 0.92rem; }
+        .checklist li::before { content: '\2713'; background: var(--color-primary); color: white; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+        /* 5. Highlight box */
+        .highlight-box { background-color: var(--color-primary); color: white; border-radius: var(--radius-lg); padding: 1.5rem 2rem; margin: 1.5rem 0; }
+        .highlight-box h3, .highlight-box p { color: white; }
+        /* Go to top button */
+        .go-top { position: fixed; bottom: 2rem; right: 2rem; background: var(--color-primary); color: white; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.2rem; box-shadow: var(--shadow-md); transition: background 0.2s, transform 0.2s; z-index: 200; }
+        .go-top:hover { background: var(--color-primary-dark); transform: translateY(-3px); color: white; }
+        @media(max-width:700px){ .content-layout{grid-template-columns:1fr;} .side-nav{position:static;} .img-row{grid-template-columns:1fr;} }
+    </style>
+</head>
+<body id="top">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div id="site-header"></div>
+
+    <main id="main-content">
+        <section class="page-heading" style="--page-heading-image: url('assets/img/Header.jpg');">
+            <div class="container">
+                <h1>Food Waste &amp; Responsible Consumption</h1>
+                <p>Understanding why students waste food and how to stop it starting today.</p>
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="home.html">Home</a><span aria-hidden="true">></span>
+                    <span aria-current="page">Food Waste</span>
+                </nav>
+            </div>
+        </section>
+
+        <div class="section">
+            <div class="container">
+                <div class="content-layout">
+
+                    <!-- Internal navigation menu -->
+                    <aside class="side-nav" aria-label="Page sections">
+                        <h2>Content</h2>
+                        <ul>
+                            <li><a href="#intro">Introduction</a></li>
+                            <li><a href="#problem">Understanding the Problem</a></li>
+                            <li><a href="#student-actions">What Students Can Do</a></li>
+                            <li><a href="#P2P">Plate2Purpose</a></li>
+                            <li><a href="#checklist">Action Checklist</a></li>
+                        </ul>
+                    </aside>
+
+                    <!-- Main content -->
+                    <article>
+
+                        <div class="content-section">
+                            <h2 id="intro">Introduction</h2>
+                            <p>Food waste is one of the most obvious cases of irresponsible consumption. 
+                                Every day, huge quantities of edible food are thrown away in homes, restaurants, and supermarkets. 
+                                This is not only a loss of food but also a loss of the water, energy, money, and labor that went into producing it. 
+                                In the Sustainable Development Goal 12, responsible consumption and production involve using resources efficiently and minimizing avoidable waste. 
+                                Food is the best place to start, as it is part of everyday life and something that every student can get involved with.</p>
+
+                            <p>At the student level, food waste can appear to be a small thing: an uneaten lunch, stale snacks pushed to the back of a cupboard, or buying more than is needed. 
+                                However, when this behavior is repeated by many people over a period of time, the problem of food waste becomes a serious issue. This page will look at the problem of food waste, why it matters, and how students are contributing to it without realizing it. We will explore what can be done about the issue through everyday actions and explore a student-led initiative called Plate2Purpose which is open to all IIT students!</p>
+                            <div class="img-row">
+                                <img class="content-img" src="assets/img/food_waste1.png" alt="Student planning meals with fresh vegetables and ingredients laid out on a table.">
+                                <img class="content-img" src="assets/img/food_waste2.jpg" alt="Reusable food containers and stored ingredients showing safer food storage practices.">
+                            </div>
+                        </div>
+
+                        <div class="content-section">
+                            <h2 id="problem">Understanding the Problem</h2>
+                            <p>Food waste is the act of disposing of safe-to-eat food instead of consuming it, donating it to those who might enjoy it, storing it correctly, or utilizing it for better use. 
+                                Food waste occurs at any stage of the process, from the time we acquire, store, prepare, serve, or even consume food.</p>
+                            
+                            <p>For students, food waste is usually caused by poor planning rather than bad intentions. 
+                                Students may buy food in bulk and not be able to finish it. 
+                                Others may avoid leftovers in favor of fresh food or may simply forget about them. 
+                                Edible food is not something that should be discarded like it's garbage. Every item thrown away represents lost value and resources.
+                            </p>
+                            
+                            <div class="highlight-box">
+                                <h3>The Stats</h3>
+                                <ol>
+                                    <li>One-fifth of food produced for human consumption is lost or wasted globally, which is equal to around 1 billion meals a day.</li>
+                                    <li>The total cost of food loss and waste for the global economy is estimated at roughly US$1 trillion.</li>
+                                    <li>Food loss and waste generates up to 10 per cent of global greenhouse gas emissions.</li>
+                                </ol>
+                            </div>
+
+                        </div>
+
+                        <div class="content-section">
+                            <h2 id="student-actions">What Students Can Do</h2>
+                            <p>Students do not need large systems or expensive tools to reduce food waste. Simply acting with awareness can make a clear difference.</p>
+                            
+                            <h3>Plan before buying</h3>
+                            <p>Check what is already available before purchasing more. 
+                                A short list can prevent unnecessary buying.</p>
+                            
+                            <h3>Take realistic portions</h3>
+                            <p>Only buy or serve what can actually be finished. It is better to go back for more than to throw food away.</p>
+
+                            <h3>Store food properly</h3>
+                            <p>Dry food should be kept sealed and in suitable conditions. Cooked food should be handled carefully and consumed within a reasonable time.</p>
+
+                            <h3>Use leftovers wisely</h3>
+                            <p>Leftovers can often become another meal or snack instead of being ignored.</p>
+
+                            <h3>Share extra food</h3>
+                            <p>If there are unopened and safe food items that will not be used, they can be donated or passed on before they expire.</p>
+
+                            <h3>Build awareness</h3>
+                            <p>Students can also influence others by speaking about the issue, setting a good example, and joining campus efforts linked to SDG 12, like <strong>Plate2Purpose</strong>.</p>
+
+                            <div class="img-row">
+                                <img class="content-img" src="assets/img/food_waste3.png" alt="Food production and supply chain illustration showing how waste builds across the system.">
+                                <img class="content-img" src="assets/img/food_waste4.jpg" alt="Food scraps being composted as part of a sustainable waste reduction process.">
+                            </div>
+                        </div>
+
+                        <div class="content-section">
+                            <h2 id="P2P">Plate2Purpose</h2>
+                            <p>
+                                Plate2Purpose is a student-led initiative by EcoLoop with the aim of reducing food wastage at IIT. 
+                                The main objective of this event is to reduce wastage, share smartly, and increase awareness of food wastage on campus. 
+                                A collection point will be set up on campus where students can donate unopened dry food items (rice, biscuits, noodles, cereal, canned food, milk powder, and other pantry items) with a suitable shelf-life.
+                                When possible, campus food stalls or student groups may also contribute untouched surplus food that meets our safety conditions. 
+                                Students can also volunteer to handle the logistics and flow of the event.
+                            </p>
+                            
+                            <p>
+                                The event will also include activities that will be conducted to spread awareness and encourage responsible consumption and production practices. 
+                                Students will be able to pledge to Waste Less, participate in the Clean Plate Challenge by buying only what they will eat, share their specific food-saving tips in a community chart, and many more! 
+                                Incentives will be provided to motivate individuals to participate in the campaign by giving prizes to the top three individuals who contribute and certificates of appreciation to all volunteers who actively participate in the event. 
+                                Overall, Plate2Purpose 26' helps students understand that reducing food waste is not only about throwing away less, but also about making responsible choices that support both the campus and the wider community.
+                                
+                            </p>
+                        </div>
+
+                        <div class="content-section">
+                            <h2 id="checklist">Action Checklist</h2>
+                            <p>Start with one or two of these actions this week. Each one is free, takes under ten minutes to implement, and makes a measurable difference over time.</p>
+                            <ul class="checklist" aria-label="Food waste action checklist">
+                                <li>Volunteer for Plate2Purpose</li>
+                                <li>Write a weekly meal plan before you shop.</li>
+                                <li>Store food correctly (learn fridge vs room temperature for different items).</li>
+                                <li>Check what you already have before buying more of the same item</li>
+                                <li>Understand the difference between "best before" and "use by" labels</li>
+                                <li>Freeze bread, meat and leftovers before they spoil rather than discarding them</li>
+                                <li>Use a reusable container to take leftover food home from campus cafeterias</li>
+                                <li>Compost food scraps if you have access to a compost bin on campus or at home</li>
+                            </ul>
+                            <div style="margin-top:2rem;">
+                                <a href="ais.html" class="btn btn-primary">See Your Impact Score</a>
+                                <a href="content_ST2.html" class="btn btn-outline" style="margin-left:1rem;">Read: E-Waste</a>
+                            </div>
+                        </div>
+
+                    </article>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Go to Top button - HTML and CSS only per spec -->
+    <a href="#top" class="go-top" aria-label="Go to top of page" title="Back to top">&#8593;</a>
+    <div id="site-footer"></div>
+    <script src="components.js"></script>
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const siteNav = document.querySelector('.site-nav');
+        if (navToggle && siteNav) { navToggle.addEventListener('click', function () { const o=siteNav.classList.toggle('open'); navToggle.setAttribute('aria-expanded',String(o)); }); }
+    </script>
+</body>
+</html>

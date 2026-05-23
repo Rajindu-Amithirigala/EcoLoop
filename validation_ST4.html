@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validator Page | Student 4</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/pageEditor_validator.css">
+</head>
+<body id="top">
+    
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div id="site-header"></div>
+
+    <section class="stud">
+        <h2>Sahan Polwatte, EcoLoop (G8), Student 4</h2>
+    </section>
+
+    <div class="editor-layout">
+        <main id="main-content">
+
+            <section>
+                <h2 id="contentVal">Content Page (Plastic Waste) validation report</h2>
+                    <p>The validation report for the Content 4 page did not show any errors or warnings and verifies the semantic markup, 
+                       in this case the usage of the main, article and aside, is in accordance with the W3C standards.
+                       In addition to being valid, care was taken to provide both response behavior and readability.
+                    </p>
+
+                    <img src="validationSnapshots/content4_validation.png" alt="W3C validation result for content_ST4.html showing no errors.">
+                    <br>
+                                    
+                <h3>Back to Page Editor page</h3>
+
+                    <p><a href="pageEditor_ST4.html#content4" target="_blank" rel="noopener noreferrer">Page Editor - Content 4</a></p>
+            </section>
+
+            <section>
+                <h2 id="sitemapVal">Sitemap Page validation report</h2>
+
+                <p> The Sitemap page validation report showed the embedded SVG elements and structure to be fully-compliant.
+                     No errors have been detected and thus the visual site map works perfect in modern browsers.
+                </p>
+                    <img src="validationSnapshots/sitemap_validation.png" alt="W3C validation result for sitemap.html showing no errors.">
+                    <br>  
+
+                <h3>Back to Page Editor page</h3>
+                
+                    <p><a href="pageEditor_ST4.html#sitemap" target="_blank" rel="noopener noreferrer">Page Editor - Sitemap</a></p>
+            </section>
+
+            <section>
+                <h2 id="profileVal">Profile Page validation report</h2>
+
+                <p> The User Profile page submitted passed the W3C validation without any pain. 
+                    Under the dynamic JavaScript form integration and progress bars, the wise foundation of the web page is in an
+                     error-free and appropriate state.
+                </p>
+
+                    <img src="validationSnapshots/profile_validation.png" alt="W3C validation result for profile.html showing no errors.">
+                    <br>
+                    
+                <h3>Back to Page Editor page</h3>
+                    <p><a href="pageEditor_ST4.html#profile" target="_blank" rel="noopener noreferrer">Page Editor - Profile</a></p>
+            </section>
+
+        </main>
+
+        <aside class="side-nav">
+            <h2>Navigation</h2>
+            <ul>
+                <li><a href="#contentVal">Content 4 Validation</a></li>
+                <li><a href="#sitemapVal">Sitemap Validation</a></li>
+                <li><a href="#profileVal">Profile Validation</a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <div id="site-footer"></div>
+    <script src="components.js"></script>
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const siteNav = document.querySelector('.site-nav');
+        if (navToggle && siteNav) {
+            navToggle.addEventListener('click', function () {
+                const isOpen = siteNav.classList.toggle('open');
+                navToggle.setAttribute('aria-expanded', String(isOpen));
+            });
+        }
+    </script>
+</body>
+</html>

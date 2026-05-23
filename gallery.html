@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gallery - explore images and stories about responsible consumption and SDG 12 action.">
+    <meta name="author" content="Student 1">
+    <title>Gallery | EcoLoop</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 1. Thumbnail grid */
+        .thumb-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; align-items: stretch;
+            list-style: none; padding: 0; margin: 0;
+        }
+        /* 2. Individual thumbnail */
+        .thumb-item {
+            border-radius: var(--radius-lg); overflow: hidden; cursor: pointer;
+            box-shadow: var(--shadow-md); position: relative;
+            display: flex; flex-direction: column; height: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%; padding: 0; border: none; background: var(--color-surface);
+            text-align: left; font: inherit;
+        }
+        .thumb-item[data-hovered="true"], .thumb-item:focus-visible {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+            outline: 3px solid var(--color-secondary);
+            outline-offset: 2px;
+        }
+        .thumb-media {
+            width: 100%; aspect-ratio: 16/10;
+            overflow: hidden; flex-shrink: 0;
+            background: var(--color-primary-dark);
+            line-height: 0;
+        }
+        .thumb-img {
+            width: 100%; height: 100%;
+            display: block; object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .thumb-item[data-hovered="true"] .thumb-img, .thumb-item:focus-visible .thumb-img { transform: scale(1.08); }
+        .thumb-label {
+            display: flex; width: 100%; background: var(--color-primary-dark); color: white;
+            padding: 0.6rem 0.9rem; font-size: 0.85rem; font-weight: 600; font-family: var(--font-heading);
+            box-sizing: border-box; line-height: 1.5; flex: 1; align-items: flex-start;
+        }
+        /* 3. Modal overlay */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+            z-index: 500; align-items: center; justify-content: center; padding: 1rem;
+        }
+        .modal-overlay[hidden] { display: none; }
+        .modal-overlay.open { display: flex; }
+        /* 4. Modal content box */
+        .modal-box {
+            background: white; border-radius: var(--radius-lg); max-width: 800px; width: 100%;
+            max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            position: relative;
+        }
+        .modal-hero { width:100%; height:400px; display:block; object-fit:cover; border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+        .modal-body { padding: 2rem; }
+        .modal-body h2 { color: var(--color-primary-dark); margin-bottom: 1rem; font-family: var(--font-heading); font-size: 1.6rem; }
+        #modal-content-text { color: var(--color-muted); font-family: var(--font-heading); }
+        #modal-content-text p { color: inherit; line-height: 1.8; margin-bottom: 1.5rem; font-family: inherit; min-height: 5.4em; }
+        .modal-close {
+            position: absolute; top: 0.75rem; right: 0.75rem;
+            background: rgba(255,255,255,0.9); border: none; border-radius: 50%;
+            width: 36px; height: 36px; cursor: pointer; font-size: 1.1rem;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s;
+        }
+        .modal-close:hover { background: white; }
+        .modal-close:focus-visible { outline: 3px solid var(--color-secondary); outline-offset: 2px; }
+        .modal-content-preview { min-height: 9rem; }
+        /* 5. Customisation controls in modal */
+        .customise-bar { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--color-border); }
+        .customise-label { font-size: 0.82rem; font-weight: 600; color: var(--color-primary-dark); }
+        .colour-swatch {
+            width: 28px; height: 28px; border-radius: 50%; cursor: pointer; border: 3px solid transparent; transition: border-color 0.2s;
+            padding: 0;
+        }
+        .colour-swatch:hover, .colour-swatch.active, .colour-swatch:focus-visible { border-color: var(--color-primary-dark); }
+        .font-btn { padding: 0.25rem 0.75rem; border: 2px solid var(--color-border); border-radius: var(--radius-sm); background: white; cursor: pointer; font-family: var(--font-heading); font-size: 0.8rem; transition: all 0.2s; }
+        .font-btn:hover, .font-btn.active { border-color: var(--color-primary); background: var(--color-primary); color: white; }
+        .font-btn:focus-visible { outline: 3px solid var(--color-secondary); outline-offset: 2px; }
+        #modal-title, #modal-content-text { transition: color 0.3s, font-family 0.3s; }
+        body.modal-open { overflow: hidden; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        .noscript-warning {
+            margin: 0 auto 1.5rem;
+            max-width: 720px;
+            padding: 1rem 1.25rem;
+            border-radius: var(--radius-md);
+            border: 1px solid #f2c078;
+            background: #fff4e5;
+            color: var(--color-primary-dark);
+            text-align: center;
+        }
+        @media(max-width:768px){ .thumb-grid{grid-template-columns:repeat(3, 1fr);} }
+        @media(max-width:480px){ .thumb-grid{grid-template-columns:1fr 1fr;} }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div id="site-header"></div>
+
+    <main id="main-content">
+        <section class="page-heading" style="--page-heading-image: url('assets/img/Header.jpg');">
+            <div class="container">
+                <h1>Gallery</h1>
+                <p>Explore images and stories about responsible consumption and production.</p>
+                <nav class="breadcrumb" aria-label="Breadcrumb"><a href="home.html">Home</a><span aria-hidden="true">></span><span aria-current="page">Gallery</span></nav>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="gallery-heading">
+            <div class="container">
+                <div class="section-title">
+                    <h2 id="gallery-heading">Responsible Living in Action</h2>
+                    <p>Click any image to expand it and read the full story. You can customise the text colour and font inside the expanded view.</p>
+                </div>
+
+                <noscript>
+                    <div class="noscript-warning" role="alert">
+                        This gallery needs JavaScript to load the interactive thumbnails and expanded view.
+                    </div>
+                </noscript>
+
+                <ul class="thumb-grid" id="gallery-grid" aria-label="Gallery thumbnails">
+                    <!-- Thumbnails generated by JS from data array below -->
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-content-text" hidden>
+        <div class="modal-box" tabindex="-1">
+            <button class="modal-close" id="modal-close" aria-label="Close expanded view">&times;</button>
+            <img class="modal-hero" id="modal-hero" src="assets/img/gallery1.jpg" alt="">
+            <div class="modal-body">
+                <div class="modal-content-preview">
+                    <h2 id="modal-title"><span class="sr-only">Image title</span></h2>
+                    <div id="modal-content-text"></div>
+                </div>
+                <!-- Customisation controls - per spec -->
+                <div class="customise-bar" role="group" aria-label="Extended view customisation">
+                    <span class="customise-label">Text colour:</span>
+                    <button type="button" class="colour-swatch active" style="background:#000000;" data-colour="#000000" aria-label="Apply black text" aria-pressed="true"></button>
+                    <button type="button" class="colour-swatch" style="background:#7f1d1d;" data-colour="#7f1d1d" aria-label="Apply dark red text" aria-pressed="false"></button>
+                    <button type="button" class="colour-swatch" style="background:#92400e;" data-colour="#92400e" aria-label="Apply bronze text" aria-pressed="false"></button>
+                    <button type="button" class="colour-swatch" style="background:#d45100;" data-colour="#d45100" aria-label="Apply orange text" aria-pressed="false"></button>
+                    <span class="customise-label" style="margin-left:0.5rem;">Font:</span>
+                    <button type="button" class="font-btn active" data-font="" aria-pressed="true">Default</button>
+                    <button type="button" class="font-btn" data-font="Georgia, serif" aria-pressed="false">Serif</button>
+                    <button type="button" class="font-btn" data-font="'Courier New', monospace" aria-pressed="false">Mono</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="site-footer"></div>
+    <script src="components.js"></script>
+    <script>
+        // Mobile nav
+        const navToggle = document.querySelector('.nav-toggle');
+        const siteNav = document.querySelector('.site-nav');
+        if (navToggle && siteNav) { navToggle.addEventListener('click', function () { const o = siteNav.classList.toggle('open'); navToggle.setAttribute('aria-expanded', String(o)); }); }
+
+        // Gallery data
+        const galleryData = [
+            { id: 1, bg: 'assets/img/gallery1.jpg', title: 'Farming for Development', alt: 'Harvesting forage peas in Algeria as part of an agricultural development effort.', desc: 'At the request of the Government of Algeria, the United Nations Development Programme (UNDP) and the Food and Agriculture Organization (FAO) are involved in a project to increase and integrate the production of livestock and cereals in the Saida region, 200 miles south-west of Algiers. For some time to come Algeria will have to rely on agriculture to raise its living standards and supply the capital it needs to create industries. Harvesting forage peas to be used as animal fattening.' },
+            { id: 2, bg: 'assets/img/gallery2.jpg', title: 'Projection onto UN Building', alt: 'Sustainable Development Goals film projected onto United Nations Headquarters buildings.', desc: 'In anticipation of the United Nations Sustainable Development Summit from 25 - 27 of September, and in commemoration of the 70th anniversary of the United Nations, a 10-minute film introducing the Sustainable Development Goals is being projected onto the north facade of the Secretariat building and the west facade of the General Assembly building at the UN Headquarters. This projection vividly illustrates each of the 17 Goals, aiming to increase awareness about the 2030 Agenda for Sustainable Development. Sustainable Development Goal 12: Responsible Consumption and Production.' },
+            { id: 3, bg: 'assets/img/gallery3.jpg', title: 'Businesses Reopen in Gao, Mali', alt: 'Woman speaking with a tailor at a market in Gao, Mali.', desc: 'A woman speaks to a tailor at a market in Gao, Mali. During the Jihadist occupation, women were forbidden to speak with men in public. With the return of peace to the region, Gao\'s economy has returned to growth after the crisis, as shown by the reopening of stores and businesses.' },
+            { id: 4, bg: 'assets/img/gallery4.jpg', title: 'Electronics Market in Bangkok', alt: 'Busy electronics market in Bangkok connected to the issue of e-waste.', desc: 'The view inside a bustling electronics market in Bangkok, Thailand. According to a report issued by the UN Environment Programme (UNEP), so-called e-waste from products such as old computers, printers, mobile phones, pagers, digital photo and music devices, refrigerators, toys and televisions, are set to rise sharply in tandem with growth in sales in countries like China and India and in Africa and Latin America over the next ten years.' },
+            { id: 5, bg: 'assets/img/gallery5.jpg', title: 'World Food Situation', alt: 'Morning market scene in Luang Probang during New Year celebrations.', desc: 'The world is today facing a food shortage of near critical proportions, and chronic malnutrition is widespread. Stocks of basic foodstuffs are at a low level. A United Nations World Food Conference to be held in Rome in November 1974 is expected to concern itself first with a detailed assessment of the world food supply problem in the next ten years and beyond, and then turn to concrete proposals for improving food supply, distribution and food aid. Seen here is the Luang Probang market place in the morning, during New Year\'s celebrations.' },
+            { id: 6, bg: 'assets/img/gallery6.jpg', title: 'Focus on the Elderly', alt: 'Elderly Sikh merchant in Old Delhi.', desc: 'Between 26 July and 6 August, 1982, a special UN-sponsored World Assembly on Aging will be held in Vienna to discuss the long-range future of the world\'s elderly. Issues on the agenda include health, housing and the environment, social welfare, income security, education and the family and the role of the elderly in development. An elderly Sikh merchant in Old Delhi.' },
+            { id: 7, bg: 'assets/img/gallery7.jpg', title: 'Global Issues - Waste', alt: 'Scavenger birds searching through waste at a dump site in Dhaka.', desc: 'Scavenger birds pick a dump site in Dhaka.' },
+            { id: 8, bg: 'assets/img/gallery8.jpg', title: 'Ramadan in Somalia', alt: 'Man preparing bananas for sale at a market in Mogadishu during Ramadan.', desc: 'A man readies bananas for sale during the holy month of Ramadan, at a market in Mogadishu, Somalia.' },
+            { id: 9, bg: 'assets/img/gallery9.jpg', title: 'Afghan Farmer Gathers Wheat', alt: 'Farmer gathering wheat in Bamyan, Afghanistan.', desc: 'A farmer gathers wheat in Bamyan, Afghanistan.' },
+            { id: 10, bg: 'assets/img/gallery10.jpg', title: 'Women Mark End of Ramadan', alt: 'Women shopping in a market for Eid al-Fitr food and sweets.', desc: 'Women shop in a local market for cookies, dried fruit and sweets to prepare a meal for the observance of Eid al-Fitr, marking the end of Ramadan.' },
+            { id: 11, bg: 'assets/img/gallery11.jpg', title: 'Poverty in Egypt', alt: 'People in Cairo foraging through trash.', desc: 'Romani people in Cairo, Egypt, forage through trash.' },
+            { id: 12, bg: 'assets/img/gallery12.jpg', title: 'Madras Food Vendor', alt: 'Fruit vendor selling mangoes in Madras.', desc: 'A fruit vendor sells mangoes in Madras.' },
+            { id: 13, bg: 'assets/img/gallery13.jpg', title: 'UN Sustainable Development Summit', alt: 'Participant creating a poster during a UN sustainable development discussion.', desc: 'A participant at one of today\'s interactive dialogues creates a poster outlining the discussion on "Fostering sustainable economic growth, transformation and promoting sustainable consumption and production". These conversations are taking place as part of the United Nations summit for the adoption of the post-2015 development agenda.' },
+            { id: 14, bg: 'assets/img/gallery14.jpg', title: 'Residents of Camp for Displaced Haitians Organize Trash Collection', alt: 'Residents of a displaced persons camp collecting trash together.', desc: 'Residents of the densely populated Petionville Club, the Port-au-Prince former golf resort where 50,000 displaced Haitians have set up camp, organize themselves to collect the camp\'s trash.' },
+            { id: 15, bg: 'assets/img/gallery15.jpg', title: 'Food Shortages Persist in Port-au-Prince, Haiti', alt: 'Man looking over a pig carcass near a garbage-filled ditch in Port-au-Prince.', desc: 'A man looks over a pig carcass in a garbage-filled ditch in Port-au-Prince, Haiti. Severe food shortages in the aftermath of Haiti\'s earthquake have placed many on a desperate search for something to bring home to feed their families.' },
+            { id: 16, bg: 'assets/img/gallery16.jpg', title: 'Market Opens at Camp for Displaced Haitians', alt: 'Improvised market at a camp for displaced Haitians in Port-au-Prince.', desc: 'An improvised market opens at the Petionville Club, a former golf and tennis resort in Port-au-Prince where some 50,000 displaced Haitians have built temporary shelters.' }
+
+        ];
+
+        const grid = document.getElementById('gallery-grid');
+        const overlay = document.getElementById('modal-overlay');
+        const closeBtn = document.getElementById('modal-close');
+        const modalBox = overlay.querySelector('.modal-box');
+        const modalHero = document.getElementById('modal-hero');
+        const modalTitle = document.getElementById('modal-title');
+        const modalContentText = document.getElementById('modal-content-text');
+        const colourSwatches = Array.from(document.querySelectorAll('.colour-swatch'));
+        const fontButtons = Array.from(document.querySelectorAll('.font-btn'));
+        let lastTrigger = null;
+
+        function setThumbHoverState(button, isHovered) {
+            if (isHovered) {
+                button.setAttribute('data-hovered', 'true');
+            } else {
+                button.removeAttribute('data-hovered');
+            }
+        }
+
+        // Build thumbnails using JavaScript (per spec - JS populates content)
+        galleryData.forEach(function (item) {
+            const li = document.createElement('li');
+
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'thumb-item';
+            button.setAttribute('aria-label', item.title + ' - open extended view');
+            button.setAttribute('aria-controls', 'modal-overlay');
+            button.setAttribute('aria-expanded', 'false');
+
+            const media = document.createElement('div');
+            media.className = 'thumb-media';
+
+            const image = document.createElement('img');
+            image.className = 'thumb-img';
+            image.src = item.bg;
+            image.alt = item.alt || item.title;
+
+            const label = document.createElement('div');
+            label.className = 'thumb-label';
+            label.textContent = item.title;
+
+            media.appendChild(image);
+            button.appendChild(media);
+            button.appendChild(label);
+            li.appendChild(button);
+
+            // JS-driven hover state required by the brief.
+            button.addEventListener('mouseenter', function () { setThumbHoverState(button, true); });
+            button.addEventListener('mouseleave', function () { setThumbHoverState(button, false); });
+            button.addEventListener('focus', function () { setThumbHoverState(button, true); });
+            button.addEventListener('blur', function () { setThumbHoverState(button, false); });
+            button.addEventListener('click', function () { openModal(item, button); });
+
+            grid.appendChild(li);
+        });
+
+        // Modal logic
+        function openModal(item, trigger) {
+            lastTrigger = trigger || null;
+            document.querySelectorAll('.thumb-item[aria-expanded="true"]').forEach(function (thumb) {
+                thumb.setAttribute('aria-expanded', 'false');
+            });
+            if (trigger) {
+                trigger.setAttribute('aria-expanded', 'true');
+            }
+            modalHero.src = item.bg;
+            modalHero.alt = item.alt || item.title;
+            modalTitle.textContent = item.title;
+            modalContentText.innerHTML = '<p>' + item.desc + '</p>';
+            resetCustomise();
+            overlay.hidden = false;
+            overlay.classList.add('open');
+            document.body.classList.add('modal-open');
+            closeBtn.focus();
+        }
+
+        function closeModal() {
+            if (overlay.hidden) {
+                return;
+            }
+            overlay.classList.remove('open');
+            overlay.hidden = true;
+            document.body.classList.remove('modal-open');
+            document.querySelectorAll('.thumb-item[aria-expanded="true"]').forEach(function (thumb) {
+                thumb.setAttribute('aria-expanded', 'false');
+            });
+            if (lastTrigger) {
+                lastTrigger.focus();
+            }
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
+        document.addEventListener('keydown', function (e) {
+            if (overlay.hidden) {
+                return;
+            }
+            if (e.key === 'Escape') {
+                closeModal();
+                return;
+            }
+
+            if (e.key === 'Tab') {
+                const focusable = Array.from(modalBox.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'))
+                    .filter(function (element) { return !element.disabled && !element.hidden; });
+                if (focusable.length === 0) {
+                    return;
+                }
+                const first = focusable[0];
+                const last = focusable[focusable.length - 1];
+
+                if (e.shiftKey && document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                } else if (!e.shiftKey && document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
+                }
+            }
+        });
+
+        // User customisation controls (JS driven - per spec)
+        function setColour(swatch) {
+            colourSwatches.forEach(function (s) {
+                s.classList.remove('active');
+                s.setAttribute('aria-pressed', 'false');
+            });
+            swatch.classList.add('active');
+            swatch.setAttribute('aria-pressed', 'true');
+            var colour = swatch.dataset.colour;
+            modalTitle.style.color = colour;
+            modalContentText.style.color = colour;
+            var description = modalContentText.querySelector('p');
+            if (description) {
+                description.style.color = colour;
+            }
+        }
+
+        function setFont(btn) {
+            fontButtons.forEach(function (b) {
+                b.classList.remove('active');
+                b.setAttribute('aria-pressed', 'false');
+            });
+            btn.classList.add('active');
+            btn.setAttribute('aria-pressed', 'true');
+            modalTitle.style.fontFamily = btn.dataset.font || '';
+            modalContentText.style.fontFamily = btn.dataset.font || '';
+            var description = modalContentText.querySelector('p');
+            if (description) {
+                description.style.fontFamily = btn.dataset.font || '';
+            }
+        }
+
+        function resetCustomise() {
+            modalTitle.style.color = '';
+            modalTitle.style.fontFamily = '';
+            modalContentText.style.color = '';
+            modalContentText.style.fontFamily = '';
+            var description = modalContentText.querySelector('p');
+            if (description) {
+                description.style.color = '';
+                description.style.fontFamily = '';
+            }
+            setColour(colourSwatches[0]);
+            setFont(fontButtons[0]);
+        }
+
+        colourSwatches.forEach(function (swatch) {
+            swatch.addEventListener('click', function () { setColour(swatch); });
+        });
+
+        fontButtons.forEach(function (button) {
+            button.addEventListener('click', function () { setFont(button); });
+        });
+    </script>
+</body>
+</html>

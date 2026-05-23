@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Action Impact Simulator — select sustainable actions and discover your impact score. SDG 12.">
+    <meta name="author" content="Student 2">
+    <title>Impact Simulator | EcoLoop</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 1. AIS page body — dynamic background transition */
+        body { transition: background-image 0.2s ease; }
+        .ais-bg-low    {
+            background-image: url("assets/img/ais-1.png");
+            background-size: 100%;
+            background-position: center 75px;
+            background-repeat: no-repeat;
+            background-attachment:fixed;
+        }
+        .ais-bg-medium {
+            background-image: url("assets/img/ais-2.png");
+            background-size: 100%;
+            background-position: center 75px;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .ais-bg-high   {
+            background-image: url("assets/img/ais-3.png");
+            background-size: 100%;
+            background-position: center 75px;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        /* 2. Action card grid */
+        .action-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 1.25rem; margin-bottom: 2rem; }
+        /* 3. Individual action card */
+        .action-card {
+            background: rgba(255, 255, 255, 0.568); border: 3px solid var(--color-border);
+            border-radius: var(--radius-lg); padding: 1.25rem; cursor: pointer;
+            transition: all 0.25s ease; position: relative; user-select: none;   
+            backdrop-filter: blur(2px);     
+        }
+        .action-card:hover { border-color: var(--color-primary); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+        /* 4. Selected card state */
+        .action-card.selected {
+            border-color: var(--color-primary); background: #fff;
+            box-shadow: none;
+        }
+        .action-card.selected:hover { box-shadow: none; }
+        .action-card.selected::after {
+            content: '✓'; position: absolute; top: 0.75rem; right: 0.75rem;
+            background: var(--color-primary); color: white;
+            width: 24px; height: 24px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; font-weight: 700;
+        }
+        /* Placeholder thumbnail */
+        .action-card-thumb {
+            width: 100%; height: 120px; border-radius: calc(var(--radius-lg) - 4px);
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 50%, #6ee7b7 100%);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 0.75rem; overflow: hidden; position: relative;
+        }
+        .action-card.selected .action-card-thumb { background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 50%, #6ee7b7 100%); }
+        .action-card h3 { font-size: 1rem; color: var(--color-primary-dark); margin-bottom: 0.3rem; }
+        .action-card p  { font-size: 0.85rem; color: #000; margin-bottom: 0.5rem; line-height: 1.5; }
+        .action-points { font-size: 0.8rem; font-weight: 700; color: var(--color-primary); background: var(--color-primary-pale); padding: 0.2rem 0.6rem; border-radius: 9999px; display: inline-block; }
+        /* 5. Impact results panel */
+        .impact-panel {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            padding: 2rem;
+            position: sticky;
+            top: calc(var(--header-h) + 1rem);
+        }
+        .section-title p { color: #000; }
+        .score-num { font-size: 3.5rem; font-weight: 800; color: var(--color-primary); font-family: var(--font-heading); line-height: 1; }
+        .score-max { font-size: 1rem; color: #000; }
+        .level-label { font-size: 1.1rem; font-weight: 700; margin: 0.5rem 0; }
+        .level-msg { font-size: 0.9rem; color: #000; line-height: 1.6; margin-bottom: 1rem; }
+        .progress-track { background: #e5e7eb; border-radius: 9999px; height: 10px; margin-bottom: 1rem; overflow: hidden; }
+        .progress-fill { height: 100%; border-radius: 9999px; background: var(--color-primary); transition: width 0.5s ease; }
+        .selected-list { font-size: 0.85rem; color: #000; margin-top: 0.5rem; }
+        .ais-layout { display: grid; grid-template-columns: 1fr 320px; gap: 2rem; align-items: start; }
+        @media(max-width:860px){ .ais-layout{grid-template-columns:1fr;} .impact-panel{position:static;} }
+    </style>
+</head>
+<body>
+    <div id="bg-layer">
+        <a href="#main-content" class="skip-link">Skip to main content</a>
+        <div id="site-header"></div>
+
+        <main id="main-content">
+            <section class="page-heading" style="--page-heading-image: url('assets/img/Header.jpg');">
+                <div class="container">
+                    <h1>Action Impact Simulator</h1>
+                    <p>Select the sustainable actions you take (or could take) and discover your overall impact score.</p>
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+                        <a href="home.html">Home</a><span aria-hidden="true">&rsaquo;</span><span aria-current="page">Impact Simulator</span>
+                    </nav>
+                </div>
+            </section>
+
+            <section class="section" aria-labelledby="ais-heading">
+                <div class="container">
+                    <div class="section-title">
+                        <h2 id="ais-heading">Pick Your Actions</h2>
+                    </div>
+                    <div class="ais-layout">
+                        <!-- Action Cards -->
+                        <div>
+                            <div class="action-grid" id="action-grid" role="group" aria-label="Sustainable action cards">
+
+                                <div class="action-card" tabindex="0" role="checkbox" aria-checked="false" data-points="3" data-id="1" onclick="toggleCard(this)" onkeydown="keyCard(event,this)">
+                                    <div class="action-card-thumb" aria-hidden="true">
+                                        <img src="assets/img/thumb1.jpg" alt="food waste image">
+                                    </div>
+                                    <h3>Reduce Food Waste</h3>
+                                    <p>Plan your meals, use leftovers and store food correctly to reduce what you throw out each week.</p>
+                                    <span class="action-points">3 points</span>
+                                </div>
+
+                                <div class="action-card" tabindex="0" role="checkbox" aria-checked="false" data-points="2" data-id="2" onclick="toggleCard(this)" onkeydown="keyCard(event,this)">
+                                    <div class="action-card-thumb" aria-hidden="true">
+                                        <img src="assets/img/thumb2.jpg" alt="Public transportation image">
+                                    </div>
+                                    <h3>Use Public Transport</h3>
+                                    <p>Swap at least one car journey per week for the bus, train or bicycle to cut your travel emissions.</p>
+                                    <span class="action-points">2 points</span>
+                                </div>
+
+                                <div class="action-card" tabindex="0" role="checkbox" aria-checked="false" data-points="4" data-id="3" onclick="toggleCard(this)" onkeydown="keyCard(event,this)">
+                                    <div class="action-card-thumb" aria-hidden="true">
+                                        <img src="assets/img/thumb3.jpg" alt="Clothing rack image">
+                                    </div>
+                                    <h3>Buy Second-Hand Clothing</h3>
+                                    <p>Choose pre-owned items from charity shops, swap events or online platforms instead of buying new.</p>
+                                    <span class="action-points">4 points</span>
+                                </div>
+
+                                <div class="action-card" tabindex="0" role="checkbox" aria-checked="false" data-points="3" data-id="4" onclick="toggleCard(this)" onkeydown="keyCard(event,this)">
+                                    <div class="action-card-thumb" aria-hidden="true">
+                                        <img src="assets/img/thumb4.jpg" alt="Energy plant image">
+                                    </div>
+                                    <h3>Conserve Energy at Home</h3>
+                                    <p>Turn off unused devices and reduce heating where possible. Use energy-saving settings on all appliances.</p>
+                                    <span class="action-points">3 points</span>
+                                </div>
+
+                                <div class="action-card" tabindex="0" role="checkbox" aria-checked="false" data-points="4" data-id="5" onclick="toggleCard(this)" onkeydown="keyCard(event,this)">
+                                    <div class="action-card-thumb" aria-hidden="true">
+                                        <img src="assets/img/thumb5.jpg" alt="Volunteer crew image">
+                                    </div>
+                                    <h3>Volunteer Locally</h3>
+                                    <p>Give time to a local initiatives - beach cleans, food banks, repair cafés.</p>
+                                    <span class="action-points">4 points</span>
+                                </div>
+
+                                <div class="action-card" tabindex="0" role="checkbox" aria-checked="false" data-points="1" data-id="6" onclick="toggleCard(this)" onkeydown="keyCard(event,this)">
+                                    <div class="action-card-thumb" aria-hidden="true">
+                                        <img src="assets/img/thumb6.jpg" alt="Awareness sharing image">
+                                    </div>
+                                    <h3>Share Awareness</h3>
+                                    <p>Encourage others by sharing one actionable sustainability tip per week with your peers or social network.</p>
+                                    <span class="action-points">1 point</span>
+                                </div>
+
+                                <div class="action-card" tabindex="0" role="checkbox" aria-checked="false" data-points="3" data-id="7" onclick="toggleCard(this)" onkeydown="keyCard(event,this)">
+                                    <div class="action-card-thumb" aria-hidden="true">
+                                        <img src="assets/img/thumb7.jpg" alt="repair before replace wall image">
+                                    </div>
+                                    <h3>Repair Instead of Replace</h3>
+                                    <p>Before buying new electronics or clothing, attempt to repair or find a repair service near you.</p>
+                                    <span class="action-points">3 points</span>
+                                </div>
+
+                                <div class="action-card" tabindex="0" role="checkbox" aria-checked="false" data-points="2" data-id="8" onclick="toggleCard(this)" onkeydown="keyCard(event,this)">
+                                    <div class="action-card-thumb" aria-hidden="true">
+                                        <img src="assets/img/thumb8.jpg" alt="proper waste sort image">
+                                    </div>
+                                    <h3>Sort Your Waste Properly</h3>
+                                    <p>Separate recycling from general waste and learn what your local authority accepts to maximise recycling.</p>
+                                    <span class="action-points">2 points</span>
+                                </div>
+
+                            </div>
+                            <button class="btn btn-outline" onclick="resetCards()">Reset Choices</button>
+                        </div>
+
+                        <!-- Impact Results Panel -->
+                        <aside class="impact-panel" aria-live="polite" aria-label="Your impact score">
+                            <h2>Your Impact</h2>
+                            <div style="margin:1rem 0;">
+                                <div class="score-num" id="score-display">0</div>
+                                <span class="score-max">/ 22 points</span>
+                            </div>
+                            <div class="progress-track"><div class="progress-fill" id="progress-bar" style="width:0%;"></div></div>
+                            <div class="level-label" id="level-label">No actions selected yet</div>
+                            <p class="level-msg" id="level-msg">Select actions above to see your impact score and feedback.</p>
+                            <hr style="margin:1rem 0;border:none;border-top:1px solid var(--color-border);">
+                            <p style="font-size:0.82rem;color:#000;margin-bottom:0.25rem;">Actions selected: <strong id="selected-count">0</strong></p>
+                            <div class="selected-list" id="selected-list"></div>
+                        </aside>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <div id="site-footer"></div>
+    <script src="components.js"></script>
+    <script>
+        // Mobile nav toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const siteNav = document.querySelector('.site-nav');
+        if (navToggle && siteNav) {
+            navToggle.addEventListener('click', function () {
+                const isOpen = siteNav.classList.toggle('open');
+                navToggle.setAttribute('aria-expanded', String(isOpen));
+            });
+        }
+
+        /* === AIS JAVASCRIPT ===
+           Impact thresholds:
+           Low:    0–6 points
+           Medium: 7–13 points
+           High:   14–22 points
+        */
+        const MAX_POINTS = 22;
+        const bgLayer = document.getElementById('bg-layer');
+
+        const LEVELS = {
+            none:   { label: 'No actions selected yet',   msg: 'Select actions above to see your impact score and feedback.', bg: '' },
+            low:    { label: 'Low Impact',              msg: 'Good start! Every action counts. Try adding a few more sustainable habits to increase your score.', bg: 'ais-bg-low' },
+            medium: { label: 'Medium Impact',           msg: 'Great effort! You\'re making a meaningful difference. Push towards high impact by adding more actions.', bg: 'ais-bg-medium' },
+            high:   { label: 'High Impact',             msg: 'Excellent commitment! You\'re making a real difference. Consider sharing these habits with peers to multiply your impact.', bg: 'ais-bg-high' }
+        };
+
+        function getLevel(score) {
+            if (score === 0) return 'none';
+            if (score <= 6)  return 'low';
+            if (score <= 13) return 'medium';
+            return 'high';
+        }
+
+        function updateDisplay() {
+            const cards = document.querySelectorAll('.action-card.selected');
+            let total = 0;
+            const names = [];
+            cards.forEach(function (c) {
+                total += parseInt(c.dataset.points, 10);
+                names.push(c.querySelector('h3').textContent.trim());
+            });
+
+            const level = getLevel(total);
+            const data  = LEVELS[level];
+
+            document.getElementById('score-display').textContent   = total;
+            document.getElementById('level-label').textContent     = data.label;
+            document.getElementById('level-msg').textContent       = data.msg;
+            document.getElementById('selected-count').textContent  = cards.length;
+            document.getElementById('progress-bar').style.width    = Math.round((total / MAX_POINTS) * 100) + '%';
+
+            const list = document.getElementById('selected-list');
+            list.textContent = names.length ? names.join(' · ') : '';
+
+            // JS-driven background image change — targets #bg-layer
+            bgLayer.className = '';
+            if (data.bg) bgLayer.classList.add(data.bg);
+        }
+
+        function toggleCard(card) {
+            const isSelected = card.classList.toggle('selected');
+            card.setAttribute('aria-checked', String(isSelected));
+            updateDisplay();
+        }
+
+        function keyCard(e, card) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleCard(card); }
+        }
+
+        function resetCards() {
+            document.querySelectorAll('.action-card').forEach(function (c) {
+                c.classList.remove('selected');
+                c.setAttribute('aria-checked', 'false');
+            });
+            bgLayer.className = '';
+            updateDisplay();
+        }
+    </script>
+</body>
+</html>

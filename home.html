@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EcoLoop - Simple student actions for smarter consumption and less waste. SDG 12 in action.">
+    <meta name="author" content="Student 1">
+    <title>Home | EcoLoop</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Creates a full-height hero with a video backdrop while preserving readable foreground content. */
+        .home-hero {
+            min-height: 88vh; display: flex; align-items: center; position: relative; overflow: hidden;
+            background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 60%, #40916C 100%);
+        }
+        .home-hero video {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: 0;
+        }
+        .home-hero::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(27, 67, 50, 0.3); z-index: 1;
+        }
+        .hero-content { position: relative; z-index: 2; max-width: 640px; }
+        .hero-content h1 { color: #fff; font-size: clamp(2.2rem, 5vw, 3.5rem); }
+        .hero-content p  { color: rgba(255,255,255,0.85); font-size: 1.1rem; margin: var(--spacing-lg) 0; }
+        /* Pulls the statistics strip over the following section to create a stronger page entry without changing the shared grid. */
+        .stats-row {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-lg);
+            background: var(--color-surface); border-radius: var(--radius-lg);
+            padding: var(--spacing-xl) var(--spacing-lg); box-shadow: var(--shadow-lg);
+            margin-top: calc(-1 * var(--spacing-xl)); position: relative; z-index: 2;
+        }
+        .stat-item { text-align: center; }
+        .stat-number { font-family: var(--font-body); font-size: 2.6rem; font-weight: 800; color: var(--color-primary); line-height: 1; display: block; }
+        .stat-label  { font-size: 0.88rem; color: var(--color-muted); margin-top: var(--spacing-xs); line-height: 1.4; }
+        /* Keeps mission cards image-led like the current design while using real img elements with alt text. */
+        .card-icon { width:100%; height:200px; display:block; object-fit:cover; }
+        /* Gives the interactive content cards a JS-friendly hover state plus a visible keyboard focus ring. */
+        .hybrid-card { height: 100%; }
+        .hybrid-card-media {
+            position: relative; display: block; height: 220px; overflow: hidden;
+            text-decoration: none; border-radius: 0;
+        }
+        .hybrid-card-media:focus-visible {
+            outline: 3px solid var(--color-secondary);
+            outline-offset: 2px;
+        }
+        .hybrid-card-media-bg {
+            width: 100%; height: 100%;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.45s ease;
+        }
+        .hybrid-card-overlay {
+            position: absolute; inset: 0;
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: var(--spacing-lg);
+            background: linear-gradient(180deg, rgba(0,0,0,0.05) 20%, rgba(0,0,0,0.82) 100%);
+            opacity: 0;
+            transition: opacity 0.35s ease, background 0.35s ease;
+        }
+        .hybrid-card-overlay h3,
+        .hybrid-card-overlay p {
+            color: #fff;
+            margin: 0;
+            transform: translateY(14px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            font-family: var(--font-heading);
+        }
+        .hybrid-card-overlay p { font-size: 0.88rem; color: rgba(255,255,255,0.82); margin-top: 0.25rem; }
+        .hybrid-card[data-hovered="true"] .hybrid-card-media-bg,
+        .hybrid-card:hover .hybrid-card-media-bg,
+        .hybrid-card:focus-within .hybrid-card-media-bg { transform: scale(1.08); }
+        .hybrid-card[data-hovered="true"] .hybrid-card-overlay,
+        .hybrid-card:hover .hybrid-card-overlay,
+        .hybrid-card:focus-within .hybrid-card-overlay { opacity: 1; }
+        .hybrid-card[data-hovered="true"] .hybrid-card-overlay h3,
+        .hybrid-card[data-hovered="true"] .hybrid-card-overlay p,
+        .hybrid-card:hover .hybrid-card-overlay h3,
+        .hybrid-card:hover .hybrid-card-overlay p,
+        .hybrid-card:focus-within .hybrid-card-overlay h3,
+        .hybrid-card:focus-within .hybrid-card-overlay p {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .topics-container { max-width: 1460px; }
+        /* Keeps the closing CTA visually distinct without overriding the shared button or section system. */
+        .section-cta h2 { color:#fff; } .section-cta p { color:rgba(255,255,255,0.85); max-width:520px; margin:0 auto var(--spacing-lg); }
+        @media(max-width:640px){ .stats-row{grid-template-columns:1fr;} }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div id="site-header"></div>
+
+    <main id="main-content">
+
+        <section class="home-hero" aria-labelledby="hero-heading">
+            <video autoplay loop muted playsinline poster="assets/img/hero.png"
+                aria-hidden="true">
+                <source src="assets/video/hero-background.mp4" type="video/mp4">
+                <track kind="captions" srclang="en" label="English captions" src="assets/video/hero-background.vtt">
+            </video>
+            <div class="container">
+                <div class="hero-content">
+                    <span class="badge badge-secondary mb-md">Responsible Consumption &amp; Production</span>
+                    <h1 id="hero-heading">Small daily choices.<br>Big collective impact.</h1>
+                    <p>Every student makes hundreds of decisions each day - what to eat, wear, buy, and throw away.
+                       EcoLoop shows you exactly how those choices add up, and what you can do differently - starting today.</p>
+                    <div class="hero-actions">
+                        <a href="ais.html" class="btn btn-accent">Check Your Impact</a>
+                        <a href="content_ST1.html" class="btn btn-outline-start">Start Learning</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="stats-row" role="region" aria-label="Key waste statistics">
+                <div class="stat-item">
+                    <span class="stat-number">40%</span>
+                    <p class="stat-label">of all food produced globally is lost or wasted each year</p>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">92M</span>
+                    <p class="stat-label">tonnes of textile waste from the fashion industry annually</p>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">62M</span>
+                    <p class="stat-label">metric tonnes of e-waste generated globally - a record high</p>
+                </div>
+            </div>
+        </div>
+
+        <section class="section" aria-labelledby="mission-heading">
+            <div class="container">
+                <div class="section-title">
+                    <h2 id="mission-heading">Our Mission</h2>
+                    <p>EcoLoop is not just a platform for raising awareness. It's an active community of students committed to making a difference in responsible consumption and production through events, interactive workshops, and more!</p>
+                </div>
+                <div class="card-grid">
+                    <article class="card">
+                        <img class="card-icon" src="assets/img/waste.jpg" alt="Trash dump site showing the impact of overproduction and waste.">
+                        <div class="card-body">
+                            <h3>Small Steps, Big Impact</h3>
+                            <p>
+                            EcoLoop is based on a simple core philosophy: small actions, when repeated consistently, add up to significant change.
+                            </p>
+                            <p>
+                            Students do not have to make dramatic changes in their lifestyle. 
+                            They just have to make improvements in their daily habits in terms of their purchases, use, and waste, and they can automatically contribute to a more responsible society.
+                            </p>
+
+                            <ul>
+                                <li>Reduce food waste through better planning and storage</li>
+                                <li>Choose reusable items instead of single-use products</li>
+                                <li>Extend the lifespan of clothes and devices</li>
+                            </ul>
+                            <a href="ais.html" class="btn btn-outline">Check Your Impact</a>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <img class="card-icon" src="assets/img/community.jpg" alt="Students working together to support community sustainability action.">
+                        <div class="card-body">
+                            <h3>Learn Through Action</h3>
+                            <p>Rather than stopping at awareness, EcoLoop advocates for learning beyond theory.</p>
+                            <p>We host a number of activities and events so that IIT students can learn about and engage in real-world responsible production and consumption. 
+                                This way, students may actually create a community to assist in achieving SDG 12 rather than merely talking about the problem.</p>
+                            <ul>
+                                <li>Take part in interesting and enjoyable campaigns, workshops, and events</li>
+                                <li>See instances of sustainable techniques in action</li>
+                                <li>Implement simple ideas in everyday situations</li>
+                            </ul>
+                            <a href="profile.html" class="btn btn-outline">Join Us</a>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <img class="card-icon" src="assets/img/action.jpg" alt="Image of donation scenario showing community efforts and action.">
+                        <div class="card-body">
+                            <h3>What Action Looks Like</h3>
+                            <p>Being purposeful is the key to responsible consumption, not compromising one's quality of life. Every student can make the transition from "buy and bin" to "use, repair, share, and recycle."</p>
+                            <p>Small individual acts can grow into significant collective change if we all unite in our efforts. Below are a few small changes you can make now:</p>
+                            <ul>
+                                <li><strong>Use longer</strong> - fix before replacing</li>
+                                <li><strong>Buy less</strong> - distinguish between need and want</li>
+                                <li><strong>Reuse more</strong> - bottles, bags, and containers</li>
+                                <li><strong>Share</strong> - borrow, exchange, and donate</li>
+                                <li><strong>Dispose properly</strong> - recycle and remove responsibly</li>
+                            </ul>
+                            <a href="gallery.html" class="btn btn-outline">View Gallery</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="section" aria-labelledby="hybrid-topics-heading">
+            <div class="container topics-container">
+                <div class="section-title">
+                    <h2 id="hybrid-topics-heading">Explore Topics Through Action</h2>
+                    <p>Read more about four major waste issues and industries that significantly impact SDG 12. These topics show how everyday choices create large-scale resource loss and pollution.</p>
+                </div>
+                <div class="card-grid">
+                    <article class="card hybrid-card">
+                        <a href="content_ST1.html" class="hybrid-card-media" aria-label="Open Food Waste and Smarter Choices">
+                            <img class="hybrid-card-media-bg" src="assets/img/food.jpg"
+                                alt="Image of fresh Sri Lankan produce representing food waste and smarter food choices."
+                                style="background-color: #f7e9d7;">
+                            <div class="hybrid-card-overlay">
+                                <h3>Food Waste &amp; Smarter Choices</h3>
+                                <p>Chanitha · Food &amp; Meals</p>
+                            </div>
+                        </a>
+                        <div class="card-body">
+                            <h3>Reduce Everyday Food Waste</h3>
+                            <p>Many students can make the biggest differences to sustainability with everyday food choices and by minimizing their food waste through planning meals or using leftovers. </p>
+                            <ul>
+                                <li>Make a meal plan before shopping to avoid overbuying</li>
+                                <li>Store produce correctly so they last longer</li>
+                                <li>Understand the difference between "best before" and "use by" dates</li>
+                            </ul>
+                            <a href="content_ST1.html" class="btn btn-outline">Explore Food Waste</a>
+                        </div>
+                    </article>
+
+                    <article class="card hybrid-card">
+                        <a href="content_ST2.html" class="hybrid-card-media" aria-label="Open E-Waste and Responsible Tech">
+                            <img class="hybrid-card-media-bg" src="assets/img/ewaste.jpg"
+                                alt="Used electronic devices representing e-waste and responsible technology choices."
+                                style="background-color: #f7e9d7;">
+                            <div class="hybrid-card-overlay">
+                                <h3>E-Waste &amp; Responsible Tech</h3>
+                                <p>Rajindu · Electronics &amp; Devices</p>
+                            </div>
+                        </a>
+                        <div class="card-body">
+                            <h3>Be Responsible With Technology</h3>
+                            <p>By keeping your electronics and devices as long as you can, repairing them when necessary, and recycling them, you will contribute to reducing the fastest growing source of waste in the world. </p>
+                            <ul>
+                                <li>Try to extend device lifespan before upgrading</li>
+                                <li>Avoid buying trendy devices if they are not necessary</li>
+                                <li>Recycle your electronics at e-waste drop-off sites or store take-back programs.</li>
+                            </ul>
+                            <a href="content_ST2.html" class="btn btn-outline">Explore E-Waste</a>
+                        </div>
+                    </article>
+
+                    <article class="card hybrid-card">
+                        <a href="content_ST3.html" class="hybrid-card-media" aria-label="Open Fast Fashion and Buying Less">
+                            <img class="hybrid-card-media-bg" src="assets/img/thrift.jpg"
+                                alt="Thrift store scene showing action against fast fashion and smarter clothing choices."
+                                style="background-color: #f7e9d7;">
+                            <div class="hybrid-card-overlay">
+                                <h3>Fast Fashion &amp; Buying Less</h3>
+                                <p>Rithika · Fashion &amp; Textiles</p>
+                            </div>
+                        </a>
+                        <div class="card-body">
+                            <h3>Buy Better, Wear Longer</h3>
+                            <p>Fashion choices contribute to waste, water usage, and carbon emissions. Simply shopping at thrift stores and repairing before replacing clothes can have a tremendous positive impact while being much more cost-effective.</p>
+                            <ul>
+                                <li>Check charity shops and resale apps before buying new</li>
+                                <li>Think in cost per wear instead of purchase price</li>
+                                <li>Repair minor damage in old clothes instead of replacing</li>
+                            </ul>
+                            <a href="content_ST3.html" class="btn btn-outline">Explore Fast Fashion</a>
+                        </div>
+                    </article>
+
+                    <article class="card hybrid-card">
+                        <a href="content_ST4.html" class="hybrid-card-media" aria-label="Open Plastic Waste and Smarter Packaging">
+                            <img class="hybrid-card-media-bg" src="assets/img/plastic.jpg"
+                                alt="Plastic bottles and packaging representing plastic waste and smarter packaging choices."
+                                style="background-color: #dce8e1;">
+                            <div class="hybrid-card-overlay">
+                                <h3>Plastic Waste &amp; Smarter Packaging</h3>
+                                <p>Sahan · Plastics &amp; Packaging</p>
+                            </div>
+                        </a>
+                        <div class="card-body">
+                            <h3>Cut Down Everyday Plastic Waste</h3>
+                            <p>Single-use plastic is one of the most visible forms of waste in daily life. Choosing reusable alternatives and reducing unnecessary packaging can make a direct difference.</p>
+                            <ul>
+                                <li>Carry reusable bottles, cups, bags, and containers</li>
+                                <li>Choose products with less plastic packaging where possible</li>
+                                <li>Separate plastic waste correctly so it can be managed responsibly</li>
+                            </ul>
+                            <a href="content_ST4.html" class="btn btn-outline">Explore Plastic Waste</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section bg-primary section-cta" aria-labelledby="cta-heading">
+            <div class="container text-center">
+                <h2 id="cta-heading">Ready to measure your impact?</h2>
+                <p>Discover how to make positive changes through the choices you make every day with our Action Impact Simulator. Choose your actions and see how they affect your score!</p>
+                <a href="ais.html" class="btn btn-accent">Start the Simulator &rarr;</a>
+            </div>
+        </section>
+
+    </main>
+    <div id="site-footer"></div>
+    <script src="components.js"></script>
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const siteNav   = document.querySelector('.site-nav');
+        if (navToggle && siteNav) {
+            navToggle.addEventListener('click', function () {
+                const isOpen = siteNav.classList.toggle('open');
+                navToggle.setAttribute('aria-expanded', String(isOpen));
+            });
+        }
+        // Uses JavaScript to drive the content-card hover state so the gallery interaction is not CSS-only.
+        document.querySelectorAll('.hybrid-card').forEach(function (card) {
+            const link = card.querySelector('.hybrid-card-media');
+            card.addEventListener('mouseenter', function () { card.setAttribute('data-hovered', 'true'); });
+            card.addEventListener('mouseleave', function () { card.removeAttribute('data-hovered'); });
+            if (link) {
+                link.addEventListener('focus', function () { card.setAttribute('data-hovered', 'true'); });
+                link.addEventListener('blur', function () { card.removeAttribute('data-hovered'); });
+                link.addEventListener('keydown', function (e) {
+                    if (e.key === ' ') {
+                        e.preventDefault();
+                        link.click();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validator Page | Rithika Wickramasinghe</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/pageEditor_validator.css"> <!-- External CSS link -->
+
+</head>
+<body id="top">
+    
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div id="site-header"></div>
+
+    <section class="stud">
+        <h2>Rithika Wickramasinghe, EcoLoop (G8), User experience and feedback system developer</h2>
+    </section>
+
+    <div class="editor-layout">
+        <!-- Main content area -->
+        <main id="main-content">
+
+            <!-- Update the content of the following sections with the information that corresponds to the pages you implemented  -->
+
+            <section>
+                <h2 id="feedbackVal">Feedback Page validation report</h2>
+                    <p>The validation report for the Feedback Page did not find mistakes or warnings, which verified that the HTML structure was programmed correctly and that the page corresponds to the main requirements of the W3C validator on the markup side.
+                        The page combines a programme directory, ratings, and a structured form using fieldsets, legends, labels, and HTML5 input types; passing validation confirmed that these elements were nested and associated correctly.
+                        However, I realize that validation is a test of the markup correctness only, and it does not ensure the page is accessible and even well-designed.
+                        Due to this, I also took into account readability, keyboard navigation, alt text, the structure of the headings and the responsive behaviour, along with the validator results.</p>
+                    <img src="validationSnapshots/feedback_ss.png" alt="W3C validation result for feedback.html showing no errors.">
+                    <br>
+                                    
+                <h3>Back to Page Editor page</h3>
+                    <p><a href="pageEditor_ST3.html#feedback" target="_blank" rel="noopener noreferrer">Page Editor - Feedback</a></p>
+                <!-- Update the path to link the Page Editor with the validation page and make it jump to the marker that contains a snapshot for the splash page -->
+            </section>
+
+            <section>
+                <h2 id="teamVal">Team Page validation report</h2>
+                <p>The team page validation report displayed no errors or warnings, which verified that the HTML structure of the page was correct despite the addition of higher level interactive elements like profile cards, focusable regions, and ARIA attributes.
+                    This was significant as the team section is based on structured HTML and interactive behaviour and passing the validation test ensured that the underlying markup was correct and standards-compliant.</p>
+                    <img src="validationSnapshots/team.png" alt="W3C validation result for team.html showing no errors.">
+                    <br>         
+                <h3>Back to Page Editor page</h3>
+                    <p><a href="pageEditor_ST3.html#team" target="_blank" rel="noopener noreferrer">Page Editor - Team</a></p>
+                <!-- Update the path to link the Page Editor with the validation page and make it jump to the marker that contains a snapshot for the splash page -->
+            </section>
+
+            <section>
+                <h2 id="contentVal">Content Page validation report</h2>
+                <p>The Content Page validation report also did not have any errors or warnings, which also proved that the long-form structure of the page was completed correctly.
+                    This came in handy since the page has multiple linked areas, a side navigation menu, pictures, highlighted content and internal anchor links, and this kind of validation allowed to ensure that all these items were arranged in the right order in the HTML.</p>
+                    <img src="validationSnapshots/content_st3_ss.png" alt="W3C validation result for content_ST3.html showing no errors.">
+                    <br>            
+                <h3>Back to Page Editor page</h3>
+                    <p><a href="pageEditor_ST3.html#content" target="_blank" rel="noopener noreferrer">Page Editor - Content</a></p>
+                <!-- Update the path to link the Page Editor with the validation page and make it jump to the marker that contains a snapshot for the splash page -->
+            </section>
+
+
+            <p class="top"><a href="#top">Go top</a></p>
+        </main>
+
+        <!-- Sidebar area -->
+        <aside>
+            <h3>Core pages developed:</h3>
+
+            <ul class="top-level-ul">
+                <li>Chanitha (Student 1)</li>
+                <ul>
+                    <li>Shared Template &amp; Navigation</li>
+                    <li><a href="home.html">Home Page</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="content_ST1.html">Content</a></li>
+                </ul>
+                <li>Rajindu (Student 2)</li>
+                <ul>
+                    <li><a href="splash.html">Splash Screen</a></li>
+                    <li><a href="ais.html">Action Impact Simulator (AIS)</a></li>
+                    <li><a href="content_ST2.html">Content</a></li>
+                </ul>
+                <li>Rithika (Student 3)</li>
+                <ul>
+                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="content_ST3.html">Content</a></li>
+                </ul>
+                <li>Student 4</li>
+                <ul>
+                    <li><a href="profile.html">User Profile</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                    <li><a href="content_ST4.html">Content</a></li>
+                </ul>
+            </ul>
+        </aside>
+    </div>
+
+    <div id="site-footer"></div>
+    <script src="components.js"></script>
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const siteNav = document.querySelector('.site-nav');
+        if (navToggle && siteNav) {
+            navToggle.addEventListener('click', function () {
+                const isOpen = siteNav.classList.toggle('open');
+                navToggle.setAttribute('aria-expanded', String(isOpen));
+            });
+        }
+    </script>
+</body>
+</html>

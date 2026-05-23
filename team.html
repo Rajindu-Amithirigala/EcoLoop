@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Meet the EcoLoop team - four students working to promote SDG 12 responsible consumption.">
+    <meta name="author" content="Student 3">
+    <title>Our Team | EcoLoop</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 1. Team grid layout */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        /* 2. Team member block */
+        .team-member {
+            position: relative;
+            text-align: center;
+            cursor: pointer;
+            border-radius: var(--radius-lg);
+            padding: 2rem 1.5rem;
+            background: white;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            height: auto;
+            overflow: visible;
+        }
+
+        .team-member,
+        .team-details,
+        .team-name,
+        .team-role {
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
+
+        /* 3. Hover scale + shadow effect */
+        .team-member:hover,
+        .team-member:focus-within {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .team-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            border: 4px solid var(--color-primary);
+            transition: border-color 0.3s ease, transform 0.3s ease;
+            overflow: hidden;
+            background-color: #e8f0eb;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .team-member:hover .team-img,
+        .team-member:focus-within .team-img {
+            border-color: var(--color-secondary);
+            transform: scale(1.08);
+        }
+
+        .team-name {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-primary-dark);
+            margin-bottom: 0.2rem;
+        }
+
+        .team-role {
+            font-size: 0.85rem;
+            color: var(--color-primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* 4. Expandable detail panel */
+        .team-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.45s ease, opacity 0.3s ease, padding 0.3s ease;
+            opacity: 0;
+            text-align: left;
+        }
+
+        .team-member:hover .team-details,
+        .team-member:focus-within .team-details {
+            max-height: 1000px;
+            opacity: 1;
+        }
+
+        .team-details ul {
+            list-style: disc;
+            padding-left: 1.2rem;
+            font-size: 0.85rem;
+            color: var(--color-muted);
+            margin-top: 0.5rem;
+        }
+
+        .team-details ul li {
+            margin-bottom: 0.3rem;
+        }
+
+        .team-details p {
+            font-size: 0.88rem;
+            color: var(--color-muted);
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-primary);
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            margin-top: 0.75rem;
+        }
+
+        .team-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hover-hint {
+            font-size: 0.75rem;
+            color: var(--color-muted);
+            margin-top: 0.5rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div id="site-header"></div>
+
+    <main id="main-content">
+        <section class="page-heading" style="--page-heading-image: url('assets/img/Header.jpg');">
+            <div class="container">
+                <h1>Meet the Team</h1>
+                <p>We are four students from the University of Westminster united by SDG 12.</p>
+                <nav class="breadcrumb" aria-label="Breadcrumb"><a href="home.html">Home</a><span
+                        aria-hidden="true">&rsaquo;</span><span aria-current="page">Team</span></nav>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="team-heading">
+            <div class="container">
+                <div class="section-title">
+                    <h2 id="team-heading">Student Details</h2>
+                    <p>About Us - hover over the cards to reveal each member's contribution and role.</p>
+                </div>
+
+                <div class="team-grid" role="list">
+
+                    <div class="team-member" role="listitem" tabindex="0"
+                        aria-label="Student 1 - Template and Home Page developer">
+                        <div class="team-img">
+                            <img src="assets/img/Chanitha.png" alt="Student 1 profile image">
+                        </div>
+                        <div class="team-name">Chanitha Abeygunawardena</div>
+                        <div class="team-role">Student 1</div>
+                        <p class="hover-hint">Hover for details &darr;</p>
+                        <div class="team-details">
+                            <div class="detail-label">Pages Contributed</div>
+                            <ul>
+                                <li>Shared template (style.css)</li>
+                                <li>Navigation bar (components.js)</li>
+                                <li>Home Page (home.html)</li>
+                                <li>Gallery (gallery.html)</li>
+                                <li>Content Page ST1</li>
+                            </ul>
+                            <div class="detail-label">About</div>
+                            <p>Chanitha built the shared template, global CSS, and the dynamic header/footer system (component.js) used across all pages. His pages include a video hero home page with a JS-driven interactive gallery, a fully JS-generated image gallery with modal, focus trapping, and live text customisation, and a food waste content page with sticky side-navigation and anchor-linked sections.</p>
+                        </div>
+                    </div>
+
+                    <div class="team-member" role="listitem" tabindex="0"
+                        aria-label="Student 2 - Splash and Impact Simulator developer">
+                        <div class="team-img">
+                            <img src="assets/img/Rajindu.png" alt="Student 2 profile image">
+                        </div>
+                        <div class="team-name">Rajindu Amithirigala</div>
+                        <div class="team-role">Student 2</div>
+                        <p class="hover-hint">Hover for details &darr;</p>
+                        <div class="team-details">
+                            <div class="detail-label">Pages Contributed</div>
+                            <ul>
+                                <li>Splash Screen (splash.html)</li>
+                                <li>Action Impact Simulator (ais.html)</li>
+                                <li>Content Page ST2</li>
+                            </ul>
+                            <div class="detail-label">About</div>
+                            <p>Rajindu implemented the Splash Screen, Action Impact Simulator, and E-Waste content page, focusing on interactive and informative features that encourage users to reflect on their consumption habits and take meaningful action toward SDG 12.</p>
+                        </div>
+                    </div>
+
+                    <div class="team-member" role="listitem" tabindex="0"
+                        aria-label="Student 3 - Feedback and Team page developer">
+                        <div class="team-img">
+                            <img src="assets/img/rithika.jpeg" alt="Rithika Mandiv profile picture">
+                        </div>
+                        <div class="team-name">Rithika Mandiv</div>
+                        <div class="team-role">Student 3</div>
+                        <p class="hover-hint">Hover for details &darr;</p>
+                        <div class="team-details">
+                            <div class="detail-label">Pages Contributed</div>
+                            <ul>
+                                <li>Feedback (feedback.html)</li>
+                                <li>Team Page (team.html)</li>
+                                <li>Content Page ST3</li>
+                            </ul>
+                            <div class="detail-label">About</div>
+                            <p>Rithika Wickramasinghe implemented the Feedback page, Team page, and Content_ST3. The Feedback page uses structured form elements with validation to collect user input. The Team page presents members clearly using images and organised sections. The Content_ST3 page explores e-waste through structured sections, internal navigation, and an original initiative promoting responsible disposal and awareness.</p>
+                        </div>
+                    </div>
+
+                    <div class="team-member" role="listitem" tabindex="0"
+                        aria-label="Student 4 - Content and Profile page developer">
+                        <div class="team-img">
+                            <img src="assets/img/Sahan.jpeg" alt="Student 4 profile image">
+                        </div>
+                        <div class="team-name">Sahan Polwatte</div>
+                        <div class="team-role">Student 4</div>
+                        <p class="hover-hint">Hover for details &darr;</p>
+                        <div class="team-details">
+                            <div class="detail-label">Pages Contributed</div>
+                            <ul>
+                                <li>User Profile Page (profile.html)</li>
+                                <li>Sitemap (sitemap.html)</li>
+                                <li>Content Page ST4</li>
+                            </ul>
+                            <div class="detail-label">About</div>
+                            <p>Sahan was  responsible the User Profile, the Plastic & Packaging Waste content page, and the  Sitemap, focusing on interactive data collection and clear navigation systems to promote SDG 12.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div id="site-footer"></div>
+    <script src="components.js"></script>
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const siteNav = document.querySelector('.site-nav');
+        if (navToggle && siteNav) { navToggle.addEventListener('click', function () { const o = siteNav.classList.toggle('open'); navToggle.setAttribute('aria-expanded', String(o)); }); }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fast Fashion and Buying Less - how students can reduce clothing waste and shop more responsibly.">
+    <meta name="author" content="Student 3">
+    <title>Fast Fashion | EcoLoop</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 1. Side nav for internal navigation */
+        .content-layout { display: grid; grid-template-columns: 220px 1fr; gap: 2.5rem; align-items: start; }
+        .side-nav { position: sticky; top: calc(var(--header-h) + 1rem); background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); padding: 1.25rem; }
+        .side-nav h4 { font-family: var(--font-heading); color: var(--color-primary-dark); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+        .side-nav ul { list-style: none; }
+        .side-nav ul li { margin-bottom: 0.5rem; }
+        .side-nav ul li a { font-family: var(--font-heading); font-size: 0.88rem; color: var(--color-muted); text-decoration: none; padding: 0.25rem 0.5rem; border-left: 3px solid transparent; display: block; transition: all 0.2s; }
+        .side-nav ul li a:hover { color: var(--color-primary); border-left-color: var(--color-primary); background: var(--color-primary-pale); border-radius: 0 4px 4px 0; }
+        /* 2. Content section spacing */
+        .content-section { margin-bottom: 3rem; padding-top: 1rem; }
+        .content-section > h2 { scroll-margin-top: calc(var(--header-h) + 1rem); }
+        /* 3. Content images grid */
+        .img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        .content-img {
+            width: 100%; aspect-ratio: 4/3; border-radius: var(--radius-md); display: block;
+            object-fit: cover; box-shadow: var(--shadow-sm);
+        }
+        /* 4. Action checklist */
+        .checklist { list-style: none; margin: 1rem 0; }
+        .checklist li { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem; padding: 0.75rem; background: var(--color-primary-pale); border-radius: var(--radius-md); font-size: 0.92rem; }
+        .checklist li::before { content: '\2713'; background: var(--color-primary); color: white; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+        /* 5. Highlight box */
+        .highlight-box { background-color: var(--color-primary); color: white; border-radius: var(--radius-lg); padding: 1.5rem 2rem; margin: 1.5rem 0; }
+        .highlight-box h3, .highlight-box p { color: white; }
+        /* Go to top button */
+        .go-top { position: fixed; bottom: 2rem; right: 2rem; background: var(--color-primary); color: white; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.2rem; box-shadow: var(--shadow-md); transition: background 0.2s, transform 0.2s; z-index: 200; }
+        .go-top:hover { background: var(--color-primary-dark); transform: translateY(-3px); color: white; }
+        @media(max-width:700px){ .content-layout{grid-template-columns:1fr;} .side-nav{position:static;} .img-row{grid-template-columns:1fr;} }
+    </style>
+</head>
+<body id="top">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div id="site-header"></div>
+
+    <main id="main-content">
+        <section class="page-heading" style="--page-heading-image: url('assets/img/Header.jpg');">
+            <div class="container">
+                <h1>Fast Fashion</h1>
+                <p>The clothing industry's hidden environmental cost &mdash; and how students can choose differently.</p>
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="home.html">Home</a><span aria-hidden="true">></span>
+                    <span aria-current="page">Fast Fashion</span>
+                </nav>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="content-layout">
+
+                    <!-- Internal navigation menu -->
+                    <aside class="side-nav" aria-label="Page sections">
+                        <h4>Content</h4>
+                        <ul>
+                            <li><a href="#intro">Introduction</a></li>
+                            <li><a href="#problem">Understanding the Problem</a></li>
+                            <li><a href="#student-actions">What Students Can Do</a></li>
+                            <li><a href="#P2P">GoThrift 26'</a></li>
+                            <li><a href="#checklist">Action Checklist</a></li>
+                        </ul>
+                    </aside>
+
+                    <!-- Main content -->
+                    <article>
+
+                        <div class="content-section">
+                            <h2 id="intro">Introduction</h2>
+                            <p>Fast fashion &mdash; the rapid, high-volume production of cheap clothing designed to follow the latest trends &mdash; has transformed the clothing industry over the past twenty years. Where previous generations bought a few quality garments per season, today's consumers may buy dozens of items per year, wearing many of them only once or twice before discarding them. Students, faced with social pressure to appear up to date and limited by modest budgets, are a primary target market for fast fashion brands.</p>
+
+                            <p>The consequences for the environment are severe. This page examines the specific environmental harms caused by the fashion industry, how student consumption patterns contribute to those harms, and what practical alternatives are available right now for students in the UK.</p>
+                            <div class="img-row">
+                                <img class="content-img" src="assets/img/fast_fashion.webp" alt="A pile of clothes.">
+                                <img class="content-img" src="assets/img/clothing_pile.webp" alt="A pile of discarded clothes.">
+                            </div>
+                        </div>
+
+                        <div class="content-section">
+                            <h2 id="problem">Understanding the Problem</h2>
+                            <p>The fashion industry is responsible for approximately 10% of global carbon emissions &mdash; more than all international aviation and maritime shipping combined. It is also the second-largest consumer of the world's water supply. Producing a single cotton t-shirt requires approximately 2,700 litres of water &mdash; enough for one person to drink for two and a half years.</p>
+
+                            <p>Synthetic fibres like polyester &mdash; used in the majority of fast fashion garments &mdash; shed microplastics with every wash. These microscopic particles flow through wastewater treatment systems and into rivers, lakes and oceans, where they enter the food chain. A single wash of a polyester garment can release over 700,000 microplastic fibres.</p>
+
+                            <p>Research consistently finds that young adults aged 18&ndash;25 &mdash; the core student demographic &mdash; are both the heaviest consumers of fast fashion and, increasingly, the group most aware of its environmental impact. This awareness&ndash;action gap is driven by several factors specific to student life: budget constraints that make cheap options attractive, social media trends that create constant pressure to dress in new ways, and a lack of convenient alternatives in many university towns.</p>
+
+                            <div class="highlight-box">
+                                <h3>The Stats</h3>
+                                <ol>
+                                    <li>The fashion industry is responsible for approximately 10% of global carbon emissions.</li>
+                                    <li>Producing a single cotton t-shirt requires approximately 2,700 litres of water.</li>
+                                    <li>The equivalent of one rubbish truck of clothes is landfilled or incinerated every second worldwide.</li>
+                                </ol>
+                            </div>
+
+                            <div class="img-row">
+                                <img class="content-img" src="assets/img/clothes_burn.jpeg" alt="Burning clothes creating pollution.">
+                                <img class="content-img" src="assets/img/water_pollution.jpeg" alt="Water pollution caused by toxins from textile production.">
+                            </div>
+                        </div>
+
+                        <div class="content-section">
+                            <h2 id="student-actions">What Students Can Do</h2>
+                            <p>Students do not need to choose between looking good and acting sustainably. A growing ecosystem of affordable, accessible alternatives to fast fashion makes it easier than ever to make responsible clothing choices.</p>
+
+                            <h3>The "Cost Per Wear" Mindset</h3>
+                            <p>One of the most effective cognitive shifts a student can make is to think in terms of cost per wear rather than purchase price. A &pound;10 item worn twice costs &pound;5 per wear. A &pound;35 item worn 40 times costs &pound;0.875 per wear. Viewed this way, higher-quality, longer-lasting garments &mdash; or well-chosen second-hand items &mdash; are almost always the better financial and environmental decision.</p>
+
+                            <h3>Second-Hand &amp; Charity Shops</h3>
+                            <p>The UK has one of the most developed second-hand clothing markets in the world. Charity shops, vintage markets, and platforms like Vinted, Depop, and eBay offer high-quality pre-owned garments at prices that frequently undercut fast fashion retailers. Many university cities have thriving charity shop scenes specifically geared towards students.</p>
+
+                            <h3>Clothes Swaps &amp; Borrowing</h3>
+                            <p>Clothes swap events &mdash; where participants exchange items they no longer wear &mdash; are increasingly popular on campuses. Many students' unions organise termly swap events. For one-off events like formal dinners or themed parties, borrowing from flatmates or friends is a zero-cost, zero-waste solution.</p>
+
+                            <h3>Capsule Wardrobes</h3>
+                            <p>A capsule wardrobe is a small, carefully chosen collection of versatile garments that can be combined in multiple ways. Rather than following trends, a capsule wardrobe focuses on quality, fit and versatility. Students who adopt this approach typically spend less money overall while producing significantly less textile waste.</p>
+                        </div>
+
+                        <div class="content-section">
+                            <h2 id="P2P">GoThrift 26'</h2>
+                            <p>GoThrift 26' is an initiative designed to promote sustainable fashion among students. IIT students are encouraged to donate unused clothing, which will then be sold at discounted prices in the EcoLoop Thrift Shop. This initiative reduces textile waste while making affordable clothing accessible to the community.</p>
+
+                            <ul>
+                                <li>Clothing donation drive for IIT students</li>
+                                <li>Discounted thrift shop open to the public</li>
+                                <li>Top 3 donors rewarded with prizes</li>
+                            </ul>
+                        </div>
+
+                        <div class="content-section">
+                            <h2 id="checklist">Action Checklist</h2>
+                            <p>Start with one or two actions from this list. Small consistent choices build long-term habits that significantly reduce your clothing footprint.</p>
+                            <ul class="checklist" aria-label="Fast fashion action checklist">
+                                <li>Before buying new clothing, check charity shops, Vinted or Depop first</li>
+                                <li>Implement a "cost per wear" mindset &mdash; value longevity over cheap price</li>
+                                <li>Attend or organise a campus clothes swap event this term</li>
+                                <li>Wash synthetic garments in a microplastic-catching laundry bag</li>
+                                <li>Repair minor damage (loose buttons, small tears) before discarding items</li>
+                                <li>Donate or sell clothing you no longer wear rather than sending it to landfill</li>
+                                <li>Unsubscribe from fast fashion brand marketing emails to reduce impulse buying</li>
+                                <li>Build a small capsule wardrobe of versatile, mix-and-match items</li>
+                            </ul>
+                            <div style="margin-top:2rem;">
+                                <a href="ais.html" class="btn btn-primary">Try the Impact Simulator</a>
+                                <a href="content_ST4.html" class="btn btn-outline" style="margin-left:1rem;">Read: Plastic Waste</a>
+                            </div>
+                        </div>
+
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Go to Top button - HTML and CSS only per spec -->
+    <a href="#top" class="go-top" aria-label="Go to top of page" title="Back to top">&#8593;</a>
+    <div id="site-footer"></div>
+    <script src="components.js"></script>
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const siteNav = document.querySelector('.site-nav');
+        if (navToggle && siteNav) { navToggle.addEventListener('click', function () { const o=siteNav.classList.toggle('open'); navToggle.setAttribute('aria-expanded',String(o)); }); }
+    </script>
+</body>
+</html>

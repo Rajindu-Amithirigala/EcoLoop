@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Build your SDG 12 user profile — progressive steps with JavaScript prompts.">
+    <meta name="author" content="Student 4">
+    <title>Your Profile | Small Shift</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 1. Profile layout */
+        .profile-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        /* 2. Progress indicator */
+        .step-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .step-tab {
+            padding: 0.45rem 1rem;
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 2px solid var(--color-border);
+            background: white;
+            color: var(--color-muted);
+            cursor: default;
+            transition: all 0.3s;
+        }
+
+        .step-tab.done {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        .step-tab.partial {
+            background: var(--color-secondary);
+            color: var(--color-primary-dark);
+            border-color: var(--color-secondary);
+        }
+
+        .progress-pct {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .prog-track {
+            background: var(--color-border);
+            border-radius: 9999px;
+            height: 12px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .prog-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+            border-radius: 9999px;
+            transition: width 0.5s ease;
+        }
+
+        /* 3. Profile output area */
+        .profile-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            padding: 1.5rem;
+            max-width: 380px;
+            margin: 0 auto;
+        }
+
+        .profile-section {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .profile-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .profile-section h3 {
+            color: var(--color-primary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.75rem;
+        }
+
+        .profile-field {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .profile-field span:first-child {
+            color: var(--color-muted);
+            flex-shrink: 0;
+        }
+
+        .profile-field span:last-child {
+            font-weight: 600;
+            color: var(--color-primary-dark);
+            text-align: right;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* 4. Control buttons */
+        .btn-group {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        /* 5. Empty state */
+        .profile-empty {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            color: var(--color-muted);
+        }
+
+        @media(max-width:700px) {
+            .profile-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div id="site-header"></div>
+
+    <main id="main-content">
+        <section class="page-heading" style="--page-heading-image: url('assets/img/Header.jpg');">
+            <div class="container">
+                <h1>Progressive User Profile</h1>
+                <p>Build your SDG 12 profile step by step — answer prompts, skip what you prefer, return to fill in more
+                    later.</p>
+                <nav class="breadcrumb" aria-label="Breadcrumb"><a href="home.html">Home</a><span
+                        aria-hidden="true">›</span><span aria-current="page">Profile</span></nav>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="profile-heading">
+            <div class="container">
+                <h2 id="profile-heading" class="sr-only">Profile Builder</h2>
+                <p style="margin-bottom:1.5rem;color:var(--color-muted);">
+                    This page collects information through JavaScript prompts — no HTML form required.
+                    Complete steps in order, skip questions, and revisit any step at any time.
+                </p>
+
+                <!-- Progress area -->
+                <div style="background:white;border-radius:var(--radius-lg);box-shadow:var(--shadow-md);padding:1.5rem;margin-bottom:2rem;"
+                    role="region" aria-label="Profile completion progress">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+                        <strong>Profile Completion</strong>
+                        <span class="progress-pct" id="pct-text" aria-live="polite">0%</span>
+                    </div>
+                    <div class="prog-track">
+                        <div class="prog-bar" id="prog-bar" style="width:0%;"></div>
+                    </div>
+                    <p id="status-msg" style="font-size:0.88rem;color:var(--color-muted);margin:0;" aria-live="polite">
+                        Start by clicking a step below.</p>
+                    <div class="step-tabs" role="group" aria-label="Profile steps">
+                        <span class="step-tab" id="tab-1">Step 1: Basics</span>
+                        <span class="step-tab" id="tab-2">Step 2: Interests</span>
+                        <span class="step-tab" id="tab-3">Step 3: Actions</span>
+                    </div>
+                </div>
+
+                <div class="profile-layout">
+                    <!-- Controls -->
+                    <div>
+                        <h3>Build Your Profile</h3>
+                        <p style="color:var(--color-muted);font-size:0.9rem;margin-bottom:1rem;">
+                            Each step has 3 prompts. You can skip any prompt by leaving it blank.
+                            Return to any step using the "Revisit" buttons below.
+                        </p>
+                        <div class="btn-group" id="step-buttons">
+                            <button class="btn btn-primary" onclick="runContinue()" id="btn-continue" type="button">Start / Continue
+                                Profile</button>
+                            <button class="btn btn-outline" onclick="runStep(2)" id="btn-step2" disabled>Step 2:
+                                Interests</button>
+                            <button class="btn btn-outline" onclick="runStep(3)" id="btn-step3" disabled>Step 3:
+                                Actions</button>
+                        </div>
+                        <div class="btn-group" style="margin-top:1rem;">
+                            <button class="btn btn-outline" onclick="runStep(1)"
+                                style="font-size:0.82rem;padding:0.4rem 0.9rem;">Revisit Step 1</button>
+                            <button class="btn btn-outline" onclick="runStep(2)"
+                                style="font-size:0.82rem;padding:0.4rem 0.9rem;">Revisit Step 2</button>
+                            <button class="btn btn-outline" onclick="runStep(3)"
+                                style="font-size:0.82rem;padding:0.4rem 0.9rem;">Revisit Step 3</button>
+                            <button class="btn btn-outline" onclick="resetProfile()"
+                                style="font-size:0.82rem;padding:0.4rem 0.9rem;border-color:var(--color-error);color:var(--color-error);">Reset
+                                Profile</button>
+                        </div>
+                        <div id="completion-msg" class="hidden"
+                            style="margin-top:1.5rem;background:var(--color-primary-pale);border-radius:var(--radius-md);padding:1rem;color:var(--color-primary-dark);">
+                            <strong>🎉 Profile Complete!</strong><br>
+                            You have filled in all three steps. Your SDG 12 profile is ready. You can revisit any step
+                            to update your information.
+                        </div>
+                    </div>
+
+                    <!-- Profile output -->
+                    <section class="profile-card" id="profile-output" aria-live="polite"
+                        aria-label="Your profile information">
+                        <div class="profile-empty" id="profile-empty">
+                            <p><strong>Your profile is empty.</strong></p>
+                            <p style="font-size:0.88rem;">Click "Start / Continue Profile" to begin building your
+                                profile </p>
+                        </div>
+                        <!-- Step 1 output -->
+                        <div class="profile-section hidden" id="out-step1">
+                            <h3>Step 1 — Basic Details</h3>
+                            <div class="profile-field"><span>Name:</span><span id="out-name">—</span></div>
+                            <div class="profile-field"><span>Username:</span><span id="out-username">—</span></div>
+                            <div class="profile-field"><span>Role:</span><span id="out-role">—</span></div>
+                        </div>
+                        <!-- Step 2 output -->
+                        <div class="profile-section hidden" id="out-step2">
+                            <h3>Step 2 — SDG Interests</h3>
+                            <div class="profile-field"><span>SDG Interest:</span><span id="out-sdg">—</span></div>
+                            <div class="profile-field"><span>Preferred Content:</span><span id="out-content">—</span>
+                            </div>
+                            <div class="profile-field"><span>Weekly Time (hrs):</span><span id="out-time">—</span>
+                            </div>
+                        </div>
+                        <!-- Step 3 output -->
+                        <div class="profile-section hidden" id="out-step3">
+                            <h3>Step 3 — Actions &amp; Goals</h3>
+                            <div class="profile-field"><span>Current Action:</span><span id="out-action">—</span>
+                            </div>
+                            <div class="profile-field"><span>Goal this Month:</span><span id="out-goal">—</span>
+                            </div>
+                            <div class="profile-field"><span>Commitment:</span><span id="out-commit">—</span></div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div id="site-footer"></div>
+    <script src="components.js"></script>
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const siteNav = document.querySelector('.site-nav');
+        if (navToggle && siteNav) { navToggle.addEventListener('click', function () { const o = siteNav.classList.toggle('open'); navToggle.setAttribute('aria-expanded', String(o)); }); }
+
+        // Profile data object (stores all collected info)
+        let profileData = { step1: {}, step2: {}, step3: {} };
+        let stepsCompleted = { 1: false, 2: false, 3: false };
+
+        //data saves even the page refreshes
+        function SaveProfile() {
+            localStorage.setItem("profile data", JSON.stringify(profileData))
+        }
+
+        // Prompt helper — returns null if skipped (empty), else trimmed string
+        function askPrompt(question) {
+            const answer = prompt(question);
+            if (answer === null) return null; // user cancelled
+            return answer.trim() || null;     // empty = skipped
+        }
+
+        function ValidateCommitment(value) {
+            if (value == null) return null;
+            const num = Number(value);
+            if (!isNaN(num) && num >= 1 && num <= 5) {
+                return num;
+            }
+            alert("please enter a number between 1 and 5");
+            return null;
+        }
+
+        /** True when all three prompts for that step have been answered (not skipped). */
+        function isStepFullyComplete(step) {
+            const d = profileData['step' + step];
+            if (!d) return false;
+            if (step === 1) {
+                return !!(d.name && d.username && d.role);
+            }
+            if (step === 2) {
+                return !!(d.sdg && d.content && d.time);
+            }
+            if (step === 3) {
+                return !!(d.action && d.goal && d.commit != null && d.commit !== '');
+            }
+            return false;
+        }
+
+        /** First step that still needs data, or null if the profile is fully complete. */
+        function getNextIncompleteStep() {
+            if (!isStepFullyComplete(1)) return 1;
+            if (!isStepFullyComplete(2)) return 2;
+            if (!isStepFullyComplete(3)) return 3;
+            return null;
+        }
+
+        function runContinue() {
+            const next = getNextIncompleteStep();
+            if (next === null) {
+                alert('Your profile is complete. Use "Revisit Step 1–3" if you want to change any answers.');
+                return;
+            }
+            runStep(next);
+        }
+
+        function runStep(step) {
+            if (step === 1) {
+                const name = askPrompt('Step 1 of 3: Basic Details\n\nWhat is your full name?');
+                if (name == null) return;
+                const username = askPrompt('What username would you like?');
+                if (username == null) return;
+                const role = askPrompt('What is your role? e.g. Student, Researcher, Campaigner');
+                if (role == null) return;
+                profileData.step1 = { name: name, username: username, role: role };
+                renderStep1();
+            } else if (step === 2) {
+                const sdg = askPrompt('Step 2 of 3: SDG Interests\n\nWhich SDG area interests you most? e.g. Food Waste, Fashion, Energy');
+                if (sdg == null) return;
+                const content = askPrompt('What type of content do you prefer? e.g. videos, articles, events');
+                if (content == null) return;
+                const time = askPrompt('How many hours per week can you dedicate to sustainability?');
+                if (time == null) return;
+                profileData.step2 = { sdg: sdg, content: content, time: time };
+                renderStep2();
+            } else if (step === 3) {
+                const action = askPrompt('Step 3 of 3: Actions & Goals\n\nWhat sustainable action are you currently taking?');
+                if (action == null) return;
+                const goal = askPrompt('What is your sustainability goal this month?');
+                if (goal == null) return;
+                let commit = askPrompt('On a scale of 1–5, how committed are you to reducing consumption?');
+                if (commit == null) return;
+                commit = ValidateCommitment(commit);
+                profileData.step3 = { action: action, goal: goal, commit: commit };
+                renderStep3();
+            }
+            updateProgress();
+            SaveProfile();
+        }
+
+        function setField(id, value) {
+            const el = document.getElementById(id);
+            if (el) el.textContent = value || '(skipped)';
+        }
+
+        function renderStep1() {
+            const d = profileData.step1;
+            const hasData = d.name || d.username || d.role;
+            const el = document.getElementById('out-step1');
+            if (hasData) {
+                el.classList.remove('hidden');
+                setField('out-name', d.name);
+                setField('out-username', d.username);
+                setField('out-role', d.role);
+                stepsCompleted[1] = true;
+                document.getElementById('btn-step2').disabled = false;
+                document.getElementById('btn-step3').disabled = false;
+            }
+            document.getElementById('profile-empty').style.display = 'none';
+        }
+
+        function renderStep2() {
+            const d = profileData.step2;
+            const hasData = d.sdg || d.content || d.time;
+            if (hasData) {
+                document.getElementById('out-step2').classList.remove('hidden');
+                setField('out-sdg', d.sdg);
+                setField('out-content', d.content);
+                setField('out-time', d.time);
+                stepsCompleted[2] = true;
+            }
+        }
+
+        function renderStep3() {
+            const d = profileData.step3;
+            const hasData = d.action || d.goal || d.commit;
+            if (hasData) {
+                document.getElementById('out-step3').classList.remove('hidden');
+                setField('out-action', d.action);
+                setField('out-goal', d.goal);
+                setField('out-commit', d.commit);
+                stepsCompleted[3] = true;
+            }
+        }
+
+        function updateProgress() {
+            // Count answered prompts across all steps
+            const total = 9;
+            let filled = 0;
+            function count(obj) { Object.values(obj).forEach(function (v) { if (v) filled++; }); }
+            count(profileData.step1);
+            count(profileData.step2);
+            count(profileData.step3);
+
+            const pct = Math.round((filled / total) * 100);
+            document.getElementById('prog-bar').style.width = pct + '%';
+            document.getElementById('pct-text').textContent = pct + '%';
+
+            // Update step tabs
+            function tabState(tabId, step) {
+                const tab = document.getElementById(tabId);
+                tab.className = 'step-tab';
+                if (stepsCompleted[step]) {
+                    const vals = Object.values(profileData['step' + step]);
+                    const nonNull = vals.filter(function (v) { return v; }).length;
+                    tab.classList.add(nonNull === 3 ? 'done' : 'partial');
+                }
+            }
+            tabState('tab-1', 1); tabState('tab-2', 2); tabState('tab-3', 3);
+
+            const msg = pct === 0 ? 'Start by clicking a step below.'
+                : pct < 34 ? 'Step 1 partially complete. Continue or move to Step 2.'
+                    : pct < 67 ? 'Steps 1–2 done. Complete Step 3 to finish your profile.'
+                        : pct < 100 ? 'Almost there! Revisit any step to fill in skipped prompts.'
+                            : '🎉 Profile 100% complete!';
+            document.getElementById('status-msg').textContent = msg;
+
+            if (pct === 100) {
+                document.getElementById('completion-msg').classList.remove('hidden');
+            }
+        }
+
+        function resetProfile() {
+            if (!confirm('Reset your entire profile? This cannot be undone.')) return;
+            profileData = { step1: {}, step2: {}, step3: {} };
+            stepsCompleted = { 1: false, 2: false, 3: false };
+            ['out-step1', 'out-step2', 'out-step3'].forEach(function (id) { document.getElementById(id).classList.add('hidden'); });
+            document.getElementById('profile-empty').style.display = '';
+            document.getElementById('prog-bar').style.width = '0%';
+            document.getElementById('pct-text').textContent = '0%';
+            document.getElementById('status-msg').textContent = 'Start by clicking a step below.';
+            document.getElementById('completion-msg').classList.add('hidden');
+            document.getElementById('btn-step2').disabled = true;
+            document.getElementById('btn-step3').disabled = true;
+            ['tab-1', 'tab-2', 'tab-3'].forEach(function (id) { document.getElementById(id).className = 'step-tab'; });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Plastic and packaging waste - why single-use plastic is a growing crisis and how students can act.">
+    <meta name="author" content="Student 4">
+    <title>Plastic Waste | EcoLoop</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 1. Side nav for internal navigation */
+        .content-layout { display: grid; grid-template-columns: 220px 1fr; gap: 2.5rem; align-items: start; }
+        .side-nav { position: sticky; top: calc(var(--header-h) + 1rem); background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); padding: 1.25rem; }
+        .side-nav h4 { font-family: var(--font-heading); color: var(--color-primary-dark); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+        .side-nav ul { list-style: none; }
+        .side-nav ul li { margin-bottom: 0.5rem; }
+        .side-nav ul li a { font-family: var(--font-heading); font-size: 0.88rem; color: var(--color-muted); text-decoration: none; padding: 0.25rem 0.5rem; border-left: 3px solid transparent; display: block; transition: all 0.2s; }
+        .side-nav ul li a:hover { color: var(--color-primary); border-left-color: var(--color-primary); background: var(--color-primary-pale); border-radius: 0 4px 4px 0; }
+        /* 2. Content section spacing */
+        .content-section { margin-bottom: 3rem; padding-top: 1rem; }
+        .content-section > h2 { scroll-margin-top: calc(var(--header-h) + 1rem); }
+        /* 3. Content images grid */
+        .img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        .content-img {
+            width: 100%; aspect-ratio: 4/3; border-radius: var(--radius-md); display: block;
+            object-fit: cover; box-shadow: var(--shadow-sm);
+        }
+        /* 4. Action checklist */
+        .checklist { list-style: none; margin: 1rem 0; }
+        .checklist li { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.75rem; padding: 0.75rem; background: var(--color-primary-pale); border-radius: var(--radius-md); font-size: 0.92rem; }
+        .checklist li::before { content: '\2713'; background: var(--color-primary); color: white; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+        /* 5. Highlight box */
+        .highlight-box { background-color: var(--color-primary); color: white; border-radius: var(--radius-lg); padding: 1.5rem 2rem; margin: 1.5rem 0; }
+        .highlight-box h3, .highlight-box p { color: white; }
+        .highlight-box ol { padding-left: 1.25rem; }
+        .highlight-box li { list-style: decimal; margin-bottom: 0.4rem; }
+        /* Go to top button */
+        .go-top { position: fixed; bottom: 2rem; right: 2rem; background: var(--color-primary); color: white; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.2rem; box-shadow: var(--shadow-md); transition: background 0.2s, transform 0.2s; z-index: 200; }
+        .go-top:hover { background: var(--color-primary-dark); transform: translateY(-3px); color: white; }
+        @media(max-width:700px){ .content-layout{grid-template-columns:1fr;} .side-nav{position:static;} .img-row{grid-template-columns:1fr;} }
+    </style>
+</head>
+<body id="top">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div id="site-header"></div>
+
+    <main id="main-content">
+        <section class="page-heading" style="--page-heading-image: url('assets/img/Header.jpg');">
+            <div class="container">
+                <h1>Plastic Waste &amp; Responsible Consumption</h1>
+                <p>Understanding how single-use plastic and packaging harm ecosystems and what students can do to reduce waste starting today.</p>
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="home.html">Home</a><span aria-hidden="true">></span>
+                    <span aria-current="page">Plastic Waste</span>
+                </nav>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="content-layout">
+
+                    <!-- Internal navigation menu -->
+                    <aside class="side-nav" aria-label="Page sections">
+                        <h4>Content</h4>
+                        <ul>
+                            <li><a href="#intro">Introduction</a></li>
+                            <li><a href="#problem">Understanding the Problem</a></li>
+                            <li><a href="#student-actions">What Students Can Do</a></li>
+                            <li><a href="#P2P">ShoreSafe</a></li>
+                            <li><a href="#checklist">Action Checklist</a></li>
+                        </ul>
+                    </aside>
+
+                    <!-- Main content -->
+                    <article>
+
+                        <div class="content-section">
+                            <h2 id="intro">Introduction</h2>
+                            <p>Plastic waste is one of the clearest examples of unsustainable consumption. Large amounts of single-use packaging, bottles, wrappers, cups, and takeaway containers are used for only a few minutes before being thrown away. Because plastic is cheap, durable, and convenient, it has become a normal part of student life, especially through food delivery, bottled drinks, and heavily packaged products.</p>
+
+                            <p>However, convenience comes with long-term environmental cost. Much of the plastic people use every day is difficult to recycle properly, and a large share still ends up in landfill, waterways, and oceans. This page explores why plastic waste is such a serious issue, how students contribute to it without always noticing, and what practical actions can reduce the problem on campus and beyond.</p>
+                            <div class="img-row">
+                                <img class="content-img" src="assets/img/img 1.jpg" alt="Large pile of collected plastic bottles waiting to be sorted and recycled.">
+                                <img class="content-img" src="assets/img/img 1.1.jpg" alt="Illustration of the Earth surrounded by plastic waste and recycling symbols.">
+                            </div>
+                        </div>
+
+                        <div class="content-section">
+                            <h2 id="problem">Understanding the Problem</h2>
+                            <p>Plastic waste creates damage far beyond what we see in a bin. Single-use plastics can remain in the environment for hundreds of years, breaking down into smaller pieces rather than disappearing completely. These fragments, known as microplastics, now appear in oceans, soil, food systems, and even the human body. Wildlife is also heavily affected, with marine animals often swallowing plastic or becoming trapped in discarded packaging.</p>
+
+                            <p>For students, the issue is often driven by habit rather than intention. Buying bottled water, using disposable cutlery, ordering takeaway meals, and choosing heavily packaged snacks may each seem small on their own. Yet when thousands of students repeat those actions every week, the result is a large waste stream that is expensive to manage and harmful to ecosystems. Reducing plastic waste therefore depends on changing routine daily choices, not only on large-scale recycling systems.</p>
+
+                            <div class="highlight-box">
+                                <h3>The Stats</h3>
+                                <ol>
+                                    <li>More than 300 million tonnes of plastic are produced globally each year.</li>
+                                    <li>Roughly 8 million tonnes of plastic enter the oceans annually.</li>
+                                    <li>Many common plastics take hundreds of years to break down in the environment.</li>
+                                </ol>
+                            </div>
+
+                            <div class="img-row">
+                                <img class="content-img" src="assets/img/img 2.jpg" alt="Infographic showing the environmental impact of plastic waste on land and in the sea.">
+                                <img class="content-img" src="assets/img/img 2.1.jpg" alt="Beach covered in litter with a protest banner warning about single-use plastic pollution.">
+                            </div>
+                        </div>
+
+                        <div class="content-section">
+                            <h2 id="student-actions">What Students Can Do</h2>
+                            <p>Students do not need expensive products or perfect zero-waste lifestyles to reduce plastic pollution. Small, repeated choices can significantly lower the amount of single-use material used every week.</p>
+
+                            <h3>Carry reusable essentials</h3>
+                            <p>A refillable water bottle, reusable cup, lunch box, and shopping bag can replace many disposable plastic items used during a normal week.</p>
+
+                            <h3>Choose products with less packaging</h3>
+                            <p>Buying in bulk, selecting unpackaged produce when possible, and avoiding individually wrapped items reduces waste before it is even created.</p>
+
+                            <h3>Sort waste properly</h3>
+                            <p>Recycling only works when materials are separated correctly. Empty, clean, and sort recyclable items based on the system available on campus or at home.</p>
+
+                            <h3>Reuse before replacing</h3>
+                            <p>Containers, folders, bottles, and storage items can often be reused several times instead of being thrown away after one use.</p>
+
+                            <h3>Build awareness</h3>
+                            <p>Students can influence others by refusing unnecessary plastic, talking about better habits, and taking part in SDG 12 initiatives like <strong>ShoreSafe</strong>.</p>
+                        </div>
+
+                        <div class="content-section">
+                            <h2 id="P2P">ShoreSafe</h2>
+                            <p>ShoreSafe is a student-led EcoLoop initiative focused on reducing plastic pollution through direct local action. The project organises beach and coastline clean-up events where volunteers collect, sort, and record discarded plastic waste. This helps students see how everyday litter moves beyond streets and bins into wider ecosystems, especially marine environments.</p>
+
+                            <p>The campaign also promotes prevention, not just collection. Students can join awareness sessions on single-use plastics, learn how to reduce packaging waste in daily life, and take part in a "Trash-to-Art" activity that turns selected waste items into visual awareness pieces. ShoreSafe helps students understand that responsible consumption is not only about using less plastic, but also about restoring the places already affected by waste.</p>
+                        </div>
+
+                        <div class="content-section">
+                            <h2 id="checklist">Action Checklist</h2>
+                            <p>Start with one or two of these actions this week. Each one is simple, affordable, and reduces plastic waste over time.</p>
+                            <ul class="checklist" aria-label="Plastic waste action checklist">
+                                <li>Carry a refillable water bottle instead of buying bottled drinks.</li>
+                                <li>Keep a reusable bag with you so you do not need plastic carrier bags.</li>
+                                <li>Refuse plastic straws, stirrers, and disposable cutlery unless they are necessary.</li>
+                                <li>Choose products with minimal or recyclable packaging where possible.</li>
+                                <li>Wash and reuse takeaway containers or jars before throwing them away.</li>
+                                <li>Sort recyclable plastics correctly instead of placing everything into general waste.</li>
+                                <li>Join a local clean-up or campus waste awareness activity.</li>
+                                <li>Encourage friends to switch from single-use plastics to reusable alternatives.</li>
+                            </ul>
+                            <div style="margin-top:2rem;">
+                                <a href="ais.html" class="btn btn-primary">Try the Impact Simulator</a>
+                                <a href="content_ST1.html" class="btn btn-outline" style="margin-left:1rem;">Read: Food Waste</a>
+                            </div>
+                        </div>
+
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Go to Top button - HTML and CSS only per spec -->
+    <a href="#top" class="go-top" aria-label="Go to top of page" title="Back to top">&#8593;</a>
+    <div id="site-footer"></div>
+    <script src="components.js"></script>
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const siteNav = document.querySelector('.site-nav');
+        if (navToggle && siteNav) { navToggle.addEventListener('click', function () { const o = siteNav.classList.toggle('open'); navToggle.setAttribute('aria-expanded', String(o)); }); }
+    </script>
+</body>
+</html>
